@@ -77,3 +77,7 @@ C:\Users\Admin\OneDrive\Desktop\University\Năm 3\Học kỳ 2\Đồ án phần 
 C:\Users\Admin\OneDrive\Desktop\University\Năm 3\Học kỳ 2\Đồ án phần mềm\Đồ án\Cellphone\Cellphone\obj\Debug\Cellphone.csproj.CopyComplete
 C:\Users\Admin\OneDrive\Desktop\University\Năm 3\Học kỳ 2\Đồ án phần mềm\Đồ án\Cellphone\Cellphone\obj\Debug\Cellphone.dll
 C:\Users\Admin\OneDrive\Desktop\University\Năm 3\Học kỳ 2\Đồ án phần mềm\Đồ án\Cellphone\Cellphone\obj\Debug\Cellphone.pdb
+C:\Users\Admin\OneDrive\Desktop\University\Năm 3\Học kỳ 2\Đồ án phần mềm\Đồ án\Cellphone\Cellphone\bin\EntityFramework.dll
+C:\Users\Admin\OneDrive\Desktop\University\Năm 3\Học kỳ 2\Đồ án phần mềm\Đồ án\Cellphone\Cellphone\bin\EntityFramework.SqlServer.dll
+C:\Users\Admin\OneDrive\Desktop\University\Năm 3\Học kỳ 2\Đồ án phần mềm\Đồ án\Cellphone\Cellphone\bin\EntityFramework.xml
+C:\Users\Admin\OneDrive\Desktop\University\Năm 3\Học kỳ 2\Đồ án phần mềm\Đồ án\Cellphone\Cellphone\bin\EntityFramework.SqlServer.xml
