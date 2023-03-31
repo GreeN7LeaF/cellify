@@ -9,6 +9,7 @@
     @RenderSection("head", required: false)
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <script src="https://kit.fontawesome.com/fdd5f8d904.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -22,6 +23,7 @@
                         @Html.Action("getSideBar", "PartialHandle")
                     </div>
                     <div class="col ms-4">
+                        
                         @RenderBody()
                     </div>
                 </div>

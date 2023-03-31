@@ -1,0 +1,16 @@
+﻿<div class="breadcumb d-flex flex-row mb-3">
+    @* @Html.ActionLink("Product", "Index", null, new { @class= "bc-prev nav-link" })
+        <a href="#" class="nav-link">Create Product</a>*@
+    @if (ViewContext.RouteData.Values["controller"].ToString() != "Home")
+    {
+        @Html.ActionLink(ViewContext.RouteData.Values["controller"].ToString(), "Index",
+           ViewContext.RouteData.Values["controller"].ToString(),
+           null, new { @class = "bc-prev nav-link" })
+    }
+    @if (ViewContext.RouteData.Values["action"].ToString() != "Index")
+    {
+        @Html.ActionLink(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["action"].ToString(),
+           ViewContext.RouteData.Values["controller"].ToString(),
+           null, new { @class = "nav-link" })
+    }
+</div>

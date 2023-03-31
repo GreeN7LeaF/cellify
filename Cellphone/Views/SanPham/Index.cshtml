@@ -50,12 +50,12 @@
             <table class="table align-middle mb-0">
                 <thead class="">
                     <tr>
-                        <th>Product name</th>
-                        <th>Price</th>
-                        <th>Cost</th>
-                        <th>Brand</th>
-                        <th>Quantity</th>
-                        <th>Actions</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Giá bán</th>
+                        <th>Giá mua</th>
+                        <th>Hãng</th>
+                        <th>Số lượng</th>
+                        <th>Khác</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -79,7 +79,10 @@
                                 <div class="d-flex flex-row gap-2">
                                     <button type="button"
                                             class="btn btn-link btn-sml btn-clr-normal btn-sm btn-rounded">
-                                        <a href="./edit.html" class="nav-link"> Edit </a>
+                                        @*<a href="./edit.html" class="nav-link"> Edit </a>*@
+                                        <a href="@Url.Action("Edit", "SanPham")" class="nav-link">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </a>
                                     </button>
                                     <button type="button"
                                             class="btn btn-link btn-sml btn-clr-danger btn-sm btn-rounded">

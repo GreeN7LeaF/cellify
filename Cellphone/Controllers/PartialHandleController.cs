@@ -22,5 +22,10 @@ namespace Cellphone.Controllers
             if (isAdmin) return PartialView("_AdminSideBar");
             else return View();
         }
+
+        public ActionResult getBreadcumb()
+        {
+            return PartialView("_Breadcumb");
+        }
     }
 }
