@@ -7,18 +7,33 @@
 <head>
     <title>@Page.Title</title>
     @RenderSection("head", required: false)
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" 
+      integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <nav>
 
-    </nav>
+    @Html.Action("getHeaderNav", "PartialHandle")
 
-    @RenderBody()
+    <div id="body">
+        <div class="container">
+            <div class="container-fluid main-body">
+                <div class="d-flex flex-col">
+                    <div class="col-2">
+                        @Html.Action("getSideBar", "PartialHandle")
+                    </div>
+                    <div class="col ms-4">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Content/js")
     @RenderSection("scripts", required: false)
 </body>
 </html>

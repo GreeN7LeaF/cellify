@@ -5,72 +5,92 @@
     Layout = "~/Views/Shared/Admin_Layout.cshtml";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.TenSP)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GiaBan)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GiaMua)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SoLuong)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HinhAnh)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TrangThai)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Hang1.TenHang)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LoaiSP1.TenLoai)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TenSP)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GiaBan)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GiaMua)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SoLuong)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HinhAnh)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TrangThai)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Hang1.TenHang)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LoaiSP1.TenLoai)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
-
-</table>
+<div class="information">
+    <div class="row">
+        <div class="col">
+            <div class="info-card d-flex flex-col gap-4">
+                <h4>20%</h4>
+                <div>sub title</div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="info-card d-flex flex-col gap-4">
+                <h4>20%</h4>
+                <div>sub title</div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="info-card d-flex flex-col gap-4">
+                <h4>20%</h4>
+                <div>sub title</div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="info-card d-flex flex-col gap-4">
+                <h4>20%</h4>
+                <div>sub title</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main-content rounded-3 border border-2 py-4 px-3">
+    <div class="table-header row">
+        <div class="col-3">
+            <h3 class="title">Product List</h3>
+            <p>sub title</p>
+        </div>
+        <div class="col text-end me-2">
+            <button class="btn btn-clr-normal">
+                @Html.ActionLink("Add Product", "Create",null, new { @class="nav-link"})
+            </button>
+        </div>
+    </div>
+    <div class="text-white">
+        <div class="bg-white">
+            <table class="table align-middle mb-0">
+                <thead class="">
+                    <tr>
+                        <th>Product name</th>
+                        <th>Price</th>
+                        <th>Cost</th>
+                        <th>Brand</th>
+                        <th>Quantity</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    @Html.DisplayFor(modelItem => item.TenSP)
+                                </div>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.GiaBan)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.GiaMua)
+                            </td>
+                            <td>@Html.DisplayFor(modelItem => item.Hang)</td>
+                            <td>@Html.DisplayFor(modelItem => item.SoLuong)</td>
+                            <td class="mw-80">
+                                <div class="d-flex flex-row gap-2">
+                                    <button type="button"
+                                            class="btn btn-link btn-sml btn-clr-normal btn-sm btn-rounded">
+                                        <a href="./edit.html" class="nav-link"> Edit </a>
+                                    </button>
+                                    <button type="button"
+                                            class="btn btn-link btn-sml btn-clr-danger btn-sm btn-rounded">
+                                        <a href="#" class="nav-link"> Delete </a>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+            </table>
+        </div>
+    </div>
+</div>

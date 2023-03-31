@@ -19,13 +19,17 @@ namespace Cellphone
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+            bundles.Add(new Bundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
+
+            bundles.Add(new Bundle("~/Content/js").Include(
+                "~/Content/assets/js/main.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css",
-                      "~/Template/css/style.css")
+                      "~/Template/css/style.css",
+                      "~/Content/assets/css/root.css",
+                      "~/Content/assets/css/main.css")
                 .Include("~/Content/fontawesome-free-6.3.0-web/css/fontawesome.css", new CssRewriteUrlTransform()));
 
         }
