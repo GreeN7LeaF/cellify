@@ -79,8 +79,7 @@
                                 <div class="d-flex flex-row gap-2">
                                     <button type="button"
                                             class="btn btn-link btn-sml btn-clr-normal btn-sm btn-rounded">
-                                        @*<a href="./edit.html" class="nav-link"> Edit </a>*@
-                                        <a href="@Url.Action("Edit", "SanPham")" class="nav-link">
+                                        <a href="@Url.Action("Edit", "SanPham", new { id = item.ID})" class="nav-link">
                                             <i class="fa-solid fa-pen"></i>
                                         </a>
                                     </button>

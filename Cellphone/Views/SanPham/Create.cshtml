@@ -6,20 +6,18 @@
 }
 
 
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
     <div class="breadcumb d-flex flex-row mb-3">
         @Html.ActionLink("Sản phẩm", "Index", null, new { @class = "bc-prev nav-link" })
         <a href="#" class="nav-link">Thêm sản phẩm</a>
     </div>
 
-    <h3 class="title">Thêm sản phẩm</h3>
-    <p>Điền tất cả các mục *bắt buộc</p>
-    <div class="row create-form">
-        <div class="col-8">
-            <form class="">
+<h3 class="title">Thêm sản phẩm</h3>
+<p>Điền tất cả các mục *bắt buộc</p>
+<div class="row create-form">
+    <div class="col-8">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
                 <!-- 2 column grid layout with text inputs for the first and last names -->
                 <div class="row mb-4">
                     <div class="col">
@@ -71,8 +69,8 @@
 
                 <div class="form-outline mb-4">
                     <textarea class="form-control"
-                              id="form6Example7"
-                              rows="4"></textarea>
+                                id="form6Example7"
+                                rows="4"></textarea>
                     <label class="form-label" for="form6Example7">Ghi chú</label>
                 </div>
 
@@ -80,20 +78,15 @@
                 <button type="submit" class="btn btn-clr-normal btn-block mb-4">
                     Thêm
                 </button>
-            </form>
-        </div>
-        <div class="col-3">
-            <div class="form-outline mb-4">
-                <div class=" default-img-wrapper">
-                    <img src="~/Images/default.jpg" alt="" />
-                </div>
-                <label class="form-label" for="form6Example4">Image</label>
+            }
+    </div>
+    <div class="col-3">
+        <div class="form-outline mb-4">
+            <div class=" default-img-wrapper">
+                <img src="~/Images/default.jpg" alt="" />
             </div>
+            <label class="form-label" for="form6Example4">Image</label>
         </div>
     </div>
-}
-
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
+
