@@ -129,16 +129,19 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CTKhuyenMaiController.cs" />
+    <Compile Include="Controllers\HangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KhuyenMaiController.cs" />
     <Compile Include="Controllers\PartialHandleController.cs" />
     <Compile Include="Controllers\SanPhamController.cs" />
-    <Compile Include="Extensions\HtmlExtension.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BaoHanh.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BindPropertyAttribute.cs" />
     <Compile Include="Models\CTDonHang.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -2609,6 +2612,16 @@
     <Content Include="Views\Shared\_AuthHeader.cshtml" />
     <Content Include="Views\Shared\_AdminSideBar.cshtml" />
     <Content Include="Views\Shared\_Breadcumb.cshtml" />
+    <Content Include="Views\KhuyenMai\Create.cshtml" />
+    <Content Include="Views\KhuyenMai\Delete.cshtml" />
+    <Content Include="Views\KhuyenMai\Details.cshtml" />
+    <Content Include="Views\KhuyenMai\Edit.cshtml" />
+    <Content Include="Views\KhuyenMai\Index.cshtml" />
+    <Content Include="Views\Hang\Create.cshtml" />
+    <Content Include="Views\Hang\Delete.cshtml" />
+    <Content Include="Views\Hang\Details.cshtml" />
+    <Content Include="Views\Hang\Edit.cshtml" />
+    <Content Include="Views\Hang\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

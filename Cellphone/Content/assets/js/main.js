@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     dropDownSideBar();
+    toggleAddProductForm();
     console.log("run into this");
 });
 // DOMContentLoaded  end
@@ -34,18 +35,32 @@ function dropDownSideBar() {
   }); // forEach
 }
 
+function toggleAddProductForm() {
+    $('#addProduct').click(() => {
+        $('#addProductForm').removeClass('d-none');
+        $('#addProduct').addClass('d-none');
+    });
+
+    $('#removeAddProductForm').click(() => {
+        $('#addProductForm').addClass('d-none');
+        $('#addProduct').removeClass('d-none');    
+    });
+}
+
 function setSideNav() {
     let route = (window.location.pathname).split("/")[1];
-    /*console.log($("#sidebar").find(`[href="${route}"]`));*/
+    let route2 = (window.location.pathname).split("/")[2];
 
     $item = $('#sidebar .nav-link').filter(function () {
-        return $(this).prop('href').indexOf(route) !== -1;
+        return $(this).prop('href').split('/').splice(-1)[0].indexOf(route) !== -1 || 
+            $(this).prop('href').split('/').splice(-1)[0].indexOf(route2) !== -1;
     });
 
     $authHeader = $("#auth-header .nav-link").filter(function () {
-        return $(this).prop("href").indexOf(route) !== -1;
+        return $(this).prop("href").split('/').splice(-1)[0].indexOf(route) !== -1 ||
+            $(this).prop('href').split('/').splice(-1)[0].indexOf(route2) !== -1;
     });
 
-    $item.map((idx, val) => console.log(val.classList.toggle('active')));
-    $authHeader.map((idx, val) => console.log(val.classList.toggle("active")));
+    $item.map((idx, val) => val.classList.toggle('active'));
+    $authHeader.map((idx, val) => val.classList.toggle("active"));
 }

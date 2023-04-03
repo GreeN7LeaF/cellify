@@ -1,0 +1,125 @@
+﻿@model Cellphone.Models.KhuyenMai
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+}
+
+<div class="add-inline-form main-content rounded-3 border border-2 py-4 px-3 mb-3">
+    <div class="table-header row">
+        <div class="col-5">
+            <h5 class="title">Thêm mới khuyến mãi</h5>
+        </div>
+    </div>
+    @using (Html.BeginForm("Index", "KhuyenMai"))
+    {
+        @Html.AntiForgeryToken()
+        <form class="create-form">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row create-form">
+                <div class="col-10">
+                    <div class="form-outline mb-4">
+                        @Html.EditorFor(model => model.TenKM, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TenKM, "", new { @class = "text-danger" })
+                        @Html.LabelFor(model => model.TenKM, "Tiêu đề", htmlAttributes: new { @class = "form-label " })
+                    </div>
+                </div>
+                <div class="col-2">
+                    <select class="select w-100">
+                        <option value="1">ON</option>
+                        <option value="2">OFF</option>
+                    </select>
+                    <label class="form-label" for="TrangThai">Trạng thái</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input type="datetime-local"
+                           id="birthdaytime"
+                           name="birthdaytime"
+                           class="form-control" asp-for="DateTime"  asp-format="{0:yyyy-MM-ddTHH:mm}"/>
+                    <label for="birthdaytime">Ngày Bắt Đầu</label>
+                </div>
+                <div class="col">
+                    <input type="datetime-local"
+                           id="birthdaytime"
+                           name="birthdaytime"
+                           class="form-control" asp-for="DateTime"  asp-format="{0:yyyy-MM-ddTHH:mm}" />
+                    <label for="birthdaytime">Ngày Kết Thúc</label>
+                </div>
+            </div>
+            <div class="col-2 mt-4">
+                <!-- Submit button -->
+                <button type="submit"
+                        class="btn btn-clr-normal btn-block mb-4 w-50">
+                    Thêm
+                </button>
+            </div>
+        </form>
+    }
+
+</div>
+<div class="main-content rounded-3 border border-2 py-4 px-3">
+    <div class="table-header row">
+        <div class="col-5">
+            <h5 class="title">Danh mục khuyến mãi</h5>
+            <p>sub title</p>
+        </div>
+    </div>
+    <div class="text-white">
+        <div class="bg-white">
+            <table class="table align-middle mb-0">
+                <thead class="">
+                    <tr>
+                        <th>Tiêu đề</th>
+                        <th>Ngày bắt đầu</th>
+                        <th>Ngày kết thúc</th>
+                        <th>Trạng thái</th>
+                        <th>Khác</th>
+                    </tr>
+                </thead>
+                <tbody> 
+                    @if (ViewBag.KhuyenMai != null)
+                    {
+                        foreach (var item in ViewBag.KhuyenMai)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        @item.TenKM
+                                    </div>
+                                </td>
+                                <td>
+                                    @item.NgayBD
+                                </td>
+                                <td>
+                                    @item.NgayKT
+                                </td>
+                                <td>
+                                       @if (item.TrangThai == 0)
+                                       {
+                                           <div class="text-center px-1 w-75 btn-sml btn-clr-danger rounded-1">OFF</div>
+                                       }
+                                       else
+                                       {<div class="text-center px-1 w-75 btn-sml btn-clr-success rounded-1">ON</div>}
+                                </td>
+                                <td>
+                                    <div class="d-flex flex-row gap-1">
+                                        <a href="@Url.Action("Edit", "KhuyenMai", new {id=item.ID})" class="nav-link">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </a>
+                                        <a href="@Url.Action("Delete", "KhuyenMai", new {id=item.ID})" class="nav-link"> 
+                                        <i class="fa-solid fa-trash"></i> </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else { 
+                        <div>Không tìm thấy khuyến mãi nào</div>
+                    }
+                    </tbody>
+            </table>
+        </div>
+    </div>
+</div>

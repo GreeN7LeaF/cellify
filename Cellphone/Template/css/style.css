@@ -5969,7 +5969,7 @@ Pages - My Account
 .btn {
 /*  padding: 0;*/
   font-size: 16px;
-  border-radius: 10px;
+ /* border-radius: 10px;*/
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

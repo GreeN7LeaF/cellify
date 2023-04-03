@@ -20,7 +20,7 @@ namespace Cellphone
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new Bundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+                      "~/Scripts/bootstrap.bundle.min.js"));
 
             bundles.Add(new Bundle("~/Content/js").Include(
                 "~/Content/assets/js/main.js"));

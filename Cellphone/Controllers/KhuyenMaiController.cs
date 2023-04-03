@@ -10,117 +10,115 @@ using Cellphone.Models;
 
 namespace Cellphone.Controllers
 {
-    public class SanPhamController : Controller
+    public class KhuyenMaiController : Controller
     {
         private mobiledbEntities1 db = new mobiledbEntities1();
 
-        // GET: SanPham
+        // GET: KhuyenMai
         public ActionResult Index()
         {
-            var sanPhams = db.SanPhams.Include(s => s.Hang1).Include(s => s.LoaiSP1);
-            ViewBag.Hang = db.Hangs;
-            return View(sanPhams.ToList());
+            ViewBag.KhuyenMai = db.KhuyenMais;
+            return View();
         }
 
-        // GET: SanPham/Details/5
+        // GET: KhuyenMai/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SanPham sanPham = db.SanPhams.Find(id);
-            if (sanPham == null)
+            KhuyenMai khuyenMai = db.KhuyenMais.Find(id);
+            if (khuyenMai == null)
             {
                 return HttpNotFound();
             }
-            return View(sanPham);
+            return View(khuyenMai);
         }
 
-        // GET: SanPham/Create
+        // GET: KhuyenMai/Create
         public ActionResult Create()
         {
-            ViewBag.Hang = new SelectList(db.Hangs, "ID", "TenHang");
-            ViewBag.LoaiSP = new SelectList(db.LoaiSPs, "ID", "TenLoai");
             return View();
         }
 
-        // POST: SanPham/Create
+        // POST: KhuyenMai/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,TenSP,GiaBan,GiaMua,SoLuong,HinhAnh,LoaiSP,Hang,TrangThai")] SanPham sanPham)
+        public ActionResult Index([Bind(Include = "ID,TenKM,NgayBD,NgayKT,TrangThai")] KhuyenMai khuyenMai)
         {
             if (ModelState.IsValid)
             {
-                db.SanPhams.Add(sanPham);
+                db.KhuyenMais.Add(khuyenMai);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Hang = new SelectList(db.Hangs, "ID", "TenHang", sanPham.Hang);
-            ViewBag.LoaiSP = new SelectList(db.LoaiSPs, "ID", "TenLoai", sanPham.LoaiSP);
-            return View(sanPham);
+            return View(khuyenMai);
         }
 
-        // GET: SanPham/Edit/5
+        // GET: KhuyenMai/Edit/5
         public ActionResult Edit(int? id)
         {
+            ViewBag.customStatus = new List<SelectListItem> { 
+                new SelectListItem{Text="ON", Value="1"},
+                new SelectListItem{Text="OFF", Value="2"}
+            };
+            ViewBag.SanPham = db.SanPhams;
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SanPham sanPham = db.SanPhams.Find(id);
-            if (sanPham == null)
+            KhuyenMai khuyenMai = db.KhuyenMais.Find(id);
+            if (khuyenMai == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.Hang = new SelectList(db.Hangs, "ID", "TenHang", sanPham.Hang);
-            ViewBag.LoaiSP = new SelectList(db.LoaiSPs, "ID", "TenLoai", sanPham.LoaiSP);
-            return View(sanPham);
+            return View(khuyenMai);
         }
 
-        // POST: SanPham/Edit/5
+        // POST: KhuyenMai/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,TenSP,GiaBan,GiaMua,SoLuong,HinhAnh,LoaiSP,Hang,TrangThai")] SanPham sanPham)
+        public ActionResult Edit([Bind(Include = "ID,TenKM,NgayBD,NgayKT,TrangThai")] KhuyenMai khuyenMai)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(sanPham).State = EntityState.Modified;
+                db.Entry(khuyenMai).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Hang = new SelectList(db.Hangs, "ID", "TenHang", sanPham.Hang);
-            ViewBag.LoaiSP = new SelectList(db.LoaiSPs, "ID", "TenLoai", sanPham.LoaiSP);
-            return View(sanPham);
+            
+            return View(khuyenMai);
         }
 
-        // GET: SanPham/Delete/5
+        // GET: KhuyenMai/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SanPham sanPham = db.SanPhams.Find(id);
-            if (sanPham == null)
+            KhuyenMai khuyenMai = db.KhuyenMais.Find(id);
+            if (khuyenMai == null)
             {
                 return HttpNotFound();
             }
-            return View(sanPham);
+            return View(khuyenMai);
         }
 
-        // POST: SanPham/Delete/5
+        // POST: KhuyenMai/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            SanPham sanPham = db.SanPhams.Find(id);
-            db.SanPhams.Remove(sanPham);
+            KhuyenMai khuyenMai = db.KhuyenMais.Find(id);
+            db.KhuyenMais.Remove(khuyenMai);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

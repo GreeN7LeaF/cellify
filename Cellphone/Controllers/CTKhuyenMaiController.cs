@@ -10,117 +10,116 @@ using Cellphone.Models;
 
 namespace Cellphone.Controllers
 {
-    public class SanPhamController : Controller
+    public class CTKhuyenMaiController : Controller
     {
         private mobiledbEntities1 db = new mobiledbEntities1();
 
-        // GET: SanPham
+        // GET: CTKhuyenMai
         public ActionResult Index()
         {
-            var sanPhams = db.SanPhams.Include(s => s.Hang1).Include(s => s.LoaiSP1);
-            ViewBag.Hang = db.Hangs;
-            return View(sanPhams.ToList());
+            var cTKhuyenMais = db.CTKhuyenMais.Include(c => c.KhuyenMai).Include(c => c.SanPham);
+            return View(cTKhuyenMais.ToList());
         }
 
-        // GET: SanPham/Details/5
+        // GET: CTKhuyenMai/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SanPham sanPham = db.SanPhams.Find(id);
-            if (sanPham == null)
+            CTKhuyenMai cTKhuyenMai = db.CTKhuyenMais.Find(id);
+            if (cTKhuyenMai == null)
             {
                 return HttpNotFound();
             }
-            return View(sanPham);
+            return View(cTKhuyenMai);
         }
 
-        // GET: SanPham/Create
+        // GET: CTKhuyenMai/Create
         public ActionResult Create()
         {
-            ViewBag.Hang = new SelectList(db.Hangs, "ID", "TenHang");
-            ViewBag.LoaiSP = new SelectList(db.LoaiSPs, "ID", "TenLoai");
+            ViewBag.MaKM = new SelectList(db.KhuyenMais, "ID", "TenKM");
+            ViewBag.MaSP = new SelectList(db.SanPhams, "ID", "TenSP");
             return View();
         }
 
-        // POST: SanPham/Create
+        // POST: CTKhuyenMai/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,TenSP,GiaBan,GiaMua,SoLuong,HinhAnh,LoaiSP,Hang,TrangThai")] SanPham sanPham)
+        public ActionResult Create([Bind(Include = "ID,MaSP,MaKM,Gia,SoLuong,TrangThai")] CTKhuyenMai cTKhuyenMai)
         {
             if (ModelState.IsValid)
             {
-                db.SanPhams.Add(sanPham);
+                db.CTKhuyenMais.Add(cTKhuyenMai);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Hang = new SelectList(db.Hangs, "ID", "TenHang", sanPham.Hang);
-            ViewBag.LoaiSP = new SelectList(db.LoaiSPs, "ID", "TenLoai", sanPham.LoaiSP);
-            return View(sanPham);
+            ViewBag.MaKM = new SelectList(db.KhuyenMais, "ID", "TenKM", cTKhuyenMai.MaKM);
+            ViewBag.MaSP = new SelectList(db.SanPhams, "ID", "TenSP", cTKhuyenMai.MaSP);
+            return View(cTKhuyenMai);
         }
 
-        // GET: SanPham/Edit/5
+        // GET: CTKhuyenMai/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SanPham sanPham = db.SanPhams.Find(id);
-            if (sanPham == null)
+            CTKhuyenMai cTKhuyenMai = db.CTKhuyenMais.Find(id);
+            if (cTKhuyenMai == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.Hang = new SelectList(db.Hangs, "ID", "TenHang", sanPham.Hang);
-            ViewBag.LoaiSP = new SelectList(db.LoaiSPs, "ID", "TenLoai", sanPham.LoaiSP);
-            return View(sanPham);
+            ViewBag.MaKM = new SelectList(db.KhuyenMais, "ID", "TenKM", cTKhuyenMai.MaKM);
+            ViewBag.MaSP = new SelectList(db.SanPhams, "ID", "TenSP", cTKhuyenMai.MaSP);
+            return View(cTKhuyenMai);
         }
 
-        // POST: SanPham/Edit/5
+        // POST: CTKhuyenMai/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,TenSP,GiaBan,GiaMua,SoLuong,HinhAnh,LoaiSP,Hang,TrangThai")] SanPham sanPham)
+        public ActionResult Edit([Bind(Include = "ID,MaSP,MaKM,Gia,SoLuong,TrangThai")] CTKhuyenMai cTKhuyenMai)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(sanPham).State = EntityState.Modified;
+                db.Entry(cTKhuyenMai).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Hang = new SelectList(db.Hangs, "ID", "TenHang", sanPham.Hang);
-            ViewBag.LoaiSP = new SelectList(db.LoaiSPs, "ID", "TenLoai", sanPham.LoaiSP);
-            return View(sanPham);
+            ViewBag.MaKM = new SelectList(db.KhuyenMais, "ID", "TenKM", cTKhuyenMai.MaKM);
+            ViewBag.MaSP = new SelectList(db.SanPhams, "ID", "TenSP", cTKhuyenMai.MaSP);
+            return View(cTKhuyenMai);
         }
 
-        // GET: SanPham/Delete/5
+        // GET: CTKhuyenMai/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SanPham sanPham = db.SanPhams.Find(id);
-            if (sanPham == null)
+            CTKhuyenMai cTKhuyenMai = db.CTKhuyenMais.Find(id);
+            if (cTKhuyenMai == null)
             {
                 return HttpNotFound();
             }
-            return View(sanPham);
+            return View(cTKhuyenMai);
         }
 
-        // POST: SanPham/Delete/5
+        // POST: CTKhuyenMai/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            SanPham sanPham = db.SanPhams.Find(id);
-            db.SanPhams.Remove(sanPham);
+            CTKhuyenMai cTKhuyenMai = db.CTKhuyenMais.Find(id);
+            db.CTKhuyenMais.Remove(cTKhuyenMai);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -8,7 +8,7 @@
         @Html.ActionLink("Sản phẩm", "Index", null, new { @class= "bc-prev nav-link" })
         <a href="#" class="nav-link">Chỉnh sửa sản phẩm</a>
     </div>
-    <h3 class="title">Chỉnh sửa thông tin sản phẩm</h3>
+    <h5 class="title">Chỉnh sửa thông tin sản phẩm</h5>
     <p>Chỉnh sửa các mục cho phép</p>
     <div class="row">
         <div class="col-8">
@@ -29,7 +29,7 @@
                             <div class="form-outline">
                                 @Html.DropDownList("LoaiSP", null, htmlAttributes: new { @class = "select w-100" })
                                 @Html.ValidationMessageFor(model => model.LoaiSP, "", new { @class = "text-danger" })
-                                @Html.LabelFor(model => model.LoaiSP, "Loại sản phẩm", htmlAttributes: new { @class = "form-label " })
+                                @*@Html.LabelFor(model => model.LoaiSP, "Loại sản phẩm", htmlAttributes: new { @class = "form-label " })*@
                             </div>
                         </div>
                     </div>

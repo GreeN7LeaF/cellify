@@ -10,117 +10,107 @@ using Cellphone.Models;
 
 namespace Cellphone.Controllers
 {
-    public class SanPhamController : Controller
+    public class HangController : Controller
     {
         private mobiledbEntities1 db = new mobiledbEntities1();
 
-        // GET: SanPham
+        // GET: Hang
         public ActionResult Index()
         {
-            var sanPhams = db.SanPhams.Include(s => s.Hang1).Include(s => s.LoaiSP1);
-            ViewBag.Hang = db.Hangs;
-            return View(sanPhams.ToList());
+            return View(db.Hangs.ToList());
         }
 
-        // GET: SanPham/Details/5
+        // GET: Hang/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SanPham sanPham = db.SanPhams.Find(id);
-            if (sanPham == null)
+            Hang hang = db.Hangs.Find(id);
+            if (hang == null)
             {
                 return HttpNotFound();
             }
-            return View(sanPham);
+            return View(hang);
         }
 
-        // GET: SanPham/Create
+        // GET: Hang/Create
         public ActionResult Create()
         {
-            ViewBag.Hang = new SelectList(db.Hangs, "ID", "TenHang");
-            ViewBag.LoaiSP = new SelectList(db.LoaiSPs, "ID", "TenLoai");
             return View();
         }
 
-        // POST: SanPham/Create
+        // POST: Hang/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,TenSP,GiaBan,GiaMua,SoLuong,HinhAnh,LoaiSP,Hang,TrangThai")] SanPham sanPham)
+        public ActionResult Create([Bind(Include = "ID,TenHang,GhiChu,DienThoai,Mail")] Hang hang)
         {
             if (ModelState.IsValid)
             {
-                db.SanPhams.Add(sanPham);
+                db.Hangs.Add(hang);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Hang = new SelectList(db.Hangs, "ID", "TenHang", sanPham.Hang);
-            ViewBag.LoaiSP = new SelectList(db.LoaiSPs, "ID", "TenLoai", sanPham.LoaiSP);
-            return View(sanPham);
+            return View(hang);
         }
 
-        // GET: SanPham/Edit/5
+        // GET: Hang/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SanPham sanPham = db.SanPhams.Find(id);
-            if (sanPham == null)
+            Hang hang = db.Hangs.Find(id);
+            if (hang == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.Hang = new SelectList(db.Hangs, "ID", "TenHang", sanPham.Hang);
-            ViewBag.LoaiSP = new SelectList(db.LoaiSPs, "ID", "TenLoai", sanPham.LoaiSP);
-            return View(sanPham);
+            return View(hang);
         }
 
-        // POST: SanPham/Edit/5
+        // POST: Hang/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,TenSP,GiaBan,GiaMua,SoLuong,HinhAnh,LoaiSP,Hang,TrangThai")] SanPham sanPham)
+        public ActionResult Edit([Bind(Include = "ID,TenHang,GhiChu,DienThoai,Mail")] Hang hang)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(sanPham).State = EntityState.Modified;
+                db.Entry(hang).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Hang = new SelectList(db.Hangs, "ID", "TenHang", sanPham.Hang);
-            ViewBag.LoaiSP = new SelectList(db.LoaiSPs, "ID", "TenLoai", sanPham.LoaiSP);
-            return View(sanPham);
+            return View(hang);
         }
 
-        // GET: SanPham/Delete/5
+        // GET: Hang/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SanPham sanPham = db.SanPhams.Find(id);
-            if (sanPham == null)
+            Hang hang = db.Hangs.Find(id);
+            if (hang == null)
             {
                 return HttpNotFound();
             }
-            return View(sanPham);
+            return View(hang);
         }
 
-        // POST: SanPham/Delete/5
+        // POST: Hang/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            SanPham sanPham = db.SanPhams.Find(id);
-            db.SanPhams.Remove(sanPham);
+            Hang hang = db.Hangs.Find(id);
+            db.Hangs.Remove(hang);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
