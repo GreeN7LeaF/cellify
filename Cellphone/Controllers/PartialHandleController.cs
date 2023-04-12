@@ -16,11 +16,20 @@ namespace Cellphone.Controllers
             else return View();
         }
 
-        public ActionResult getSideBar()
+        public ActionResult getSideBar(int headerId)
         {
             bool isAdmin = true;
-            if (isAdmin) return PartialView("_AdminSideBar");
-            else return View();
+            if (isAdmin) {
+                switch (headerId) {
+                    case 2:
+                        return PartialView("_SanPhamSideBar");
+                    case 3:
+                        return PartialView("_CuaHangSideBar");
+                    default:
+                        return PartialView("_EmptyPartialPage");
+                }
+            }
+            else return PartialView("_EmptyPartialPage");
         }
 
         public ActionResult getBreadcumb()

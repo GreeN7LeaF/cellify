@@ -151,6 +151,95 @@ select:focus,
     color: #fff;
 }
 
+
+/* login */
+#loginContent,
+#loginContent .bg-left > div {
+    height: 100vh;
+}
+
+#loginContent {
+    background: rgb(255, 127, 132);
+}
+
+#loginContent .bg-left {
+    padding: 0;
+    overflow: hidden;
+    /* background-color: var(--clr-btn); */
+}
+
+#loginContent {
+    overflow: hidden;
+    background-image: url("/Images/login-bg.jpg");
+    background-size: contain;
+}
+
+#loginContent .bg-right {
+    background: linear-gradient( 257deg, rgba(255, 127, 132, 1) 5%, rgba(255, 100, 136, 1) 35%, rgba(231, 110, 160, 1) 83% );
+}
+
+#loginContent #loginForm {
+    position: absolute;
+    height: 85vh;
+    width: 80vw;
+    margin: auto;
+    border-radius: 20px;
+    overflow: hidden;
+    color: #ffe6fd;
+}
+
+#loginContent #loginForm .form-title {
+    font-size: 32px;
+    margin-top: 70px;
+    /* margin-left: 4em; */
+    text-transform: uppercase;
+}
+
+#loginContent #loginForm input {
+    padding: 10px 10px;
+}
+
+#loginContent #loginForm a {
+    color: #66115f;
+}
+
+#loginContent #loginForm .submit-btn {
+    background-color: #fff;
+    color: var(--clr-btn);
+    /*width: 25%;*/
+    font-weight: 600;
+    padding: 15px 25px;
+}
+
+#loginContent #loginForm .submit-btn:hover {
+    background-color: #fff;
+    color: var(--clr-btn);
+    box-shadow: 5px 5px 0px var(--clr-btn);
+}
+
+#loginContent #loginForm .bg-left {
+    background-color: rgb(148, 53, 92, 40%);
+}
+
+#loginContent #loginForm .bg-left img {
+    height: auto;
+    width: 100%;
+    margin: auto 0;
+}
+
+#loginContent #loginForm .bg-right {
+    background: linear-gradient( 32deg, rgba(175, 22, 27, 0.6) 5%, rgba(190, 42, 103, 0.7) 82% );
+}
+
+#loginContent #loginForm .bg {
+    height: 100%;
+}
+
+#loginContent #loginForm .form-container {
+    padding: 3em 6em 5em 6em;
+}
+
+
 /* table */
 td .nav-link {
     transition: all 0.3s;

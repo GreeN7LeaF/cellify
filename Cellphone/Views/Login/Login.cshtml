@@ -1,0 +1,72 @@
+﻿@model Cellphone.Models.User
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+<!-- right -->
+<div class="col bg-right">
+</div>
+<!-- left -->
+<div class="col bg-left " ">
+</div>
+<div id="loginForm" class="">
+    <div class="row bg">
+        <!-- left -->
+        <div class="col bg-right">
+            <div class="form-title w-100 text-center">Đăng nhập</div>
+            <div class="form-container">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <form>
+                        <!-- Email input -->
+                        <div class="form-outline mb-2">
+                            @Html.EditorFor(model => model.C_Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.C_Email, "", new { @class = "text-danger" })
+                            @Html.LabelFor(model => model.C_Email, "Email", htmlAttributes: new { @class = "form-label" })
+                        </div>
+
+                        <!-- Password input -->
+                        <div class="form-outline mb-2">
+                            @Html.EditorFor(model => model.C_Password, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.C_Password, "", new { @class = "text-danger" })
+                            @Html.LabelFor(model => model.C_Password, "Mật khẩu", htmlAttributes: new { @class = "form-label" })
+                        </div>
+
+                        <!-- 2 column grid layout for inline styling -->
+                        <div class="row mb-4">
+                            <div class="col d-flex justify-content-center">
+                                <!-- Checkbox -->
+                                <div class="form-check d-flex flex-row gap-2 align-items-center">
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           value=""
+                                           id="form2Example31"
+                                           checked />
+                                    <label class="form-check-label" for="form2Example31">
+                                        Nhớ tài khoản
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <!-- Simple link -->
+                                <a href="#!">Quên mật khẩu?</a>
+                            </div>
+                        </div>
+
+                        <!-- Submit button -->
+                        <button type="button" class="submit-btn btn btn-block mb-4">
+                            Đăng Nhập
+                        </button>
+                    </form>
+                }
+            </div>
+        </div>
+        <!-- right -->
+        <div class="col bg-left">
+        </div>
+    </div>
+</div>

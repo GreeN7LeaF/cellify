@@ -14,13 +14,31 @@ namespace Cellphone
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "Hang",
+                name: "DonHang",
+                url: "CuaHang/DonHang/{action}",
+                defaults: new { controller = "DonHang", action = "Index" }
+            );
+
+            routes.MapRoute(
+                name: "CuaHang",
+                url: "CuaHang/",
+                defaults: new { controller = "Home", action = "CuaHang" }
+            );
+
+            routes.MapRoute(
+                name: "SanPham_LoaiSP",
+                url: "SanPham/LoaiSP/{action}",
+                defaults: new { controller = "LoaiSP", action = "Index" }
+            );
+
+            routes.MapRoute(
+                name: "SanPham_Hang",
                 url: "SanPham/Hang/{action}",
                 defaults: new { controller = "Hang", action = "Index" }
             );
 
             routes.MapRoute(
-                name: "KhuyenMai",
+                name: "SanPham_KhuyenMai",
                 url: "SanPham/KhuyenMai/{action}",
                 defaults: new { controller = "KhuyenMai", action = "Index" }
             );

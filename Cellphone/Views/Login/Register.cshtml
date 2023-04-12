@@ -1,0 +1,78 @@
+﻿@model Cellphone.Models.User
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<div class="col bg-left"></div>
+<div class="col bg-right"></div>
+<div id="loginForm" class="">
+    <div class="row bg">
+        <div class="col bg-left">
+            <!-- <img src="../../images/abstract-img.png" alt="" /> -->
+        </div>
+        <div class="col bg-right">
+            <div class="form-title w-100 text-center">Tạo tài khoản</div>
+            <div class="form-container">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <form>
+                        <!-- Email input -->
+                        <div class="form-outline mb-2">
+                            @Html.EditorFor(model => model.C_Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.C_Email, "", new { @class = "text-danger" })
+                            @Html.LabelFor(model => model.C_Email, "Email", htmlAttributes: new { @class = "form-label" })
+                        </div>
+
+                        <!-- Phone number input -->
+                        <div class="form-outline mb-2">
+                            @Html.EditorFor(model => model.C_Phone, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.C_Phone, "", new { @class = "text-danger" })
+                            @Html.LabelFor(model => model.C_Phone, "Số điện thoại", htmlAttributes: new { @class = "form-label" })
+                        </div>
+
+                        <!-- Password input -->
+                        <div class="form-outline mb-2">
+                            @Html.EditorFor(model => model.C_Password, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.C_Password, "", new { @class = "text-danger" })
+                            @Html.LabelFor(model => model.C_Password, "Mật khẩu", htmlAttributes: new { @class = "form-label" })
+                        </div>
+
+                        <!-- Password input -->
+                        <div class="form-outline mb-2">
+                            <input type="password"
+                                   id="form2Example2"
+                                   class="form-control" />
+                            <label class="form-label" for="form2Example2">Nhập lại mật khẩu</label>
+                        </div>
+
+                        <!-- 2 column grid layout for inline styling -->
+                        <div class="row mb-4">
+                            <div class="col d-flex justify-content-center">
+                                <!-- Checkbox -->
+                                <div class="form-check d-flex flex-row gap-2 align-items-center">
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           value=""
+                                           id="form2Example31"
+                                           checked />
+                                    <label class="form-check-label" for="form2Example31">
+                                        Nhớ tài khoản
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Submit button -->
+                        <button type="button" class="submit-btn btn btn-block mb-4">
+                            Đăng ký
+                        </button>
+                    </form>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

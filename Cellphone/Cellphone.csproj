@@ -130,9 +130,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CTKhuyenMaiController.cs" />
+    <Compile Include="Controllers\DonHangController.cs" />
     <Compile Include="Controllers\HangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KhuyenMaiController.cs" />
+    <Compile Include="Controllers\LoaiSPController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PartialHandleController.cs" />
     <Compile Include="Controllers\SanPhamController.cs" />
     <Compile Include="Global.asax.cs">
@@ -237,6 +240,7 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Images\bg.jpg" />
     <Content Include="Images\default.jpg" />
+    <Content Include="Images\login-bg.jpg" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -2548,13 +2552,6 @@
     <Content Include="Template\scss\_search-modal.scss" />
     <Content Include="Template\scss\_shop.scss" />
     <Content Include="Template\scss\_variabls.scss" />
-    <EntityDeploy Include="Models\Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.esm.min.js.map" />
@@ -2577,6 +2574,13 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <EntityDeploy Include="Models\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2610,7 +2614,7 @@
     <Content Include="Views\SanPham\Edit.cshtml" />
     <Content Include="Views\SanPham\Index.cshtml" />
     <Content Include="Views\Shared\_AuthHeader.cshtml" />
-    <Content Include="Views\Shared\_AdminSideBar.cshtml" />
+    <Content Include="Views\Shared\_SanPhamSideBar.cshtml" />
     <Content Include="Views\Shared\_Breadcumb.cshtml" />
     <Content Include="Views\KhuyenMai\Create.cshtml" />
     <Content Include="Views\KhuyenMai\Delete.cshtml" />
@@ -2622,6 +2626,22 @@
     <Content Include="Views\Hang\Details.cshtml" />
     <Content Include="Views\Hang\Edit.cshtml" />
     <Content Include="Views\Hang\Index.cshtml" />
+    <Content Include="Views\Login\Register.cshtml" />
+    <Content Include="Views\Shared\_LoginLayout.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\LoaiSP\Create.cshtml" />
+    <Content Include="Views\LoaiSP\Delete.cshtml" />
+    <Content Include="Views\LoaiSP\Details.cshtml" />
+    <Content Include="Views\LoaiSP\Edit.cshtml" />
+    <Content Include="Views\LoaiSP\Index.cshtml" />
+    <Content Include="Views\Shared\_EmptyPartialPage.cshtml" />
+    <Content Include="Views\DonHang\Create.cshtml" />
+    <Content Include="Views\DonHang\Delete.cshtml" />
+    <Content Include="Views\DonHang\Details.cshtml" />
+    <Content Include="Views\DonHang\Edit.cshtml" />
+    <Content Include="Views\DonHang\Index.cshtml" />
+    <Content Include="Views\Home\CuaHang.cshtml" />
+    <Content Include="Views\Shared\_CuaHangSideBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

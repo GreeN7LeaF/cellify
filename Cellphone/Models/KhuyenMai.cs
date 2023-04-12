@@ -11,8 +11,7 @@ namespace Cellphone.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class KhuyenMai
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,9 +22,7 @@ namespace Cellphone.Models
     
         public int ID { get; set; }
         public string TenKM { get; set; }
-        [BindProperty, DisplayFormat(DataFormatString = "{0:yyyy-MM-ddTHH:mm}", ApplyFormatInEditMode = true)]
         public System.DateTime NgayBD { get; set; }
-        [BindProperty, DisplayFormat(DataFormatString = "{0:yyyy-MM-ddTHH:mm}", ApplyFormatInEditMode = true)]
         public System.DateTime NgayKT { get; set; }
         public Nullable<int> TrangThai { get; set; }
     

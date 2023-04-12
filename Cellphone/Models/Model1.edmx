@@ -142,6 +142,8 @@ warning 6002: The table/view 'mobiledb.dbo.DanhGia' does not have a primary key 
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TenLoai" Type="nvarchar(max)" Nullable="false" />
           <Property Name="GhiChu" Type="nvarchar(max)" />
+          <Property Name="SoLuong" Type="float" />
+          <Property Name="CapNhat" Type="datetime" />
         </EntityType>
         <EntityType Name="PhieuNhap">
           <Key>
@@ -676,6 +678,8 @@ warning 6002: The table/view 'mobiledb.dbo.DanhGia' does not have a primary key 
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TenLoai" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SoLuong" Type="Double" />
+          <Property Name="CapNhat" Type="DateTime" Precision="3" />
           <NavigationProperty Name="SanPhams" Relationship="Self.FK_LoaiSP_SanPham" FromRole="LoaiSP" ToRole="SanPham" />
         </EntityType>
         <EntityType Name="PhieuNhap">
@@ -1231,6 +1235,8 @@ warning 6002: The table/view 'mobiledb.dbo.DanhGia' does not have a primary key 
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="TenLoai" ColumnName="TenLoai" />
                 <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="CapNhat" ColumnName="CapNhat" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

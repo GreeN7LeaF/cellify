@@ -10,124 +10,112 @@ using Cellphone.Models;
 
 namespace Cellphone.Controllers
 {
-    public class HangController : Controller
+    public class DonHangController : Controller
     {
         private mobiledbEntities1 db = new mobiledbEntities1();
 
-        // GET: Hang
-        public ActionResult Index(string searchString)
+        // GET: DonHang
+        public ActionResult Index()
         {
-            var products = from p in db.Hangs select p;
-            //Thêm chức năng tìm kiếm vào câu truy vấn
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                products = products.Where(p => p.TenHang.Contains(searchString));
-            }
-            return View(products.ToList());
+            var donHangs = db.DonHangs.Include(d => d.KhachHang);
+            return View(donHangs.ToList());
         }
 
-       /* public ActionResult Index(string searchString)
-        {
-            var products = from p in db.Hangs select p;
-            //Thêm chức năng tìm kiếm vào câu truy vấn
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                products = products.Where(p => p.TenHang.Contains(searchString));
-            }
-            return View(products.ToList());
-        }*/
-
-        // GET: Hang/Details/5
+        // GET: DonHang/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Hang hang = db.Hangs.Find(id);
-            if (hang == null)
+            DonHang donHang = db.DonHangs.Find(id);
+            if (donHang == null)
             {
                 return HttpNotFound();
             }
-            return View(hang);
+            return View(donHang);
         }
 
-        // GET: Hang/Create
+        // GET: DonHang/Create
         public ActionResult Create()
         {
+            ViewBag.MaKH = new SelectList(db.KhachHangs, "MaKH", "HoTen");
             return View();
         }
 
-        // POST: Hang/Create
+        // POST: DonHang/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,TenHang,GhiChu,DienThoai,Mail")] Hang hang)
+        public ActionResult Create([Bind(Include = "ID,MaKH,NgayLap,TongTien,GiamGia,TrangThai")] DonHang donHang)
         {
             if (ModelState.IsValid)
             {
-                db.Hangs.Add(hang);
+                db.DonHangs.Add(donHang);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(hang);
+            ViewBag.MaKH = new SelectList(db.KhachHangs, "MaKH", "HoTen", donHang.MaKH);
+            return View(donHang);
         }
 
-        // GET: Hang/Edit/5
+        // GET: DonHang/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Hang hang = db.Hangs.Find(id);
-            if (hang == null)
+            DonHang donHang = db.DonHangs.Find(id);
+            if (donHang == null)
             {
                 return HttpNotFound();
             }
-            return View(hang);
+            ViewBag.MaKH = new SelectList(db.KhachHangs, "MaKH", "HoTen", donHang.MaKH);
+            return View(donHang);
         }
 
-        // POST: Hang/Edit/5
+        // POST: DonHang/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,TenHang,DienThoai,Mail,GhiChu")] Hang hang)
+        public ActionResult Edit([Bind(Include = "ID,MaKH,NgayLap,TongTien,GiamGia,TrangThai")] DonHang donHang)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(hang).State = EntityState.Modified;
+                db.Entry(donHang).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(hang);
+            ViewBag.MaKH = new SelectList(db.KhachHangs, "MaKH", "HoTen", donHang.MaKH);
+            return View(donHang);
         }
 
-        // GET: Hang/Delete/5
+        // GET: DonHang/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Hang hang = db.Hangs.Find(id);
-            if (hang == null)
+            DonHang donHang = db.DonHangs.Find(id);
+            if (donHang == null)
             {
                 return HttpNotFound();
             }
-            return View(hang);
+            return View(donHang);
         }
 
-        // POST: Hang/Delete/5
+        // POST: DonHang/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Hang hang = db.Hangs.Find(id);
-            db.Hangs.Remove(hang);
+            DonHang donHang = db.DonHangs.Find(id);
+            db.DonHangs.Remove(donHang);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

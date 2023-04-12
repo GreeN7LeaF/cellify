@@ -27,6 +27,9 @@ namespace Cellphone.Controllers
             return View();
         }
 
-        
+        public ActionResult CuaHang()
+        {
+            return View();
+        }
     }
 }

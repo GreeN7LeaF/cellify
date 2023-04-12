@@ -1,16 +1,16 @@
-﻿@model IEnumerable<Cellphone.Models.Hang>
+﻿@model IEnumerable<Cellphone.Models.LoaiSP>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/Admin_Layout.cshtml";
 }
 
-<!-- search brand -->
-<div id="searchBrand"
+<!-- search product type -->
+<div id="searchRecipe"
      class="add-inline-form main-content rounded-3 border border-2 py-4 px-3 mb-3">
     <div class="table-header mb-3 row">
         <div class="col">
-            <h5 class="title">Tìm kiếm hãng</h5>
+            <h5 class="title">Tìm kiếm loại sản phẩm</h5>
         </div>
         <div class="col-1">
             <button class="btn btn-clr-normal"
@@ -24,13 +24,12 @@
         </div>
     </div>
     <form id="searchCollapse" class="collapse create-form">
-
         @using (Html.BeginForm("Index", "Hang", FormMethod.Get))
         {
             <div class="row">
                 <div class="col">
                     <input type="text" name="searchString" value="@ViewBag.CurrentFilter" class="form-control" />
-                    <label class="form-label" for="form6Example3">Tên hãng</label>
+                    <label class="form-label" for="form6Example3">Tên Loại</label>
                 </div>
             </div>
             <!-- Submit button -->
@@ -42,15 +41,18 @@
                 </button>
             </div>
         }
-    </form>
-
+        </form>
 </div>
-<!-- brand List -->
 <div class="main-content rounded-3 border border-2 py-4 px-3">
-    <div class="table-header row">
-        <div class="col-3">
-            <h5 class="title">Danh mục hãng</h5>
+    <div class="table-header d-flex flex-row justify-content-between">
+        <div class="mh-100">
+            <h5 class="title">Danh mục loại sản phẩm</h5>
             <p>sub title</p>
+        </div>
+        <div class="flex-end me-2">
+            <button class="btn btn-clr-normal">
+                @Html.ActionLink("Thêm", "Create", null, new { @class = "nav-link" })
+            </button>
         </div>
     </div>
     <div class="text-white">
@@ -58,9 +60,9 @@
             <table class="table align-middle mb-0">
                 <thead class="">
                     <tr>
-                        <th>Tên hãng</th>
-                        <th>Liên hệ</th>
-                        <th>Mail</th>
+                        <th>Tên loại sản phẩm</th>
+                        <th>Số lượng</th>
+                        <th>Cập nhật lần cuối</th>
                         <th>Khác</th>
                     </tr>
                 </thead>
@@ -70,28 +72,29 @@
                         <tr>
                             <td>
                                 <div class="d-flex align-items-center">
-                                    @Html.DisplayFor(modelItem => item.TenHang)
+                                    @Html.DisplayFor(modelItem => item.TenLoai)
                                 </div>
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.DienThoai)
+                                @Html.DisplayFor(modelItem => item.SoLuong)
                             </td>
-                            <td>@Html.DisplayFor(modelItem => item.Mail)</td>
                             <td>
+                                @Html.DisplayFor(modelItem => item.CapNhat)
+                            </td>
+                            <td class="mw-80">
                                 <div class="d-flex flex-row gap-1">
-                                    <a href="@Url.Action("Edit", "Hang", new {id=item.ID})" class="nav-link">
+                                    <a href="@Url.Action("Edit", "LoaiSP", new { id = item.ID})" class="nav-link">
                                         <i class="fa-solid fa-pen"></i>
                                     </a>
-                                    <a href="@Url.Action("Delete", "Hang", new {id=item.ID})" class="nav-link">
+                                    <a href="@Url.Action("Delete", "LoaiSP", new { id = item.ID})" class="nav-link">
                                         <i class="fa-solid fa-trash"></i>
                                     </a>
                                 </div>
                             </td>
                         </tr>
                     }
-                    </tbody>
+                </tbody>
             </table>
         </div>
     </div>
 </div>
-

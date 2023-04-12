@@ -12,27 +12,29 @@
     <script src="https://kit.fontawesome.com/fdd5f8d904.js" crossorigin="anonymous"></script>
 </head>
 <body>
+        @Html.Action("getHeaderNav", "PartialHandle")
 
-    @Html.Action("getHeaderNav", "PartialHandle")
-
-    <div id="body">
-        <div class="container">
-            <div class="container-fluid main-body">
-                <div class="d-flex flex-col">
-                    <div class="col-2">
-                        @Html.Action("getSideBar", "PartialHandle")
-                    </div>
-                    <div class="col ms-4">
-                        @RenderBody()
-                    </div>
+        <div id="body">
+            <div class="container">
+                <div class="container-fluid main-body">
+                    <div class="d-flex flex-col">
+                        <div class="col-2">
+                            <div id="sidebar">
+                                @Html.Action("getSideBar", "PartialHandle", new { headerId = 0 })
+                            </div>
+                        </div>
+                            <div class="col ms-4">
+                                @RenderBody()
+                            </div>
+                        </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/Content/js")
-    @RenderSection("scripts", required: false)
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/Content/js")
+        @RenderSection("scripts", required: false)
 </body>
 </html>

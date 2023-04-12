@@ -137,6 +137,8 @@ warning 6002: The table/view 'mobiledb.dbo.DanhGia' does not have a primary key 
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TenLoai" Type="nvarchar(max)" Nullable="false" />
     <Property Name="GhiChu" Type="nvarchar(max)" />
+    <Property Name="SoLuong" Type="float" />
+    <Property Name="CapNhat" Type="datetime" />
   </EntityType>
   <EntityType Name="PhieuNhap">
     <Key>

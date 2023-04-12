@@ -10,124 +10,113 @@ using Cellphone.Models;
 
 namespace Cellphone.Controllers
 {
-    public class HangController : Controller
+    public class LoaiSPController : Controller
     {
         private mobiledbEntities1 db = new mobiledbEntities1();
 
-        // GET: Hang
+        // GET: LoaiSP
         public ActionResult Index(string searchString)
         {
-            var products = from p in db.Hangs select p;
+            var products = from p in db.LoaiSPs select p;
             //Thêm chức năng tìm kiếm vào câu truy vấn
             if (!String.IsNullOrEmpty(searchString))
             {
-                products = products.Where(p => p.TenHang.Contains(searchString));
+                products = products.Where(p => p.TenLoai.Contains(searchString));
             }
             return View(products.ToList());
         }
 
-       /* public ActionResult Index(string searchString)
-        {
-            var products = from p in db.Hangs select p;
-            //Thêm chức năng tìm kiếm vào câu truy vấn
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                products = products.Where(p => p.TenHang.Contains(searchString));
-            }
-            return View(products.ToList());
-        }*/
-
-        // GET: Hang/Details/5
+        // GET: LoaiSP/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Hang hang = db.Hangs.Find(id);
-            if (hang == null)
+            LoaiSP loaiSP = db.LoaiSPs.Find(id);
+            if (loaiSP == null)
             {
                 return HttpNotFound();
             }
-            return View(hang);
+            return View(loaiSP);
         }
 
-        // GET: Hang/Create
+        // GET: LoaiSP/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Hang/Create
+        // POST: LoaiSP/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,TenHang,GhiChu,DienThoai,Mail")] Hang hang)
+        public ActionResult Create([Bind(Include = "ID,TenLoai,GhiChu")] LoaiSP loaiSP)
         {
             if (ModelState.IsValid)
             {
-                db.Hangs.Add(hang);
+                db.LoaiSPs.Add(loaiSP);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(hang);
+            return View(loaiSP);
         }
 
-        // GET: Hang/Edit/5
+        // GET: LoaiSP/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Hang hang = db.Hangs.Find(id);
-            if (hang == null)
+            LoaiSP loaiSP = db.LoaiSPs.Find(id);
+            if (loaiSP == null)
             {
                 return HttpNotFound();
             }
-            return View(hang);
+            return View(loaiSP);
         }
 
-        // POST: Hang/Edit/5
+        // POST: LoaiSP/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,TenHang,DienThoai,Mail,GhiChu")] Hang hang)
+        public ActionResult Edit([Bind(Include = "ID,TenLoai,GhiChu")] LoaiSP loaiSP)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(hang).State = EntityState.Modified;
+                db.Entry(loaiSP).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(hang);
+            return View(loaiSP);
         }
 
-        // GET: Hang/Delete/5
+        // GET: LoaiSP/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Hang hang = db.Hangs.Find(id);
-            if (hang == null)
+            LoaiSP loaiSP = db.LoaiSPs.Find(id);
+            if (loaiSP == null)
             {
                 return HttpNotFound();
             }
-            return View(hang);
+            return View(loaiSP);
         }
 
-        // POST: Hang/Delete/5
+        // POST: LoaiSP/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Hang hang = db.Hangs.Find(id);
-            db.Hangs.Remove(hang);
+            LoaiSP loaiSP = db.LoaiSPs.Find(id);
+            db.LoaiSPs.Remove(loaiSP);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

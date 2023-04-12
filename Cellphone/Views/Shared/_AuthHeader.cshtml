@@ -29,8 +29,8 @@
                                 </li>
                             </ul>
 
-                            <div class="user">
-                                <img src="" alt="" />
+                            <div class="user-image">
+                                <img class="img-fluid" src="" alt="" />
                             </div>
                         </div>
                     </div>
@@ -53,27 +53,23 @@
                             <div class="collapse navbar-collapse"
                                     id="navbarSupportedContent">
                                 <ul class="navbar-nav nav-list me-auto mb-2 mb-lg-0">
-                                    <li class="nav-item">
+                                    <li id="1" class="nav-item">
                                         <a class="nav-link" aria-current="page" href="/">Trang chủ</a>
                                     </li>
                                     <!-- Manage product info ref -->
-                                    <li class="nav-item">
+                                    <li id="2" class="nav-item">
                                         @Html.ActionLink("Sản phẩm", "Index", "SanPham", null, new { @class = "nav-link" })
                                     </li>
                                     <!-- Staff management -->
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="/">Cửa hàng</a>
+                                    <li id="3" class="nav-item">
+                                        @Html.ActionLink("Cửa hàng", "CuaHang", "Home", null, new { @class = "nav-link" })
                                     </li>
                                     <!-- Manage calendar and shift of staffs -->
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="/">Lịch biểu</a>
-                                    </li>
-                                    <!-- Records -->
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="/">Báo cáo</a>
+                                    <li id="4" class="nav-item">
+                                        <a class="nav-link" href="/">Nhân lực</a>
                                     </li>
                                     <!-- Chart -->
-                                    <li class="nav-item">
+                                    <li id="5" class="nav-item">
                                         <a class="nav-link" href="/">Thống kê</a>
                                     </li>
                                 </ul>

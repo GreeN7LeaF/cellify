@@ -132,6 +132,8 @@
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="TenLoai" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SoLuong" Type="Double" />
+    <Property Name="CapNhat" Type="DateTime" Precision="3" />
     <NavigationProperty Name="SanPhams" Relationship="Self.FK_LoaiSP_SanPham" FromRole="LoaiSP" ToRole="SanPham" />
   </EntityType>
   <EntityType Name="PhieuNhap">

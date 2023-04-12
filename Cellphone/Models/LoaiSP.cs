@@ -23,6 +23,8 @@ namespace Cellphone.Models
         public int ID { get; set; }
         public string TenLoai { get; set; }
         public string GhiChu { get; set; }
+        public Nullable<double> SoLuong { get; set; }
+        public Nullable<System.DateTime> CapNhat { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SanPham> SanPhams { get; set; }
