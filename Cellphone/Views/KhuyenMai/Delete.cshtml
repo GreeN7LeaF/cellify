@@ -1,0 +1,62 @@
+﻿@model Cellphone.Models.KhuyenMai
+
+@{ ViewBag.Title = "Delete";
+                Layout = "~/Views/Shared/Admin_Layout.cshtml"; }
+
+<div style="margin: 10px auto; width: 100%;">
+    <h3 style="text-align:center">
+        BẠN CÓ CHẮC CHẮN MUỐN XÓA KHUYẾN MÃI NÀY?
+    </h3>
+
+    <div>
+
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                TÊN KHUYẾN MÃI
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TenKM)
+            </dd>
+
+            <dt>
+                NGÀY BẮT ĐẦU
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NgayBD)
+            </dd>
+
+            <dt>
+                NGÀY KẾT THÚC
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NgayKT)
+            </dd>
+
+            <dt>
+                TRẠNG THÁI
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TrangThai)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.TenKM)
+                    @Html.HiddenFor(model => model.NgayBD)
+                    @Html.HiddenFor(model => model.NgayKT)
+                    @Html.HiddenFor(model => model.TrangThai)
+                    <div class="form-actions no-color">
+                    <input type="submit" value="XÓA" class="btn btn-default" /> |
+                     @Html.ActionLink("TRỞ LẠI", "Khuyenmai")
+                    </div>
+        }
+    </div>
+</div>

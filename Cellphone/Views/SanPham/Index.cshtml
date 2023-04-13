@@ -1,0 +1,103 @@
+﻿@model IEnumerable<Cellphone.Models.SanPham>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+}
+
+<!-- search recipe -->
+<div id="searchRecipe"
+     class="add-inline-form main-content rounded-3 border border-2 py-4 px-3 mb-3">
+    <div class="table-header mb-3 row">
+        <div class="col">
+            <h5 class="title">Tìm kiếm sản phẩm</h5>
+        </div>
+        <div class="col-1">
+            <button class="btn btn-clr-normal"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#searchCollapse"
+                    aria-expanded="false"
+                    aria-controls="searchCollapse">
+                <i class="fa-solid fa-caret-down"></i>
+            </button>
+        </div>
+    </div>
+    <form id="searchCollapse" class="collapse create-form">
+        <div class="row">
+            <div class="col">
+                <input type="text"
+                       id="form6Example3"
+                       class="form-control" />
+                <label class="form-label" for="form6Example3">Food Name</label>
+            </div>
+        </div>
+        <!-- Submit button -->
+        <div class="col-2 mt-4">
+            <button id="searchBtn"
+                    type="submit"
+                    class="btn btn-clr-normal btn-block mb-4 w-50">
+                Search
+            </button>
+        </div>
+    </form>
+</div>
+<div class="main-content rounded-3 border border-2 py-4 px-3">
+    <div class="table-header d-flex flex-row justify-content-between">
+        <div class="mh-100">
+            <h5 class="title">Danh mục sản phẩm</h5>
+            <p>sub title</p>
+        </div>
+        <div class="flex-end me-2">
+            <button class="btn btn-clr-normal">
+                @Html.ActionLink("Thêm", "Create", null, new { @class = "nav-link" })
+            </button>
+        </div>
+    </div>
+    <div class="text-white">
+        <div class="bg-white">
+            <table class="table align-middle mb-0">
+                <thead class="">
+                    <tr>
+                        <th>Tên sản phẩm</th>
+                        <th>Giá bán</th>
+                        <th>Giá mua</th>
+                        <th>Hãng</th>
+                        <th>Số lượng</th>
+                        <th>Khác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    @Html.DisplayFor(modelItem => item.TenSP)
+                                </div>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.GiaBan)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.GiaMua)
+                            </td>
+                            <td>@Html.DisplayFor(modelItem => item.Hang)</td>
+                            <td>@Html.DisplayFor(modelItem => item.SoLuong)</td>
+                            <td class="mw-80">
+                                <div class="d-flex flex-row gap-1">
+                                    <a href="@Url.Action("Edit", "SanPham", new { id = item.ID})" class="nav-link">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </a>
+                                    <a href="@Url.Action("Delete", "SanPham", new { id = item.ID})" class="nav-link">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

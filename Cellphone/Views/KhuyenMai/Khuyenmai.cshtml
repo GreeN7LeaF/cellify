@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Cellphone.Models.KhuyenMai>
+
+@{
+    ViewBag.Title = "Khuyenmai";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+}
+
+
+<div style="margin: 10px; height: auto; width: 100%;">
+    <h2 style="text-align: center">THÔNG TIN KHUYẾN MÃI</h2>
+    
+    <p>
+        @Html.ActionLink("TẠO MỚI", "Create", null, new
+   {
+       @class = "btn btn-primary"
+   })
+    </p>
+
+    <table class="table">
+        <tr>
+            <th>
+                TÊN KHUYẾN MÃI
+            </th>
+            <th>
+                NGÀY BẮT ĐẦU
+            </th>
+            <th>
+                NGÀY KẾT THÚC
+            </th>
+            <th>
+                TRẠNG THÁI
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenKM)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayBD)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayKT)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TrangThai)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Sửa", "Edit", new { id = item.ID }, new
+               {
+                   @class = "btn btn-success"
+               }) |
+                    @Html.ActionLink("Chi tiết", "Details", new { id = item.ID }, new 
+               { @class = "btn btn-info" }) |
+                    @Html.ActionLink("Xóa", "Delete", new { id = item.ID }, new
+               { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

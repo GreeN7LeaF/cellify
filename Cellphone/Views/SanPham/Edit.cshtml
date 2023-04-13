@@ -1,0 +1,94 @@
+﻿@model Cellphone.Models.SanPham
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+}
+    <div class="breadcumb d-flex flex-row mb-3">
+        @Html.ActionLink("Sản phẩm", "Index", null, new { @class= "bc-prev nav-link" })
+        <a href="#" class="nav-link">Chỉnh sửa sản phẩm</a>
+    </div>
+    <h5 class="title">Chỉnh sửa thông tin sản phẩm</h5>
+    <p>Chỉnh sửa các mục cho phép</p>
+    <div class="row">
+        <div class="col-8">
+            <div class="create-form">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <!-- 2 column grid layout with text inputs for the first and last names -->
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                @Html.EditorFor(model => model.TenSP, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TenSP, "", new { @class = "text-danger" })
+                                @Html.LabelFor(model => model.TenSP, htmlAttributes: new { @class = "form-label" })
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-outline">
+                                @Html.DropDownList("LoaiSP", null, htmlAttributes: new { @class = "select w-100" })
+                                @Html.ValidationMessageFor(model => model.LoaiSP, "", new { @class = "text-danger" })
+                                @*@Html.LabelFor(model => model.LoaiSP, "Loại sản phẩm", htmlAttributes: new { @class = "form-label " })*@
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text input -->
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-outline mb-4">
+                                @Html.EditorFor(model => model.GiaMua, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.GiaMua, "", new { @class = "text-danger" })
+                                @Html.LabelFor(model => model.GiaMua, "Giá mua", htmlAttributes: new { @class = "fomr-label " })
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-outline mb-4">
+                                @Html.EditorFor(model => model.GiaBan, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.GiaBan, "", new { @class = "text-danger" })
+                                @Html.LabelFor(model => model.GiaBan, "Giá bán", htmlAttributes: new { @class = "form-label " })
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="file-upload">
+                                <div class="file-select">
+                                    <div class="file-select-button" id="fileName">
+                                        Choose Image
+                                    </div>
+                                    <div class="file-select-name" id="noFile">
+                                        No file chosen...
+                                    </div>
+                                    <input type="file"
+                                           name="chooseFile"
+                                           id="chooseFile" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <textarea class="form-control"
+                                  id="form6Example7"
+                                  rows="4"></textarea>
+                        <label class="form-label" for="form6Example7">Note</label>
+                    </div>
+
+                    <!-- Submit button -->
+                    <button type="submit"
+                            class="btn btn-clr-normal btn-block mb-4">
+                        Create
+                    </button>
+                }
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="form-outline mb-4">
+                <div class="default-img-wrapper">
+                    <img src="../../../images/default.jpg" alt="" />
+                </div>
+                <label class="form-label" for="form6Example4">Image</label>
+            </div>
+        </div>
+    </div>
+
