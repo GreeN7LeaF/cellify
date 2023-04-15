@@ -18,7 +18,9 @@ namespace Cellphone.Controllers
         public ActionResult Index()
         {
             var sanPhams = db.SanPhams.Include(s => s.Hang1).Include(s => s.LoaiSP1);
-            ViewBag.Hang = db.Hangs;
+            ViewBag.Hang = new SelectList(db.Hangs, "ID", "TenHang");
+
+            
             return View(sanPhams.ToList());
         }
 
@@ -50,7 +52,7 @@ namespace Cellphone.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,TenSP,GiaBan,GiaMua,SoLuong,HinhAnh,LoaiSP,Hang,TrangThai")] SanPham sanPham)
+        public ActionResult Create([Bind(Include = "TenSP,GiaBan,GiaMua,HinhAnh,LoaiSP,Hang,TrangThai")] SanPham sanPham)
         {
             if (ModelState.IsValid)
             {

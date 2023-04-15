@@ -1,14 +1,14 @@
 @import "./root.css";
 
-* {
-  box-sizing: border-box;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  margin: 0;
-  padding: 0;
-  transition: 0.3s;
+#admin > * {
+    box-sizing: border-box;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    transition: 0.3s;
 }
 
 body {
@@ -245,7 +245,7 @@ td .nav-link {
     transition: all 0.3s;
 }
 
-td .nav-link:hover {
+td .nav-link:hover i {
     background-color: var(--clr-btn);
     color: #fff;
     border-radius: 100%;

@@ -52,6 +52,7 @@ namespace Cellphone.Controllers
         {
             if (ModelState.IsValid)
             {
+                donHang.TrangThai = "Chưa xác nhận";
                 db.DonHangs.Add(donHang);
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cellphone.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +9,12 @@ namespace Cellphone.Controllers
 {
     public class HomeController : Controller
     {
+        private mobiledbEntities1 db = new mobiledbEntities1();
         public ActionResult Index()
         {
-            return View();
+            var sanphams = db.SanPhams.ToList();
+            ViewBag.LoaiSP = db.LoaiSPs.ToList();
+            return View(sanphams);
         }
 
         public ActionResult About()

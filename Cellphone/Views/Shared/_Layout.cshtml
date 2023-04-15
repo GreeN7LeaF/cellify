@@ -9,6 +9,9 @@
     <meta name="description" content="Mioca - Handmade Goods eCommerce HTML Template" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
+    <link rel="stylesheet" href="~/Content/assets/css/root.css" />
+    <link rel="stylesheet" href="~/Content/assets/css/main.css" />
+
     <!-- Add site Favicon -->
     <link rel="shortcut icon" href="~/Template/images/favicon/favicon.ico" type="image/png">
 
@@ -31,10 +34,9 @@
     <link rel="stylesheet" href="~/Template/css/style.min.css"> -->
     <!-- Main Style -->
     <link rel="stylesheet" href="~/Template/css/style.css" />
-
 </head>
 
-<body>
+<body id="client">
 
 
     <!-- Header Area Start -->
@@ -549,6 +551,7 @@
     <script src="~/Template/js/plugins/plugins.min.js"></script> -->
     <!-- Main Js -->
     <script src="~/Template/js/main.js"></script>
+    @Scripts.Render("~/Content/js")
 </body>
 
 </html>

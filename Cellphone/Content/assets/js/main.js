@@ -1,11 +1,39 @@
-document.addEventListener("DOMContentLoaded", function () {
-    dropDownSideBar();
-    toggleAddProductForm();
-    console.log("run into this");
-});
-// DOMContentLoaded  end
-setSideNav();
+﻿function renderSideNav(route, route2) {
+    let headerId;
+    switch (route) {
+        case 'SanPham':
+            headerId = 2;
+            break;
+        case 'CuaHang':
+            headerId = 3;
+            break;
+        case 'TrangChu':
+            headerId = 1;
+            break;
+        default:
+            return;
+    }
+    $.ajax({
+        url: '/PartialHandle/getSideBar',
+        data: { headerId },
+        success: function (result) {
+            $('#sidebar').html(result);
+            setSideNav(route, route2);
+            dropDownSideBar();
+            toggleAddProductForm();
+        }
+    });
+}
 
+// DOMContentLoaded  end
+$(document).ready(function () {
+    let route = (window.location.pathname).split("/")[1];
+    let route2 = (window.location.pathname).split("/")[2];
+    if ($("#admin").length > 0) {
+        renderSideNav(route, route2);
+    }
+    tabHandler();
+});
 
 function dropDownSideBar() {
   document.querySelectorAll("#sidebar .nav-link").forEach(function (element) {
@@ -47,14 +75,10 @@ function toggleAddProductForm() {
     });
 }
 
-function setSideNav() {
-    let route = (window.location.pathname).split("/")[1];
-    let route2 = (window.location.pathname).split("/")[2];
-
-    console.log("Route: ", route);
-
+function setSideNav(route, route2) {
     /*Active SideBar and Header*/
     $item = $('#sidebar .nav-link').filter(function () {
+
         return $(this).prop('href').split('/').splice(-1)[0].indexOf(route) !== -1 || 
             $(this).prop('href').split('/').splice(-1)[0].indexOf(route2) !== -1;
     });
@@ -67,32 +91,29 @@ function setSideNav() {
     $item.map((idx, val) => val.classList.toggle('active'));
     $authHeader.map((idx, val) => val.classList.toggle("active"));
 
-    /*Pop up sideBar by header*/
-    if (route === 'SanPham') {
-        $.ajax({
-            url: '/PartialHandle/getSideBar',
-            data: { headerId: 2 },
-            success: function (result) {
-                $('#sidebar').html(result);
-            }
-        });
-    } else if (route === 'CuaHang') {
-        console.log("Cua hang sidebar rendering...");
-        $.ajax({
-            url: '/PartialHandle/getSideBar',
-            data: { headerId: 3 },
-            success: function (result) {
-                $('#sidebar').html(result);
-            }
-        });
-    } else if (route === 'TrangChu') {
-        $.ajax({
-            url: '/PartialHandle/getSideBar',
-            data: { headerId: 1 },
-            success: function (result) {
-                $('#sidebar').html(result);
-            }
-        });
-    }
+   
+}
+
+function tabHandler() {
+    $(".tab-slider.nav-center .navlink.active").parent().attr('id');
+    $(".best-product-tab-nav li.nav-item").on("click", function () {
+        //get product type id
+        var typeid = $(".best-product-tab-nav li.nav-item .nav-link.active").parent().attr('id');
+        var id = parseInt(typeid);
+        console.log(typeof id === 'number');
+        if (id > 0 && typeof id === 'number') {
+            $.ajax({
+                url: '/PartialHandle/getProductTab',
+                data: { id },
+                success: function (result) {
+                    $('#productTabContainer').html(result);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(xhr.status);
+                    console.log(thrownError);
+                }
+            });
+        }
+    });
 }
 

@@ -64,37 +64,65 @@
                         <th>Giá mua</th>
                         <th>Hãng</th>
                         <th>Số lượng</th>
+                        <th>Trạng thái</th>
                         <th>Khác</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <tr>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    @Html.DisplayFor(modelItem => item.TenSP)
-                                </div>
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.GiaBan)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.GiaMua)
-                            </td>
-                            <td>@Html.DisplayFor(modelItem => item.Hang)</td>
-                            <td>@Html.DisplayFor(modelItem => item.SoLuong)</td>
-                            <td class="mw-80">
-                                <div class="d-flex flex-row gap-1">
-                                    <a href="@Url.Action("Edit", "SanPham", new { id = item.ID})" class="nav-link">
-                                        <i class="fa-solid fa-pen"></i>
-                                    </a>
-                                    <a href="@Url.Action("Delete", "SanPham", new { id = item.ID})" class="nav-link">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                @Html.DisplayFor(modelItem => item.TenSP)
+                            </div>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GiaBan)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GiaMua)
+                        </td>
+                        <td>
+                            @if (ViewBag.Hang != null)
+                            {
+                                foreach (var hang in ViewBag.Hang)
+                                {
+                                    if (@item.Hang == int.Parse(@hang.Value))
+                                    {
+                                        <a class="nav-link" href="">@hang.Text</a>
+                                    }
+                                }
+                            }
+                            else
+                            {<div>Không lấy được dữ liệu</div>}
+                        </td>
+                        <td>@Html.DisplayFor(modelItem => item.SoLuong)</td>
+                        <td>
+                            @if (item.TrangThai == "Ẩn")
+                            {
+                                <div class="btn text-bg-danger py-2 w-75">@Html.DisplayFor(modelItem => item.TrangThai)</div>
+                            }
+                            else if (item.TrangThai == "Còn hàng")
+                            {
+                                <div class="btn text-bg-success py-2 w-75">@Html.DisplayFor(modelItem => item.TrangThai)</div>
+                            }
+                            else if (item.TrangThai == "Hết hàng")
+                            {
+                                <div class="btn text-bg-warning py-2 w-75">@Html.DisplayFor(modelItem => item.TrangThai)</div>
+                            }
+                        </td>
+                        <td class="mw-80">
+                            <div class="d-flex flex-row gap-1">
+                                <a href="@Url.Action("Edit", "SanPham", new { id = item.ID})" class="nav-link">
+                                    <i class="fa-solid fa-pen"></i>
+                                </a>
+                                <a href="@Url.Action("Delete", "SanPham", new { id = item.ID})" class="nav-link">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>

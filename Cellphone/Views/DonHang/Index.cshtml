@@ -5,54 +5,68 @@
     Layout = "~/Views/Shared/Admin_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="main-content rounded-3 border border-2 py-4 px-3">
+    <div class="table-header row">
+        <div class="col-5">
+            <h5 class="title">Đơn hàng</h5>
+            <p>sub title</p>
+        </div>
+    </div>
+    <div class="text-white">
+        <div class="bg-white">
+            <table class="table align-middle mb-0">
+                <thead class="">
+                    <tr>
+                        <th>ID</th>
+                        <th>Ngày lập</th>
+                        <th>Tổng tiền</th>
+                        <th>Trạng thái</th>
+                        <th>Khác </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        @item.ID
+                                    </div>
+                                </td>
+                                <td>
+                                    @item.NgayLap
+                                </td>
+                                <td>
+                                    @item.TongTien
+                                </td>
+                                <td>
+                                    @if (item.TrangThai == null)
+                                    {<span>Chưa xác nhận </span>}
+                                    else
+                                    { <span>@item.TrangThai </span>}
+                                </td>
+                                <td>
+                                    <div class="d-flex flex-row gap-1">
+                                        <a href="@Url.Action("Edit", "DonHang", new {id=item.ID})" class="nav-link">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </a>
+                                        <a href="@Url.Action("Delete", "DonHang", new {id=item.ID})" class="nav-link">
+                                            Hủy
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <div>Không tìm thấy đơn hàng nào</div>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.NgayLap)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TongTien)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GiamGia)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TrangThai)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.KhachHang.HoTen)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NgayLap)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TongTien)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GiamGia)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TrangThai)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.KhachHang.HoTen)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
-
-</table>

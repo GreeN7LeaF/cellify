@@ -2618,7 +2618,6 @@
     <Content Include="Views\Shared\_Breadcumb.cshtml" />
     <Content Include="Views\KhuyenMai\Create.cshtml" />
     <Content Include="Views\KhuyenMai\Delete.cshtml" />
-    <Content Include="Views\KhuyenMai\Details.cshtml" />
     <Content Include="Views\KhuyenMai\Edit.cshtml" />
     <Content Include="Views\KhuyenMai\Index.cshtml" />
     <Content Include="Views\Hang\Create.cshtml" />
@@ -2642,6 +2641,8 @@
     <Content Include="Views\DonHang\Index.cshtml" />
     <Content Include="Views\Home\CuaHang.cshtml" />
     <Content Include="Views\Shared\_CuaHangSideBar.cshtml" />
+    <Content Include="Views\Shared\PP_SanPhamCart.cshtml" />
+    <Content Include="Views\Shared\_ModalSanPham.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
