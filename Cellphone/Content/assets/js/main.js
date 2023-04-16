@@ -95,18 +95,35 @@ function setSideNav(route, route2) {
 }
 
 function tabHandler() {
-    $(".tab-slider.nav-center .navlink.active").parent().attr('id');
     $(".best-product-tab-nav li.nav-item").on("click", function () {
         //get product type id
         var typeid = $(".best-product-tab-nav li.nav-item .nav-link.active").parent().attr('id');
         var id = parseInt(typeid);
-        console.log(typeof id === 'number');
         if (id > 0 && typeof id === 'number') {
             $.ajax({
                 url: '/PartialHandle/getProductTab',
                 data: { id },
                 success: function (result) {
                     $('#productTabContainer').html(result);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(xhr.status);
+                    console.log(thrownError);
+                }
+            });
+        }
+    });
+    /*$(".tab-slider.nav-center .navlink.active").parent().attr('id');*/
+    $(".product-list li.nav-item").on("click", function () {
+        //get product type id
+        var typeid = $(".product-list li.nav-item .nav-link.active").parent().attr('id');
+        var id = parseInt(typeid.split('-')[1]);
+        if (id > 0 && typeof id === 'number') {
+            $.ajax({
+                url: '/PartialHandle/getProductTab',
+                data: { id },
+                success: function (result) {
+                    $('#productListContainer').html(result);
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     console.log(xhr.status);

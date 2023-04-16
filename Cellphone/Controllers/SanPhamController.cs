@@ -19,8 +19,7 @@ namespace Cellphone.Controllers
         {
             var sanPhams = db.SanPhams.Include(s => s.Hang1).Include(s => s.LoaiSP1);
             ViewBag.Hang = new SelectList(db.Hangs, "ID", "TenHang");
-
-            
+            ViewBag.LoaiSP = new SelectList(db.LoaiSPs, "ID", "TenLoai");
             return View(sanPhams.ToList());
         }
 

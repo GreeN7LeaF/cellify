@@ -61,7 +61,7 @@
                     <tr>
                         <th>Tên sản phẩm</th>
                         <th>Giá bán</th>
-                        <th>Giá mua</th>
+                        <th>Loại</th>
                         <th>Hãng</th>
                         <th>Số lượng</th>
                         <th>Trạng thái</th>
@@ -81,7 +81,18 @@
                             @Html.DisplayFor(modelItem => item.GiaBan)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.GiaMua)
+                            @if (ViewBag.LoaiSP != null)
+                            {
+                                foreach (var loai in ViewBag.LoaiSP)
+                                {
+                                    if (@item.LoaiSP == int.Parse(@loai.Value))
+                                    {
+                                        <a class="nav-link" href="">@loai.Text</a>
+                                    }
+                                }
+                            }
+                            else
+                            {<div>Không lấy được dữ liệu</div>}
                         </td>
                         <td>
                             @if (ViewBag.Hang != null)
@@ -90,7 +101,9 @@
                                 {
                                     if (@item.Hang == int.Parse(@hang.Value))
                                     {
-                                        <a class="nav-link" href="">@hang.Text</a>
+                                        <a class="nav-link" 
+                                           href=@Url.Action("Edit", "Hang", new { ID = item.Hang})>
+                                        @hang.Text</a>
                                     }
                                 }
                             }

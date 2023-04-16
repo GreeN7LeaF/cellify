@@ -26,31 +26,44 @@
                             </div>
                         </div>
                         <div class="col">
-                            <div class="form-outline">
-                                @Html.DropDownList("LoaiSP", null, htmlAttributes: new { @class = "select w-100" })
-                                @Html.ValidationMessageFor(model => model.LoaiSP, "", new { @class = "text-danger" })
-                                @*@Html.LabelFor(model => model.LoaiSP, "Loại sản phẩm", htmlAttributes: new { @class = "form-label " })*@
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-outline">
+                                        @Html.DropDownList("LoaiSP", null, htmlAttributes: new { @class = "select w-100" })
+                                        @Html.ValidationMessageFor(model => model.LoaiSP, "", new { @class = "text-danger" })
+                                        @*@Html.LabelFor(model => model.LoaiSP, "Loại sản phẩm", htmlAttributes: new { @class = "form-label " })*@
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="col">
+                                        <div class="form-outline">
+                                            @Html.DropDownList("Hang", null, htmlAttributes: new { @class = "select w-100" })
+                                            @Html.ValidationMessageFor(model => model.Hang, "", new { @class = "text-danger" })
+                                            @Html.LabelFor(model => model.Hang, "Hãng", htmlAttributes: new { @class = "form-label" })
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Text input -->
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col">
                             <div class="form-outline mb-4">
                                 @Html.EditorFor(model => model.GiaMua, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.GiaMua, "", new { @class = "text-danger" })
                                 @Html.LabelFor(model => model.GiaMua, "Giá mua", htmlAttributes: new { @class = "fomr-label " })
                             </div>
                         </div>
-                        <div class="col-4">
+                        <div class="col">
                             <div class="form-outline mb-4">
                                 @Html.EditorFor(model => model.GiaBan, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.GiaBan, "", new { @class = "text-danger" })
                                 @Html.LabelFor(model => model.GiaBan, "Giá bán", htmlAttributes: new { @class = "form-label " })
                             </div>
                         </div>
-                        <div class="col-4">
+                        <div class="col">
                             <div class="file-upload">
                                 <div class="file-select">
                                     <div class="file-select-button" id="fileName">
@@ -65,6 +78,26 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col">
+                            <select class="select w-100" id="TrangThai" name="TrangThai" value="@Model.TrangThai">
+                                <option value="Hết hàng">Hết hàng</option>
+                                <option value="Còn Hàng">Còn Hàng</option>
+                                <option value="Ẩn">Ẩn</option>
+                            </select>
+                        </div>
+                        @*<script>
+                            var trangthai = @Html.Raw(Json.Encode(Model.TrangThai));
+                            if (trangthai != "") {
+                                var select = document.getElementById('TrangThai');
+                                for (var i = 0; i < select.options.length; i++) {
+                                    console.log(select.options[i].value.trim() == trangthai.trim());
+                                    if (select.options[i].value.trim() == trangthai.trim()) {
+                                        select.selectedIndex = i;
+                                        break;
+                                    }
+                                }
+                            }
+                        </script>*@
                     </div>
 
                     <div class="form-outline mb-4">

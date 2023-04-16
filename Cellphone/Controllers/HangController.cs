@@ -78,6 +78,9 @@ namespace Cellphone.Controllers
         // GET: Hang/Edit/5
         public ActionResult Edit(int? id)
         {
+            /*ViewBag.SanPham = new SelectList(db.SanPhams, sp => sp.Hang == id);*/
+            ViewBag.SanPham = db.SanPhams
+                .Where(sp => sp.Hang == id).ToList();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

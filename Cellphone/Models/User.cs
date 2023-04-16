@@ -24,8 +24,10 @@ namespace Cellphone.Models
         public string C_Password { get; set; }
         public string C_Email { get; set; }
         public string C_Phone { get; set; }
-        public System.DateTime C_Created_at { get; set; }
         public int C_is_Admin { get; set; }
+        public Nullable<bool> C_is_Active { get; set; }
+        public Nullable<System.DateTime> C_Created_at { get; set; }
+        public Nullable<System.DateTime> C_Updated_at { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KhachHang> KhachHangs { get; set; }

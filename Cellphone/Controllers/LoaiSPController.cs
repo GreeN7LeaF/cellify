@@ -67,6 +67,8 @@ namespace Cellphone.Controllers
         // GET: LoaiSP/Edit/5
         public ActionResult Edit(int? id)
         {
+            ViewBag.SanPham = db.SanPhams
+                .Where(sp => sp.LoaiSP == id).ToList();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -86,6 +88,7 @@ namespace Cellphone.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,TenLoai,GhiChu")] LoaiSP loaiSP)
         {
+            
             if (ModelState.IsValid)
             {
                 db.Entry(loaiSP).State = EntityState.Modified;

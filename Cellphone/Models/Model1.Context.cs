@@ -66,6 +66,19 @@ namespace Cellphone.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_alterdiagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
         }
     
+        public virtual int sp_capNhatDonHang(Nullable<int> id, string trangthai)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var trangthaiParameter = trangthai != null ?
+                new ObjectParameter("trangthai", trangthai) :
+                new ObjectParameter("trangthai", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_capNhatDonHang", idParameter, trangthaiParameter);
+        }
+    
         public virtual int sp_creatediagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
             var diagramnameParameter = diagramname != null ?
@@ -141,6 +154,27 @@ namespace Cellphone.Models
                 new ObjectParameter("new_diagramname", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
+        }
+    
+        public virtual int sp_themDonHang(Nullable<int> makh, Nullable<double> tongtien, string trangthai, Nullable<System.DateTime> ngaycapnhat)
+        {
+            var makhParameter = makh.HasValue ?
+                new ObjectParameter("makh", makh) :
+                new ObjectParameter("makh", typeof(int));
+    
+            var tongtienParameter = tongtien.HasValue ?
+                new ObjectParameter("tongtien", tongtien) :
+                new ObjectParameter("tongtien", typeof(double));
+    
+            var trangthaiParameter = trangthai != null ?
+                new ObjectParameter("trangthai", trangthai) :
+                new ObjectParameter("trangthai", typeof(string));
+    
+            var ngaycapnhatParameter = ngaycapnhat.HasValue ?
+                new ObjectParameter("ngaycapnhat", ngaycapnhat) :
+                new ObjectParameter("ngaycapnhat", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_themDonHang", makhParameter, tongtienParameter, trangthaiParameter, ngaycapnhatParameter);
         }
     
         public virtual int sp_upgraddiagrams()

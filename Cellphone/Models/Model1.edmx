@@ -85,6 +85,8 @@ warning 6002: The table/view 'mobiledb.dbo.DanhGia' does not have a primary key 
           <Property Name="TongTien" Type="float" Nullable="false" />
           <Property Name="GiamGia" Type="float" />
           <Property Name="TrangThai" Type="nvarchar(max)" />
+          <Property Name="SoLuong" Type="float" />
+          <Property Name="ThanhTien" Type="float" />
         </EntityType>
         <EntityType Name="GioHang">
           <Key>
@@ -116,6 +118,7 @@ warning 6002: The table/view 'mobiledb.dbo.DanhGia' does not have a primary key 
           <Property Name="HinhAnh" Type="nvarchar(max)" />
           <Property Name="DiaChi" Type="nvarchar(max)" />
           <Property Name="GioiTinh" Type="int" Nullable="false" />
+          <Property Name="DienThoai" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="KhuyenMai">
           <Key>
@@ -185,8 +188,10 @@ warning 6002: The table/view 'mobiledb.dbo.DanhGia' does not have a primary key 
           <Property Name="_Password" Type="varchar(max)" Nullable="false" />
           <Property Name="_Email" Type="varchar(max)" />
           <Property Name="_Phone" Type="varchar" MaxLength="50" />
-          <Property Name="_Created_at" Type="datetime" Nullable="false" />
           <Property Name="_is_Admin" Type="int" Nullable="false" />
+          <Property Name="_is_Active" Type="bit" />
+          <Property Name="_Created_at" Type="datetime2" Precision="7" />
+          <Property Name="_Updated_at" Type="datetime2" Precision="7" />
         </EntityType>
         <Association Name="FK_DonHang_CTDonHang">
           <End Role="DonHang" Type="Self.DonHang" Multiplicity="1" />
@@ -411,6 +416,10 @@ warning 6002: The table/view 'mobiledb.dbo.DanhGia' does not have a primary key 
           <Parameter Name="version" Type="int" Mode="In" />
           <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
         </Function>
+        <Function Name="sp_capNhatDonHang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="trangthai" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
@@ -433,6 +442,12 @@ warning 6002: The table/view 'mobiledb.dbo.DanhGia' does not have a primary key 
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_themDonHang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="makh" Type="int" Mode="In" />
+          <Parameter Name="tongtien" Type="float" Mode="In" />
+          <Parameter Name="trangthai" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ngaycapnhat" Type="datetime" Mode="In" />
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="mobiledbModelStoreContainer">
@@ -608,6 +623,8 @@ warning 6002: The table/view 'mobiledb.dbo.DanhGia' does not have a primary key 
           <Property Name="TongTien" Type="Double" Nullable="false" />
           <Property Name="GiamGia" Type="Double" />
           <Property Name="TrangThai" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SoLuong" Type="Double" />
+          <Property Name="ThanhTien" Type="Double" />
           <NavigationProperty Name="CTDonHangs" Relationship="Self.FK_DonHang_CTDonHang" FromRole="DonHang" ToRole="CTDonHang" />
           <NavigationProperty Name="KhachHang" Relationship="Self.FK_KhachHang_DonHang" FromRole="DonHang" ToRole="KhachHang" />
         </EntityType>
@@ -644,6 +661,7 @@ warning 6002: The table/view 'mobiledb.dbo.DanhGia' does not have a primary key 
           <Property Name="HinhAnh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DiaChi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="GioiTinh" Type="Int32" Nullable="false" />
+          <Property Name="DienThoai" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="BaoHanhs" Relationship="Self.FK_KhachHang_PhieuBaoHanh" FromRole="KhachHang" ToRole="BaoHanh" />
           <NavigationProperty Name="DonHangs" Relationship="Self.FK_KhachHang_DonHang" FromRole="KhachHang" ToRole="DonHang" />
           <NavigationProperty Name="GioHang" Relationship="Self.FK_GioHang_KhachHang" FromRole="KhachHang" ToRole="GioHang" />
@@ -731,8 +749,10 @@ warning 6002: The table/view 'mobiledb.dbo.DanhGia' does not have a primary key 
           <Property Name="C_Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="C_Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="C_Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="C_Created_at" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="C_is_Admin" Type="Int32" Nullable="false" />
+          <Property Name="C_is_Active" Type="Boolean" />
+          <Property Name="C_Created_at" Type="DateTime" Precision="7" />
+          <Property Name="C_Updated_at" Type="DateTime" Precision="7" />
           <NavigationProperty Name="KhachHangs" Relationship="Self.FK_User_KhachHang" FromRole="User" ToRole="KhachHang" />
         </EntityType>
         <EntityType Name="CTGioHang">
@@ -1073,6 +1093,10 @@ warning 6002: The table/view 'mobiledb.dbo.DanhGia' does not have a primary key 
             <Parameter Name="version" Mode="In" Type="Int32" />
             <Parameter Name="definition" Mode="In" Type="Binary" />
           </FunctionImport>
+          <FunctionImport Name="sp_capNhatDonHang">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="trangthai" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="sp_creatediagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
@@ -1095,6 +1119,12 @@ warning 6002: The table/view 'mobiledb.dbo.DanhGia' does not have a primary key 
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_themDonHang">
+            <Parameter Name="makh" Mode="In" Type="Int32" />
+            <Parameter Name="tongtien" Mode="In" Type="Double" />
+            <Parameter Name="trangthai" Mode="In" Type="String" />
+            <Parameter Name="ngaycapnhat" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
@@ -1172,6 +1202,8 @@ warning 6002: The table/view 'mobiledb.dbo.DanhGia' does not have a primary key 
                 <ScalarProperty Name="TongTien" ColumnName="TongTien" />
                 <ScalarProperty Name="GiamGia" ColumnName="GiamGia" />
                 <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1206,6 +1238,7 @@ warning 6002: The table/view 'mobiledb.dbo.DanhGia' does not have a primary key 
                 <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
                 <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
                 <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1282,8 +1315,10 @@ warning 6002: The table/view 'mobiledb.dbo.DanhGia' does not have a primary key 
                 <ScalarProperty Name="C_Password" ColumnName="_Password" />
                 <ScalarProperty Name="C_Email" ColumnName="_Email" />
                 <ScalarProperty Name="C_Phone" ColumnName="_Phone" />
-                <ScalarProperty Name="C_Created_at" ColumnName="_Created_at" />
                 <ScalarProperty Name="C_is_Admin" ColumnName="_is_Admin" />
+                <ScalarProperty Name="C_is_Active" ColumnName="_is_Active" />
+                <ScalarProperty Name="C_Created_at" ColumnName="_Created_at" />
+                <ScalarProperty Name="C_Updated_at" ColumnName="_Updated_at" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1309,6 +1344,7 @@ warning 6002: The table/view 'mobiledb.dbo.DanhGia' does not have a primary key 
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="mobiledbModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_capNhatDonHang" FunctionName="mobiledbModel.Store.sp_capNhatDonHang" />
           <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="mobiledbModel.Store.sp_creatediagram" />
           <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="mobiledbModel.Store.sp_dropdiagram" />
           <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="mobiledbModel.Store.sp_helpdiagramdefinition">
@@ -1331,6 +1367,7 @@ warning 6002: The table/view 'mobiledb.dbo.DanhGia' does not have a primary key 
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="mobiledbModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_themDonHang" FunctionName="mobiledbModel.Store.sp_themDonHang" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="mobiledbModel.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
