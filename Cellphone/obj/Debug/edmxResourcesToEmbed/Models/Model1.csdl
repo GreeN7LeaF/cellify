@@ -60,8 +60,10 @@
     <Property Name="MaKH" Type="Int32" Nullable="false" />
     <Property Name="NgayLap" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="TongTien" Type="Double" Nullable="false" />
+    <Property Name="ThanhTien" Type="Double" />
     <Property Name="GiamGia" Type="Double" />
     <Property Name="TrangThai" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SoLuong" Type="Double" />
     <NavigationProperty Name="CTDonHangs" Relationship="Self.FK_DonHang_CTDonHang" FromRole="DonHang" ToRole="CTDonHang" />
     <NavigationProperty Name="KhachHang" Relationship="Self.FK_KhachHang_DonHang" FromRole="DonHang" ToRole="KhachHang" />
   </EntityType>
@@ -97,7 +99,7 @@
     <Property Name="HoTen" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="HinhAnh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="DiaChi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="GioiTinh" Type="Int32" Nullable="false" />
+    <Property Name="GioiTinh" Type="Int32" />
     <NavigationProperty Name="BaoHanhs" Relationship="Self.FK_KhachHang_PhieuBaoHanh" FromRole="KhachHang" ToRole="BaoHanh" />
     <NavigationProperty Name="DonHangs" Relationship="Self.FK_KhachHang_DonHang" FromRole="KhachHang" ToRole="DonHang" />
     <NavigationProperty Name="GioHang" Relationship="Self.FK_GioHang_KhachHang" FromRole="KhachHang" ToRole="GioHang" />
@@ -167,16 +169,6 @@
     <NavigationProperty Name="CTGioHangs" Relationship="Self.FK_SanPham_CTGioHang" FromRole="SanPham" ToRole="CTGioHang" />
     <NavigationProperty Name="DanhGias" Relationship="Self.FK_SanPham_DanhGia" FromRole="SanPham" ToRole="DanhGia" />
   </EntityType>
-  <EntityType Name="sysdiagram">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-  </EntityType>
   <EntityType Name="User">
     <Key>
       <PropertyRef Name="C_ID" />
@@ -185,8 +177,10 @@
     <Property Name="C_Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="C_Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="C_Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="C_Created_at" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="C_is_Admin" Type="Int32" Nullable="false" />
+    <Property Name="C_is_Active" Type="Boolean" />
+    <Property Name="C_Created_at" Type="DateTime" Precision="7" />
+    <Property Name="C_Updated_at" Type="DateTime" Precision="7" />
     <NavigationProperty Name="KhachHangs" Relationship="Self.FK_User_KhachHang" FromRole="User" ToRole="KhachHang" />
   </EntityType>
   <EntityType Name="CTGioHang">
@@ -445,7 +439,6 @@
     <EntitySet Name="LoaiSPs" EntityType="Self.LoaiSP" />
     <EntitySet Name="PhieuNhaps" EntityType="Self.PhieuNhap" />
     <EntitySet Name="SanPhams" EntityType="Self.SanPham" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="Users" EntityType="Self.User" />
     <EntitySet Name="CTGioHangs" EntityType="Self.CTGioHang" />
     <EntitySet Name="DanhGias" EntityType="Self.DanhGia" />
@@ -521,46 +514,11 @@
       <End Role="SanPham" EntitySet="SanPhams" />
       <End Role="DanhGia" EntitySet="DanhGias" />
     </AssociationSet>
-    <FunctionImport Name="sp_alterdiagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-      <Parameter Name="version" Mode="In" Type="Int32" />
-      <Parameter Name="definition" Mode="In" Type="Binary" />
+    <FunctionImport Name="sp_themDonHang">
+      <Parameter Name="makh" Mode="In" Type="Int32" />
+      <Parameter Name="tongtien" Mode="In" Type="Double" />
+      <Parameter Name="trangthai" Mode="In" Type="String" />
+      <Parameter Name="ngaycapnhat" Mode="In" Type="DateTime" />
     </FunctionImport>
-    <FunctionImport Name="sp_creatediagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-      <Parameter Name="version" Mode="In" Type="Int32" />
-      <Parameter Name="definition" Mode="In" Type="Binary" />
-    </FunctionImport>
-    <FunctionImport Name="sp_dropdiagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(mobiledbModel.sp_helpdiagramdefinition_Result)">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(mobiledbModel.sp_helpdiagrams_Result)">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_renamediagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-      <Parameter Name="new_diagramname" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="sp_upgraddiagrams" />
   </EntityContainer>
-  <ComplexType Name="sp_helpdiagramdefinition_Result">
-    <Property Type="Int32" Name="version" Nullable="true" />
-    <Property Type="Binary" Name="definition" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="sp_helpdiagrams_Result">
-    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-    <Property Type="Int32" Name="ID" Nullable="false" />
-    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-    <Property Type="Int32" Name="OwnerID" Nullable="false" />
-  </ComplexType>
 </Schema>

@@ -15,6 +15,7 @@
         <!-- left -->
         <div class="col bg-right">
             <div class="form-title w-100 text-center">Đăng nhập</div>
+            <div id="toast-container" class="toast-top-right"></div>
             <div class="form-container">
                 @using (Html.BeginForm())
                 {
@@ -30,9 +31,11 @@
 
                         <!-- Password input -->
                         <div class="form-outline mb-2">
-                            @Html.EditorFor(model => model.C_Password, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.C_Password, "", new { @class = "text-danger" })
-                            @Html.LabelFor(model => model.C_Password, "Mật khẩu", htmlAttributes: new { @class = "form-label" })
+                            <input type="password"
+                                   id="password"
+                                   name="password"
+                                   class="form-control" />
+                            <label class="form-label" for="form2Example2">Mật khẩu</label>
                         </div>
 
                         <!-- 2 column grid layout for inline styling -->
@@ -57,10 +60,18 @@
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col">
+                                <a href=@Url.Action("Register", "Login")>Tạo tài khoản</a>
+                            </div>
+                            <div class="col">
+                                <button type="submit" class="submit-btn btn btn-block mb-4">
+                                    Đăng Nhập
+                                </button>
+                            </div>
+                        </div>
                         <!-- Submit button -->
-                        <button type="button" class="submit-btn btn btn-block mb-4">
-                            Đăng Nhập
-                        </button>
+                        
                     </form>
                 }
             </div>

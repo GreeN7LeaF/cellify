@@ -9,7 +9,7 @@
     @Scripts.Render("~/bundles/modernizr")
     <script src="https://kit.fontawesome.com/fdd5f8d904.js" crossorigin="anonymous"></script>
 </head>
-<body>
+<body id="client">
     <div id="loginContent" class="row position-relative">
         @RenderBody()
     </div>
@@ -18,5 +18,24 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/Content/js")
     @RenderSection("scripts", required: false)
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.6.1/toastify.js" 
+            integrity="sha512-MnKz2SbnWiXJ/e0lSfSzjaz9JjJXQNb2iykcZkEY2WOzgJIWVqJBFIIPidlCjak0iTH2bt2u1fHQ4pvKvBYy6Q==" 
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    @if (TempData["ToastMessage"] != null)
+    {
+<script>
+            console.log(JSON.stringify("@TempData["ToastMessage"]"));
+            Toastify({
+                text: JSON.stringify("@TempData["ToastMessage"]"),
+                duration: 3000,
+                close: true,
+                gravity: "top",
+                position: "right",
+                backgroundColor: "#32CD32",
+                stopOnFocus: true,
+            }).showToast();
+</script>
+    }
 </body>
 </html>

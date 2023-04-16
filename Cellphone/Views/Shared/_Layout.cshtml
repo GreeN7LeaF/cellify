@@ -552,6 +552,22 @@
     <!-- Main Js -->
     <script src="~/Template/js/main.js"></script>
     @Scripts.Render("~/Content/js")
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js@1.11.0/toastify.min.js"></script>
+
+    @if (TempData["ToastMessage"] != null)
+    {
+        <script>
+        Toastify({
+            text: '@TempData["ToastMessage"]',
+            duration: 3000,
+            close: true,
+            gravity: "top",
+            position: "right",
+            backgroundColor: "#32CD32",
+            stopOnFocus: true,
+        }).showToast();
+        </script>
+    }
 </body>
 
 </html>

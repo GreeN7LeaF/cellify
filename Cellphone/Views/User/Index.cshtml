@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Cellphone.Models.User>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+}
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.C_Password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.C_Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.C_Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.C_is_Admin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.C_is_Active)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.C_Created_at)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.C_Updated_at)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.C_Password)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.C_Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.C_Phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.C_is_Admin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.C_is_Active)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.C_Created_at)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.C_Updated_at)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.C_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.C_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.C_ID })
+        </td>
+    </tr>
+}
+
+</table>

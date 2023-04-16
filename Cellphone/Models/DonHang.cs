@@ -24,10 +24,10 @@ namespace Cellphone.Models
         public int MaKH { get; set; }
         public System.DateTime NgayLap { get; set; }
         public double TongTien { get; set; }
+        public Nullable<double> ThanhTien { get; set; }
         public Nullable<double> GiamGia { get; set; }
         public string TrangThai { get; set; }
         public Nullable<double> SoLuong { get; set; }
-        public Nullable<double> ThanhTien { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTDonHang> CTDonHangs { get; set; }

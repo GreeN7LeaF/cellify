@@ -29,8 +29,7 @@ namespace Cellphone.Models
         public string HoTen { get; set; }
         public string HinhAnh { get; set; }
         public string DiaChi { get; set; }
-        public int GioiTinh { get; set; }
-        public string DienThoai { get; set; }
+        public Nullable<int> GioiTinh { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BaoHanh> BaoHanhs { get; set; }
