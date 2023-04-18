@@ -29,6 +29,7 @@ namespace Cellphone.Models
     
         public virtual DbSet<BaoHanh> BaoHanhs { get; set; }
         public virtual DbSet<CTDonHang> CTDonHangs { get; set; }
+        public virtual DbSet<CTGioHang> CTGioHangs { get; set; }
         public virtual DbSet<CTKhuyenMai> CTKhuyenMais { get; set; }
         public virtual DbSet<CTPhieuNhap> CTPhieuNhaps { get; set; }
         public virtual DbSet<DonHang> DonHangs { get; set; }
@@ -41,7 +42,6 @@ namespace Cellphone.Models
         public virtual DbSet<PhieuNhap> PhieuNhaps { get; set; }
         public virtual DbSet<SanPham> SanPhams { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<CTGioHang> CTGioHangs { get; set; }
         public virtual DbSet<DanhGia> DanhGias { get; set; }
     
         public virtual int sp_themDonHang(Nullable<int> makh, Nullable<double> tongtien, string trangthai, Nullable<System.DateTime> ngaycapnhat)

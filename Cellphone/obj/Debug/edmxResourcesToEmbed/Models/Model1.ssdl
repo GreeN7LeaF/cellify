@@ -21,19 +21,16 @@
     <Property Name="Gia" Type="int" Nullable="false" />
     <Property Name="GhiChu" Type="nvarchar(max)" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'mobiledb.dbo.CTGioHang' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="CTGioHang">
     <Key>
-      <PropertyRef Name="MaGH" />
       <PropertyRef Name="MaSP" />
-      <PropertyRef Name="SoLuong" />
+      <PropertyRef Name="MaKH" />
     </Key>
-    <Property Name="MaGH" Type="int" Nullable="false" />
     <Property Name="MaSP" Type="int" Nullable="false" />
     <Property Name="SoLuong" Type="int" Nullable="false" />
     <Property Name="Gia" Type="float" />
     <Property Name="TrangThai" Type="nvarchar(max)" />
+    <Property Name="MaKH" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="CTKhuyenMai">
     <Key>
@@ -107,7 +104,6 @@ warning 6002: The table/view 'mobiledb.dbo.DanhGia' does not have a primary key 
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="MaKH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="MaGH" Type="int" />
     <Property Name="LoaiKH" Type="int" Nullable="false" />
     <Property Name="HoTen" Type="nvarchar(max)" Nullable="false" />
     <Property Name="HinhAnh" Type="nvarchar(max)" />
@@ -189,30 +185,6 @@ warning 6002: The table/view 'mobiledb.dbo.DanhGia' does not have a primary key 
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_GioHang_CTGioHang">
-    <End Role="GioHang" Type="Self.GioHang" Multiplicity="1" />
-    <End Role="CTGioHang" Type="Self.CTGioHang" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="GioHang">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="CTGioHang">
-        <PropertyRef Name="MaGH" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_GioHang_KhachHang">
-    <End Role="GioHang" Type="Self.GioHang" Multiplicity="0..1" />
-    <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="GioHang">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="KhachHang">
-        <PropertyRef Name="MaGH" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Hang_SanPham">
     <End Role="Hang" Type="Self.Hang" Multiplicity="1" />
     <End Role="SanPham" Type="Self.SanPham" Multiplicity="*" />
@@ -222,6 +194,18 @@ warning 6002: The table/view 'mobiledb.dbo.DanhGia' does not have a primary key 
       </Principal>
       <Dependent Role="SanPham">
         <PropertyRef Name="Hang" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KH_CTGioHang">
+    <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="1" />
+    <End Role="CTGioHang" Type="Self.CTGioHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KhachHang">
+        <PropertyRef Name="MaKH" />
+      </Principal>
+      <Dependent Role="CTGioHang">
+        <PropertyRef Name="MaKH" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -402,6 +386,7 @@ warning 6002: The table/view 'mobiledb.dbo.DanhGia' does not have a primary key 
   <EntityContainer Name="mobiledbModelStoreContainer">
     <EntitySet Name="BaoHanh" EntityType="Self.BaoHanh" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CTDonHang" EntityType="Self.CTDonHang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CTGioHang" EntityType="Self.CTGioHang" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CTKhuyenMai" EntityType="Self.CTKhuyenMai" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CTPhieuNhap" EntityType="Self.CTPhieuNhap" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DonHang" EntityType="Self.DonHang" Schema="dbo" store:Type="Tables" />
@@ -414,15 +399,6 @@ warning 6002: The table/view 'mobiledb.dbo.DanhGia' does not have a primary key 
     <EntitySet Name="PhieuNhap" EntityType="Self.PhieuNhap" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SanPham" EntityType="Self.SanPham" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="CTGioHang" EntityType="Self.CTGioHang" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [CTGioHang].[MaGH] AS [MaGH], 
-    [CTGioHang].[MaSP] AS [MaSP], 
-    [CTGioHang].[SoLuong] AS [SoLuong], 
-    [CTGioHang].[Gia] AS [Gia], 
-    [CTGioHang].[TrangThai] AS [TrangThai]
-    FROM [dbo].[CTGioHang] AS [CTGioHang]</DefiningQuery>
-    </EntitySet>
     <EntitySet Name="DanhGia" EntityType="Self.DanhGia" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [DanhGia].[MaKH] AS [MaKH], 
@@ -435,17 +411,13 @@ warning 6002: The table/view 'mobiledb.dbo.DanhGia' does not have a primary key 
       <End Role="DonHang" EntitySet="DonHang" />
       <End Role="CTDonHang" EntitySet="CTDonHang" />
     </AssociationSet>
-    <AssociationSet Name="FK_GioHang_CTGioHang" Association="Self.FK_GioHang_CTGioHang">
-      <End Role="GioHang" EntitySet="GioHang" />
-      <End Role="CTGioHang" EntitySet="CTGioHang" />
-    </AssociationSet>
-    <AssociationSet Name="FK_GioHang_KhachHang" Association="Self.FK_GioHang_KhachHang">
-      <End Role="GioHang" EntitySet="GioHang" />
-      <End Role="KhachHang" EntitySet="KhachHang" />
-    </AssociationSet>
     <AssociationSet Name="FK_Hang_SanPham" Association="Self.FK_Hang_SanPham">
       <End Role="Hang" EntitySet="Hang" />
       <End Role="SanPham" EntitySet="SanPham" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KH_CTGioHang" Association="Self.FK_KH_CTGioHang">
+      <End Role="KhachHang" EntitySet="KhachHang" />
+      <End Role="CTGioHang" EntitySet="CTGioHang" />
     </AssociationSet>
     <AssociationSet Name="FK_KhachHang_DanhGia" Association="Self.FK_KhachHang_DanhGia">
       <End Role="KhachHang" EntitySet="KhachHang" />

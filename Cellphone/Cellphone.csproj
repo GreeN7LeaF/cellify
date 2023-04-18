@@ -129,8 +129,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CTGioHangsController.cs" />
     <Compile Include="Controllers\CTKhuyenMaiController.cs" />
     <Compile Include="Controllers\DonHangController.cs" />
+    <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\HangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KhachHangController.cs" />
@@ -147,6 +149,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BindPropertyAttribute.cs" />
+    <Compile Include="Models\BuyProduct.cs" />
     <Compile Include="Models\CTDonHang.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -168,6 +171,7 @@
     <Compile Include="Models\GioHang.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GioHangList.cs" />
     <Compile Include="Models\Hang.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -2645,6 +2649,13 @@
     <Content Include="Views\KhachHang\CustomerManagement.cshtml" />
     <Content Include="Views\KhachHang\Details.cshtml" />
     <Content Include="Views\KhachHang\Edit.cshtml" />
+    <Content Include="Views\GioHang\HienThiGioHang.cshtml" />
+    <Content Include="Views\GioHang\Index.cshtml" />
+    <Content Include="Views\CTGioHangs\Create.cshtml" />
+    <Content Include="Views\CTGioHangs\Delete.cshtml" />
+    <Content Include="Views\CTGioHangs\Details.cshtml" />
+    <Content Include="Views\CTGioHangs\Edit.cshtml" />
+    <Content Include="Views\CTGioHangs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

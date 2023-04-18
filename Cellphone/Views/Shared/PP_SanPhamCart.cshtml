@@ -5,6 +5,7 @@
 {
 <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
     <!-- Single Product -->
+    <input type="hidden" class="productId" name="productId" value="@item.ID" />
     <div class="product">
         <div class="thumb">
             <a href="@Url.Action("Details", "SanPham", new { ID = @item.ID})" class="image">
@@ -43,11 +44,26 @@
                 <span class="new">@item.GiaBan</span>
             </span>
         </div>
-        <button title="Add To Cart" class=" add-to-cart">
-            Add
-            To Cart
+        <button title="Add To Cart" id="btnAddToCart" class="add-to-cart" onclick="addToCart(@item.ID)">
+            Add To Cart
         </button>
     </div>
+    <script>
+        function addToCart(productId) {
+            $.ajax({
+                url: '/GioHang/AddProduct',
+                type: 'POST',
+                data: { ID: productId },
+                success: function (result) {
+                    // Xử lý kết quả trả về ở đây
+                    alert('Sản phẩm đã được thêm vào giỏ hàng thành công');
+                },
+                error: function () {
+                    alert('Đã có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng');
+                }
+            });
+        }
+    </script>
 </div>
 }
 

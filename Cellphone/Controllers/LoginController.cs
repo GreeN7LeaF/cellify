@@ -58,7 +58,10 @@ namespace Cellphone.Controllers
                             db.KhachHangs.Add(newCustomer);
                             db.SaveChanges();
 
+                            var customer1 = db.KhachHangs.SingleOrDefault(x => x.ID.Equals(newCustomer.ID));
+
                             Session["ID"] = user.C_ID;
+                            Session["MaKH"] = customer1.MaKH;
                             return RedirectToAction("Index", "Home");
                         }
                     }

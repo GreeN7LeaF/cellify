@@ -14,13 +14,13 @@ namespace Cellphone.Models
     
     public partial class CTGioHang
     {
-        public int MaGH { get; set; }
         public int MaSP { get; set; }
         public int SoLuong { get; set; }
         public Nullable<double> Gia { get; set; }
         public string TrangThai { get; set; }
+        public int MaKH { get; set; }
     
-        public virtual GioHang GioHang { get; set; }
+        public virtual KhachHang KhachHang { get; set; }
         public virtual SanPham SanPham { get; set; }
     }
 }

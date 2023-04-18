@@ -24,6 +24,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="CTGioHangs">
+      <EntityTypeMapping TypeName="mobiledbModel.CTGioHang">
+        <MappingFragment StoreEntitySet="CTGioHang">
+          <ScalarProperty Name="MaSP" ColumnName="MaSP" />
+          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+          <ScalarProperty Name="Gia" ColumnName="Gia" />
+          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+          <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="CTKhuyenMais">
       <EntityTypeMapping TypeName="mobiledbModel.CTKhuyenMai">
         <MappingFragment StoreEntitySet="CTKhuyenMai">
@@ -88,7 +99,6 @@
         <MappingFragment StoreEntitySet="KhachHang">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="MaKH" ColumnName="MaKH" />
-          <ScalarProperty Name="MaGH" ColumnName="MaGH" />
           <ScalarProperty Name="LoaiKH" ColumnName="LoaiKH" />
           <ScalarProperty Name="HoTen" ColumnName="HoTen" />
           <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
@@ -163,17 +173,6 @@
           <ScalarProperty Name="C_is_Active" ColumnName="_is_Active" />
           <ScalarProperty Name="C_Created_at" ColumnName="_Created_at" />
           <ScalarProperty Name="C_Updated_at" ColumnName="_Updated_at" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CTGioHangs">
-      <EntityTypeMapping TypeName="mobiledbModel.CTGioHang">
-        <MappingFragment StoreEntitySet="CTGioHang">
-          <ScalarProperty Name="MaGH" ColumnName="MaGH" />
-          <ScalarProperty Name="MaSP" ColumnName="MaSP" />
-          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
-          <ScalarProperty Name="Gia" ColumnName="Gia" />
-          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

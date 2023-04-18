@@ -19,9 +19,9 @@ namespace Cellphone.Models
         {
             this.BaoHanhs = new HashSet<BaoHanh>();
             this.CTDonHangs = new HashSet<CTDonHang>();
+            this.CTGioHangs = new HashSet<CTGioHang>();
             this.CTKhuyenMais = new HashSet<CTKhuyenMai>();
             this.CTPhieuNhaps = new HashSet<CTPhieuNhap>();
-            this.CTGioHangs = new HashSet<CTGioHang>();
             this.DanhGias = new HashSet<DanhGia>();
         }
     
@@ -40,13 +40,13 @@ namespace Cellphone.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTDonHang> CTDonHangs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CTGioHang> CTGioHangs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTKhuyenMai> CTKhuyenMais { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTPhieuNhap> CTPhieuNhaps { get; set; }
         public virtual Hang Hang1 { get; set; }
         public virtual LoaiSP LoaiSP1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CTGioHang> CTGioHangs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DanhGia> DanhGias { get; set; }
     }
