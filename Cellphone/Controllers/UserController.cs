@@ -17,7 +17,18 @@ namespace Cellphone.Controllers
         // GET: User
         public ActionResult Index()
         {
-            return View(db.Users.ToList());
+            var customers = db.KhachHangs.ToList();
+            var users = db.Users.ToList();
+            var customerInfo = from c in customers
+                                 join o in users on c.ID equals o.C_ID 
+                                 select new User_KhachHang
+                                 {
+                                     customer = c,
+                                     user = o
+                                 } into nguoidung select nguoidung;
+            var temp = customerInfo.ToList();
+            ViewBag.User = customerInfo;
+            return View(customerInfo);
         }
 
         // GET: User/Details/5

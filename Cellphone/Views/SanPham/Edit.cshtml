@@ -73,8 +73,8 @@
                                         No file chosen...
                                     </div>
                                     <input type="file"
-                                           name="chooseFile"
-                                           id="chooseFile" />
+                                           name="HinhAnh"
+                                           id="HinhAnh" />
                                 </div>
                             </div>
                         </div>
@@ -117,8 +117,15 @@
         </div>
         <div class="col-3">
             <div class="form-outline mb-4">
-                <div class="default-img-wrapper">
-                    <img src="../../../images/default.jpg" alt="" />
+                <div id="imagePreview" class="default-img-wrapper">
+                    @if (Model.HinhAnh == null)
+                    {
+                        <img src="../../../images/default.jpg" alt="" />
+                    }
+                    else
+                    {
+                        <img src="@Url.Content("~/Images/Product/" + Model.HinhAnh)" alt="" />
+                    }
                 </div>
                 <label class="form-label" for="form6Example4">Image</label>
             </div>

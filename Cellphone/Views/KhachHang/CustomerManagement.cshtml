@@ -1,9 +1,27 @@
-﻿@model IEnumerable<Cellphone.Models.User_KhachHang>
+﻿
+@model IEnumerable<Cellphone.Models.KhachHang>
+@using Cellphone.Models
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "CustomerManagement";
     Layout = "~/Views/Shared/Admin_Layout.cshtml";
+    mobiledbEntities1 database = new mobiledbEntities1();
 }
 
+@{
+    var checkmess = (string)TempData["messageAlert"];
+    var makh = (string)TempData["makhachhang"];
+    if (checkmess == "SuaKH")
+    {
+        <script>
+            swal({
+                title: "Đã sửa thông tin khách hàng thành công",
+                text: "Khách hàng @makh đã được sửa đổi mới",
+                icon: "success",
+                button: "OK",
+            });
+        </script>
+    }
+}
 <!-- search brand -->
 <div id="searchBrand"
      class="add-inline-form main-content rounded-3 border border-2 py-4 px-3 mb-3">
@@ -61,36 +79,41 @@
                     <tr>
                         <th>Loại</th>
                         <th>Họ và tên</th>
-                        <th>Email</th>
                         <th>Giới tính</th>
                         <th>Địa chỉ</th>
 
                     </tr>
                 </thead>
                 <tbody>
-                    @if (ViewBag.User != null)
-                    {
-                        foreach (var user in Model)
+                    @{ 
+                        foreach (var item in Model)
                         {
                             <tr>
-                                <td>@user.customer.LoaiKH</td>
-                                <td>@user.customer.HoTen</td>
-                                <td>@user.user.C_Email</td>
-                                <td>@user.customer.GioiTinh</td>
-                                <td>@user.customer.DiaChi</td>
+                                <td>@item.LoaiKH</td>
+                                <td>@item.HoTen</td>
+                                <td>@item.GioiTinh</td>
+                                <td>@item.DiaChi</td>
                                 <td>
                                     <div class="d-flex flex-row gap-1">
-                                        <a href="@Url.Action("Edit", "KhachHang", new {id=@user.customer.ID})" class="nav-link">
+                                        <a href="@Url.Action("Edit", "KhachHang", new {id=item.ID})" class="nav-link">
                                             <i class="fa-solid fa-pen"></i>
                                         </a>
-
+                                        
                                     </div>
                                 </td>
+                                @*<td>
+                                        <a href="~/NhanVien/DetailCus/@item.HoTen" class="btn btn-info btn-sm edit">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                    </td>*@
                             </tr>
                         }
                     }
+
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+
+

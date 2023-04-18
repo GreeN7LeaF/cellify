@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -51,17 +52,27 @@ namespace Cellphone.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TenSP,GiaBan,GiaMua,HinhAnh,LoaiSP,Hang,TrangThai")] SanPham sanPham)
+        public ActionResult Create([Bind(Include = "TenSP,GiaBan,GiaMua,LoaiSP,Hang,TrangThai")] SanPham sanPham)
         {
             if (ModelState.IsValid)
             {
+                var file = Request.Files["HinhAnh"];
+                if (file != null)
+                {
+                    var fileName = Path.GetFileName(file.FileName);
+                    //Tạo đường dẫn tới file
+                    var path = Path.Combine(Server.MapPath("~/Images/Product/"), fileName);
+                    //Lưu tên
+                    sanPham.HinhAnh = fileName;
+                    //Save vào Images Folder
+                    file.SaveAs(path);
+                }
+
                 db.SanPhams.Add(sanPham);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Hang = new SelectList(db.Hangs, "ID", "TenHang", sanPham.Hang);
-            ViewBag.LoaiSP = new SelectList(db.LoaiSPs, "ID", "TenLoai", sanPham.LoaiSP);
             return View(sanPham);
         }
 

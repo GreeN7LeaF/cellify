@@ -133,6 +133,7 @@
     <Compile Include="Controllers\DonHangController.cs" />
     <Compile Include="Controllers\HangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KhachHangController.cs" />
     <Compile Include="Controllers\KhuyenMaiController.cs" />
     <Compile Include="Controllers\LoaiSPController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -203,6 +204,7 @@
     <Compile Include="Models\SanPham.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\User-KhachHang.cs" />
     <Compile Include="Models\User.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -2640,9 +2642,13 @@
     <Content Include="Views\User\Details.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\KhachHang\CustomerManagement.cshtml" />
+    <Content Include="Views\KhachHang\Details.cshtml" />
+    <Content Include="Views\KhachHang\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\Product\" />
     <Folder Include="Views\PartialHandle\" />
   </ItemGroup>
   <ItemGroup>

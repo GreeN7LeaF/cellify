@@ -14,6 +14,12 @@ namespace Cellphone
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "KhachHang",
+                url: "KhachHang/{action}",
+                defaults: new { controller = "KhachHang", action = "Index" }
+            );
+
+            routes.MapRoute(
                 name: "DonHang",
                 url: "CuaHang/DonHang/{action}",
                 defaults: new { controller = "DonHang", action = "Index" }
@@ -46,7 +52,7 @@ namespace Cellphone
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Login", action = "Login", id = UrlParameter.Optional }
+                defaults: new { controller = "SanPham", action = "Index", id = UrlParameter.Optional }
             );
         }
     }
