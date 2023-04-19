@@ -1,6 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="mobiledbModelStoreContainer" CdmEntityContainer="mobiledbEntities1">
+    <EntitySetMapping Name="Banners">
+      <EntityTypeMapping TypeName="mobiledbModel.Banner">
+        <MappingFragment StoreEntitySet="Banner">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
+          <ScalarProperty Name="Ten" ColumnName="Ten" />
+          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+          <ScalarProperty Name="Updated_at" ColumnName="Updated_at" />
+          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+          <ScalarProperty Name="Created_at" ColumnName="Created_at" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="BaoHanhs">
       <EntityTypeMapping TypeName="mobiledbModel.BaoHanh">
         <MappingFragment StoreEntitySet="BaoHanh">
@@ -32,6 +45,8 @@
           <ScalarProperty Name="Gia" ColumnName="Gia" />
           <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
           <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+          <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
+          <ScalarProperty Name="TenSP" ColumnName="TenSP" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

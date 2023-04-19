@@ -9,8 +9,8 @@
     <div class="product">
         <div class="thumb">
             <a href="@Url.Action("Details", "SanPham", new { ID = @item.ID})" class="image">
-                <img src="~/Template/images/product-image/1.jpg" alt="Product" />
-                <img class="hover-image" src="~/Template/images/product-image/1.jpg"
+                <img src="@Url.Content("~/Images/Product/" + @item.HinhAnh)" alt="Product" />
+                <img class="hover-image" src="@Url.Content("~/Images/Product/" + @item.HinhAnh)"
                      alt="Product" />
             </a>
             <span class="badges">
@@ -51,7 +51,7 @@
     <script>
         function addToCart(productId) {
             $.ajax({
-                url: '/GioHang/AddProduct',
+                url: '/CTGioHangs/Create',
                 type: 'POST',
                 data: { ID: productId },
                 success: function (result) {

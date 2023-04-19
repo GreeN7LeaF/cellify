@@ -17,7 +17,10 @@ namespace Cellphone.Controllers
         // GET: CTGioHangs
         public ActionResult Index()
         {
-            var cTGioHangs = db.CTGioHangs.Include(c => c.KhachHang).Include(c => c.SanPham);
+            if (Session["MaKH"] == null) return Redirect("/Login");
+
+            var maKH = (int)Session["MaKH"];
+            var cTGioHangs = db.CTGioHangs.Where(s => s.MaKH == maKH);
             return View(cTGioHangs.ToList());
         }
 
@@ -37,30 +40,57 @@ namespace Cellphone.Controllers
         }
 
         // GET: CTGioHangs/Create
-        public ActionResult Create()
+        /*public ActionResult Create()
         {
             ViewBag.MaKH = new SelectList(db.KhachHangs, "MaKH", "HoTen");
             ViewBag.MaSP = new SelectList(db.SanPhams, "ID", "TenSP");
             return View();
-        }
+        }*/
 
         // POST: CTGioHangs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaSP,SoLuong,Gia,TrangThai,MaKH")] CTGioHang cTGioHang)
+        public ActionResult Create(int ID)
         {
             if (ModelState.IsValid)
             {
-                db.CTGioHangs.Add(cTGioHang);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                var sanPham = db.SanPhams.Find(ID);
 
-            ViewBag.MaKH = new SelectList(db.KhachHangs, "MaKH", "HoTen", cTGioHang.MaKH);
-            ViewBag.MaSP = new SelectList(db.SanPhams, "ID", "TenSP", cTGioHang.MaSP);
-            return View(cTGioHang);
+                if (Session["MaKH"] == null) return Json(new { error = true });
+
+                var maKH = (int)Session["MaKH"];
+
+                if (sanPham == null)
+                {
+                    return HttpNotFound();
+                }
+
+                var ct = db.CTGioHangs.FirstOrDefault(s => s.MaKH == maKH && s.MaSP == ID);
+                if(ct == null)
+                {
+                    ct = new CTGioHang();
+                    // add new
+                    ct.MaKH = maKH;
+                    ct.MaSP = ID;
+                    ct.TenSP = sanPham.TenSP;
+                    ct.SoLuong = 1;
+                    ct.Gia = sanPham.GiaBan;
+                    ct.ThanhTien = sanPham.GiaBan;
+                    ct.TrangThai = "0";
+
+                    db.CTGioHangs.Add(ct);
+                } else
+                {
+                    ct.SoLuong++;
+                    ct.ThanhTien = sanPham.GiaBan * ct.SoLuong;
+                }
+
+                db.SaveChanges();
+                /*return Json(new { success = true,  });*/
+                return Redirect("/home/index");
+            }
+            return Json(new { error = true });
         }
 
         // GET: CTGioHangs/Edit/5
@@ -99,7 +129,7 @@ namespace Cellphone.Controllers
         }
 
         // GET: CTGioHangs/Delete/5
-        public ActionResult Delete(int? id)
+        /*public ActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -111,17 +141,23 @@ namespace Cellphone.Controllers
                 return HttpNotFound();
             }
             return View(cTGioHang);
-        }
+        }*/
 
         // POST: CTGioHangs/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int ID)
         {
-            CTGioHang cTGioHang = db.CTGioHangs.Find(id);
-            db.CTGioHangs.Remove(cTGioHang);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try { 
+                var maKH = Session["MaKH"];
+                CTGioHang cTGioHang = db.CTGioHangs.FirstOrDefault(s => s.MaKH == (int)maKH && s.MaSP == ID);
+                db.CTGioHangs.Remove(cTGioHang);
+                db.SaveChanges();
+                /*return Json(new { success = true });*/
+                return Redirect("/home/index");
+            } catch(Exception exc)
+            {
+                return Json(new { error = true });
+            }
         }
 
         protected override void Dispose(bool disposing)

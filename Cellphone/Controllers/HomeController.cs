@@ -14,6 +14,7 @@ namespace Cellphone.Controllers
         {
             var sanphams = db.SanPhams.ToList();
             ViewBag.LoaiSP = db.LoaiSPs.ToList();
+            ViewBag.CTGioHang = db.CTGioHangs.ToList();
             return View(sanphams);
         }
 

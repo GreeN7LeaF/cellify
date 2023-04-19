@@ -11,100 +11,75 @@ using Cellphone.Models;
 
 namespace Cellphone.Controllers
 {
-    public class SanPhamController : Controller
+    public class BannerController : Controller
     {
         private mobiledbEntities1 db = new mobiledbEntities1();
 
-        public string getImage(int ID) {
-            var sanPham = db.SanPhams.Find(ID);
-            if (sanPham.HinhAnh != null) return "/Images/Product/" + sanPham.HinhAnh;
-            else return "/Images/Product/default.png";
-        }
-
-        // GET: SanPham
+        // GET: Banner
         public ActionResult Index()
         {
-            var sanPhams = db.SanPhams.Include(s => s.Hang1).Include(s => s.LoaiSP1);
-            ViewBag.Hang = new SelectList(db.Hangs, "ID", "TenHang");
-            ViewBag.LoaiSP = new SelectList(db.LoaiSPs, "ID", "TenLoai");
-            return View(sanPhams.ToList());
+            return View(db.Banners.ToList());
         }
 
-        // GET: SanPham/Details/5
+        // GET: Banner/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SanPham sanPham = db.SanPhams.Find(id);
-            if (sanPham == null)
+            Banner banner = db.Banners.Find(id);
+            if (banner == null)
             {
                 return HttpNotFound();
             }
-            return View(sanPham);
+            return View(banner);
         }
 
-        // GET: SanPham/Create
+        // GET: Banner/Create
         public ActionResult Create()
         {
-            ViewBag.Hang = new SelectList(db.Hangs, "ID", "TenHang");
-            ViewBag.LoaiSP = new SelectList(db.LoaiSPs, "ID", "TenLoai");
             return View();
         }
 
-        // POST: SanPham/Create
+        // POST: Banner/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TenSP,GiaBan,GiaMua,LoaiSP,Hang,TrangThai")] SanPham sanPham)
+        public ActionResult Create([Bind(Include = "ID,HinhAnh,Ten,NoiDung")] Banner banner)
         {
             if (ModelState.IsValid)
             {
-                var file = Request.Files["HinhAnh"];
-                if (file != null)
-                {
-                    var fileName = Path.GetFileName(file.FileName);
-                    //Tạo đường dẫn tới file
-                    var path = Path.Combine(Server.MapPath("~/Images/Product/"), fileName);
-                    //Lưu tên
-                    sanPham.HinhAnh = fileName;
-                    //Save vào Images Folder
-                    file.SaveAs(path);
-                }
-
-                db.SanPhams.Add(sanPham);
+                db.Banners.Add(banner);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(sanPham);
+            return View(banner);
         }
 
-        // GET: SanPham/Edit/5
+        // GET: Banner/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SanPham sanPham = db.SanPhams.Find(id);
-            if (sanPham == null)
+            Banner banner = db.Banners.Find(id);
+            if (banner == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.Hang = new SelectList(db.Hangs, "ID", "TenHang", sanPham.Hang);
-            ViewBag.LoaiSP = new SelectList(db.LoaiSPs, "ID", "TenLoai", sanPham.LoaiSP);
-            return View(sanPham);
+            return View(banner);
         }
 
-        // POST: SanPham/Edit/5
+        // POST: Banner/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,TenSP,GiaBan,GiaMua,SoLuong,LoaiSP,Hang,TrangThai")] SanPham sanPham)
+        public ActionResult Edit([Bind(Include = "ID,Ten,NoiDung")] Banner banner)
         {
             if (ModelState.IsValid)
             {
@@ -113,44 +88,42 @@ namespace Cellphone.Controllers
                 {
                     var fileName = Path.GetFileName(file.FileName);
                     //Tạo đường dẫn tới file
-                    var path = Path.Combine(Server.MapPath("~/Images/Product/"), fileName);
+                    var path = Path.Combine(Server.MapPath("~/Images/Banner/"), fileName);
                     //Lưu tên
-                    sanPham.HinhAnh = fileName;
+                    banner.HinhAnh = fileName;
                     //Save vào Images Folder
                     file.SaveAs(path);
                 }
-
-                db.Entry(sanPham).State = EntityState.Modified;
+                banner.Created_at = DateTime.Now;
+                db.Entry(banner).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Hang = new SelectList(db.Hangs, "ID", "TenHang", sanPham.Hang);
-            ViewBag.LoaiSP = new SelectList(db.LoaiSPs, "ID", "TenLoai", sanPham.LoaiSP);
-            return View(sanPham);
+            return View(banner);
         }
 
-        // GET: SanPham/Delete/5
+        // GET: Banner/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SanPham sanPham = db.SanPhams.Find(id);
-            if (sanPham == null)
+            Banner banner = db.Banners.Find(id);
+            if (banner == null)
             {
                 return HttpNotFound();
             }
-            return View(sanPham);
+            return View(banner);
         }
 
-        // POST: SanPham/Delete/5
+        // POST: Banner/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            SanPham sanPham = db.SanPhams.Find(id);
-            db.SanPhams.Remove(sanPham);
+            Banner banner = db.Banners.Find(id);
+            db.Banners.Remove(banner);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

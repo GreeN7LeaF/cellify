@@ -1,5 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="mobiledbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Banner">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HinhAnh" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Ten" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_at" Type="DateTime" Precision="3" />
+    <Property Name="TrangThai" Type="Int32" Nullable="false" />
+    <Property Name="Created_at" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
   <EntityType Name="BaoHanh">
     <Key>
       <PropertyRef Name="ID" />
@@ -35,8 +47,9 @@
     <Property Name="Gia" Type="Double" />
     <Property Name="TrangThai" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="MaKH" Type="Int32" Nullable="false" />
+    <Property Name="ThanhTien" Type="Double" />
+    <Property Name="TenSP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="KhachHang" Relationship="Self.FK_KH_CTGioHang" FromRole="CTGioHang" ToRole="KhachHang" />
-    <NavigationProperty Name="SanPham" Relationship="Self.FK_SanPham_CTGioHang" FromRole="CTGioHang" ToRole="SanPham" />
   </EntityType>
   <EntityType Name="CTKhuyenMai">
     <Key>
@@ -172,7 +185,6 @@
     <Property Name="TrangThai" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="BaoHanhs" Relationship="Self.FK_SanPham_PhieuBaoHanh" FromRole="SanPham" ToRole="BaoHanh" />
     <NavigationProperty Name="CTDonHangs" Relationship="Self.FK_SanPham_CTDonHang" FromRole="SanPham" ToRole="CTDonHang" />
-    <NavigationProperty Name="CTGioHangs" Relationship="Self.FK_SanPham_CTGioHang" FromRole="SanPham" ToRole="CTGioHang" />
     <NavigationProperty Name="CTKhuyenMais" Relationship="Self.FK_SanPham_CTKhuyenMai" FromRole="SanPham" ToRole="CTKhuyenMai" />
     <NavigationProperty Name="CTPhieuNhaps" Relationship="Self.FK_SanPham_CTPhieuNhap" FromRole="SanPham" ToRole="CTPhieuNhap" />
     <NavigationProperty Name="Hang1" Relationship="Self.FK_Hang_SanPham" FromRole="SanPham" ToRole="Hang" />
@@ -262,18 +274,6 @@
       </Principal>
       <Dependent Role="CTGioHang">
         <PropertyRef Name="MaKH" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_SanPham_CTGioHang">
-    <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
-    <End Role="CTGioHang" Type="Self.CTGioHang" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SanPham">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="CTGioHang">
-        <PropertyRef Name="MaSP" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -410,6 +410,7 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="mobiledbEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Banners" EntityType="Self.Banner" />
     <EntitySet Name="BaoHanhs" EntityType="Self.BaoHanh" />
     <EntitySet Name="CTDonHangs" EntityType="Self.CTDonHang" />
     <EntitySet Name="CTGioHangs" EntityType="Self.CTGioHang" />
@@ -444,10 +445,6 @@
     </AssociationSet>
     <AssociationSet Name="FK_KH_CTGioHang" Association="Self.FK_KH_CTGioHang">
       <End Role="KhachHang" EntitySet="KhachHangs" />
-      <End Role="CTGioHang" EntitySet="CTGioHangs" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SanPham_CTGioHang" Association="Self.FK_SanPham_CTGioHang">
-      <End Role="SanPham" EntitySet="SanPhams" />
       <End Role="CTGioHang" EntitySet="CTGioHangs" />
     </AssociationSet>
     <AssociationSet Name="FK_KhuyenMai_CTKhuyenMai" Association="Self.FK_KhuyenMai_CTKhuyenMai">

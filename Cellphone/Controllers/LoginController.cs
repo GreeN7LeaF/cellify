@@ -82,6 +82,9 @@ namespace Cellphone.Controllers
             ViewBag.error = "Đăng nhập thất bại xin vui lòng thử lại";
             return this.Login();
         }
+        private bool checkAdmin(string email) {
+            return true;
+        }
         public ActionResult Register()
         {
             return View();

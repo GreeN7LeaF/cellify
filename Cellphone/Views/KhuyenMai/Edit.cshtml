@@ -135,28 +135,27 @@
                     {
                         foreach (var item in ViewBag.SanPham)
                         {
-                            if (@item.Hang == Model.ID)
-                            {
-                                <tr>
-                                    <td>
-                                        @item.TenSP
-                                    </td>
-                                    <td>
-                                        @item.LoaiSP
-                                    </td>
-                                    <td>
-                                        @item.Hang
-                                    </td>
-                                    <td>
-                                        @item.SoLuong
-                                    </td>
-                                    <td>
-                                        <a href="@Url.Action("Delete", "SanPham", new { id = item.ID })" class="nav-link">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            }
+                            //Chưa làm thêm sản phẩm vào khuyến mãi
+                            <tr>
+                                <td>
+                                    @item.TenSP
+                                </td>
+                                <td>
+                                    @item.LoaiSP
+                                </td>
+                                <td>
+                                    @item.Hang
+                                </td>
+                                <td>
+                                    @item.SoLuong
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Delete", "KhuyenMai", new { id = item.ID })" class="nav-link">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            
                         }
                     }
                 </tbody>

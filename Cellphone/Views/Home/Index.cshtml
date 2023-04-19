@@ -14,39 +14,17 @@
         </div>
         <div class="body customScroll">
             <ul class="minicart-product-list">
-                <li>
-                    <a href="single-product.html" class="image">
-                        <img src="~/Template/images/product-image/1.jpg"
-                             alt="Cart product Image">
-                    </a>
-                    <div class="content">
-                        <a href="single-product.html" class="title">Hand-Made Garlic Mortar</a>
-                        <span class="quantity-price">1 x <span class="amount">$21.86</span></span>
-                        <a href="#" class="remove">×</a>
-                    </div>
-                </li>
-                <li>
-                    <a href="single-product.html" class="image">
-                        <img src="~/Template/images/product-image/2.jpg"
-                             alt="Cart product Image">
-                    </a>
-                    <div class="content">
-                        <a href="single-product.html" class="title">Handmade Ceramic Pottery</a>
-                        <span class="quantity-price">1 x <span class="amount">$13.28</span></span>
-                        <a href="#" class="remove">×</a>
-                    </div>
-                </li>
-                <li>
-                    <a href="single-product.html" class="image">
-                        <img src="~/Template/images/product-image/3.jpg"
-                             alt="Cart product Image">
-                    </a>
-                    <div class="content">
-                        <a href="single-product.html" class="title">Hand Painted Bowls</a>
-                        <span class="quantity-price">1 x <span class="amount">$17.34</span></span>
-                        <a href="#" class="remove">×</a>
-                    </div>
-                </li>
+                @*@if (ViewBag.CTGioHang != null) {
+                    foreach (var item in ViewBag.CTGioHang) { 
+                        <li>
+                            <div class="content">
+                                <a href="single-product.html" class="title">@item.TenSP</a>
+                                <span class="quantity-price">@item.SoLuong x <span class="amount">@item.Gia</span></span>
+                                <a href="#" class="remove">×</a>
+                            </div>
+                        </li>
+                    }
+                }*@
             </ul>
         </div>
         <div class="foot">
@@ -67,45 +45,45 @@
 
         <div class="body customScroll">
             <ul class="minicart-product-list">
-                <li>
-                    <a href="single-product.html" class="image">
-                        <img src="~/Template/images/product-image/1.jpg"
-                             alt="Cart product Image">
-                    </a>
-                    <div class="content">
-                        <a href="single-product.html" class="title">Hand-Made Garlic Mortar</a>
-                        <span class="quantity-price">1 x <span class="amount">$18.86</span></span>
-                        <a href="#" class="remove">×</a>
-                    </div>
-                </li>
-                <li>
-                    <a href="single-product.html" class="image">
-                        <img src="~/Template/images/product-image/2.jpg"
-                             alt="Cart product Image">
-                    </a>
-                    <div class="content">
-                        <a href="single-product.html" class="title">Handmade Ceramic Pottery</a>
-                        <span class="quantity-price">1 x <span class="amount">$43.28</span></span>
-                        <a href="#" class="remove">×</a>
-                    </div>
-                </li>
-                <li>
-                    <a href="single-product.html" class="image">
-                        <img src="~/Template/images/product-image/3.jpg"
-                             alt="Cart product Image">
-                    </a>
-                    <div class="content">
-                        <a href="single-product.html" class="title">Hand Painted Bowls</a>
-                        <span class="quantity-price">1 x <span class="amount">$37.34</span></span>
-                        <a href="#" class="remove">×</a>
-                    </div>
-                </li>
+                @if (ViewBag.CTGioHang != null)
+                {
+                    foreach (var item in ViewBag.CTGioHang)
+                    {
+                        <li>
+                            <a href="single-product.html" class="image">
+                                <img src= @Html.Action("getImage","SanPham", new { ID= @item.MaSP})
+                                     alt="Cart product Image">
+                            </a>
+                            <div class="content">
+                                <a href="single-product.html" class="title">@item.TenSP</a>
+                                <span class="quantity-price">@item.SoLuong x <span class="amount">@item.Gia</span></span>
+                                <button onclick="removeFromCart(@item.MaSP)" class="remove">×</button>
+                            </div>
+                        </li>
+                    }
+                }
             </ul>
+            <script>
+                function removeFromCart(productId) {
+                    $.ajax({
+                        url: '/CTGioHangs/Delete',
+                        type: 'POST',
+                        data: { ID: productId },
+                        success: function (result) {
+                            // Xử lý kết quả trả về ở đây
+                            alert('Sản phẩm đã được xóa');
+                        },
+                        error: function () {
+                            alert('Đã có lỗi xảy ra khi xóa sản phẩm khỏi giỏ hàng');
+                        }
+                    });
+                }
+            </script>
         </div>
         <div class="foot">
             <div class="buttons mt-30px">
-                <a href="cart.html" class="btn btn-dark btn-hover-primary mb-30px">view cart</a>
-                <a href="checkout.html" class="btn btn-outline-dark current-btn">checkout</a>
+                <a href=@Url.Action("Index", "CTGioHangs") class="btn btn-dark btn-hover-primary mb-30px">view cart</a>
+                @*<a href=@Url.Action("Details", "DonHang") class="btn btn-outline-dark current-btn">checkout</a>*@
             </div>
         </div>
     </div>
@@ -508,64 +486,6 @@
                             @*chỗ này nó tự động render theo tabs, và lấy dữ liệu từ PP_SanPhamCart*@
                         </div>
                     </div>
-                    <!-- 1st tab start -->
-                    <!--<div class="tab-pane fade " id="tab-jewelry">
-        <div class="new-product-slider swiper-container slider-nav-style-1 pb-100px">
-            <div class="new-product-wrapper swiper-wrapper">
-                <div class="new-product-item swiper-slide">
-                    <div class="product">
-                        <div class="thumb">
-                            <a href="single-product.html" class="image">
-                                <img src="~/Template/images/product-image/9.jpg" alt="Product" />
-                                <img class="hover-image" src="~/Template/images/product-image/9.jpg"
-                                     alt="Product" />
-                            </a>
-                            <span class="badges">
-                                <span class="new">New</span>
-                            </span>
-                            <div class="actions">
-                                <a href="wishlist.html" class="action wishlist" title="Wishlist">
-                                    <i class="pe-7s-like"></i>
-                                </a>
-                                <a href="#" class="action quickview" data-link-action="quickview"
-                                   title="Quick view" data-bs-toggle="modal"
-                                   data-bs-target="#exampleModal"><i class="pe-7s-look"></i></a>
-                                <a href="compare.html" class="action compare" title="Compare">
-                                    <i class="pe-7s-refresh-2"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="content">
-                            <span class="ratings">
-                                <span class="rating-wrap">
-                                    <span class="star" style="width: 100%"></span>
-                                </span>
-                                <span class="rating-num">( 5 Review )</span>
-                            </span>
-                            <h5 class="title">
-                                <a href="single-product.html">
-                                    Hand-Made Garlic Mortar
-                                </a>
-                            </h5>
-                            <span class="price">
-                                <span class="new">$38.50</span>
-                            </span>
-                        </div>
-                        <button title="Add To Cart" class=" add-to-cart">
-                            Add
-                            To Cart
-                        </button>
-                    </div>
-                </div>
-            </div>-->
-                    <!-- Add Arrows -->
-                    <!--<div class="swiper-buttons">
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-            </div>
-        </div>
-    </div>-->
-                    <!-- 1st tab end -->
                 </div>
             </div>
         </div>
