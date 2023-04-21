@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Cellphone.Models;
+using PagedList;
 
 namespace Cellphone.Controllers
 {
@@ -35,19 +36,33 @@ namespace Cellphone.Controllers
             return View(sanPhams.ToList());
         }
 
-        public ActionResult ShoppingList(int ID)
+        public List<SanPham> GetProduct(int? cateId, int brandId = 0, int limit = 12, int page = 1)
         {
-            var hang = db.Hangs.ToList();
-            var loaiSP = db.LoaiSPs.ToList();
-            var sanPhams = db.SanPhams.Where(s => s.LoaiSP == ID).ToList();
+            var products = new List<SanPham>();
+            if(brandId == 0) products = db.SanPhams.Where(s => s.LoaiSP == cateId).ToList();
+            else products = db.SanPhams.Where(s => s.LoaiSP == cateId && s.Hang == brandId).ToList();
 
-            var tenLoaiSP = db.LoaiSPs.Find(ID).TenLoai;
+            products = products.Skip((page - 1) * limit).Take(limit).ToList();
+            return products;
+        }
+
+        public ActionResult ShoppingList(int cateId, int? brandId, int? page)
+        {
+            //phan trang
+            int pageSize = 12;
+            int pageNum = (page ?? 1);
+            int brandid = (brandId ?? 0);
+
+            var hangs = db.Hangs.ToList();
+            var loaiSP = db.LoaiSPs.Find(cateId);
+            var sanPhams = GetProduct(cateId, brandid, pageSize, pageNum);
+            var length = db.SanPhams.ToList().Count();
 
             var sanPhamListModelView = new SanPhamListModelView {
-                Hangs = hang,
-                LoaiSPs = loaiSP,
+                Hangs = hangs,
+                LoaiSP = loaiSP,
                 SanPhams = sanPhams,
-                tenLoaiSP = tenLoaiSP
+                soLuongSP = length
             };
 
             return View(sanPhamListModelView);
@@ -56,6 +71,19 @@ namespace Cellphone.Controllers
         // GET: SanPham/Details/5
         public ActionResult Details(int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            SanPham sanPham = db.SanPhams.Find(id);
+            if (sanPham == null)
+            {
+                return HttpNotFound();
+            }
+            return View(sanPham);
+        }
+
+        public ActionResult ThongTinSanPham(int? id) {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

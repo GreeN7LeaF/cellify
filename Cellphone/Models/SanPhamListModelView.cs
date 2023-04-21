@@ -8,16 +8,16 @@ namespace Cellphone.Models
     public class SanPhamListModelView
     {
         public List<SanPham> SanPhams;
-        public List<LoaiSP> LoaiSPs;
-        public string tenLoaiSP;
+        public int soLuongSP;
+        public LoaiSP LoaiSP;
         public List<Hang> Hangs;
 
         public SanPhamListModelView()
         {
             List<SanPham> SanPhams = new List<SanPham>();
-            List<LoaiSP> LoaiSPs = new List<LoaiSP>();
+            LoaiSP = new LoaiSP();
             List<Hang> Hangs = new List<Hang>();
-            tenLoaiSP = "";
+            soLuongSP = SanPhams.Count();
         }
     }
 }

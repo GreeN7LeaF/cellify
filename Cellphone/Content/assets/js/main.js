@@ -38,6 +38,9 @@ $(document).ready(function () {
     }
     tabHandler();
     setHeader(route, route2);
+    if ($(".pages")) {
+        setPageList();
+    }   
 
     /*var input = document.getElementById("HinhAnh");
     console.log(input);
@@ -106,6 +109,28 @@ function setHeader(route, route2) {
     });
 
     $authHeader.map((idx, val) => val.classList.toggle("active"));
+}
+
+function setPageList() {
+    $(".pages .page-link").map((idx, val) => {
+        $(this).removeClass(".active");
+    };
+    
+    let param = (window.location.toString()).split("=")[1];
+
+    if (param) {
+        $pageLink = $(".pages .page-link").filter(function () {
+            //lay value cua page
+            var getValueFromString = $(this).prop("href").split("=")[1];
+            if (getValueFromString.length > 1) getValueFromString = getValueFromString.substring(0, getValueFromString.length - getValueFromString.length + 1);
+            return getValueFromString == param;
+        });
+        $pageLink.map((idx, val) => {
+            val.classList.toggle("active"));
+        };
+    } else {
+        $(".pages .page-link").eq(0).classList.toggle("active"));
+    }
 }
 
 function tabHandler() {
