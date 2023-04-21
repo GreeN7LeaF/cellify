@@ -146,6 +146,76 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BaoHanh.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BindPropertyAttribute.cs" />
+    <Compile Include="Models\BuyProduct.cs" />
+    <Compile Include="Models\CTDonHang.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CTGioHang.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CTKhuyenMai.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CTPhieuNhap.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DanhGia.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DonHang.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GioHang.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GioHangList.cs" />
+    <Compile Include="Models\Hang.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KhachHang.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KhuyenMai.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LoaiKH.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LoaiSP.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PhieuNhap.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SanPham.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User-KhachHang.cs" />
+    <Compile Include="Models\User.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -170,144 +240,6 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
-    <Content Include="Images\bg.jpg" />
-    <Content Include="Images\default.jpg" />
-    <Content Include="Images\login-bg.jpg" />
-    <Content Include="Scripts\bootstrap.bundle.js" />
-    <Content Include="Scripts\bootstrap.bundle.min.js" />
-    <Content Include="Scripts\bootstrap.esm.js" />
-    <Content Include="Scripts\bootstrap.esm.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Template\css\plugins\animate.css" />
-    <Content Include="Template\css\plugins\images\ui-icons_444444_256x240.png" />
-    <Content Include="Template\css\plugins\images\ui-icons_555555_256x240.png" />
-    <Content Include="Template\css\plugins\images\ui-icons_777620_256x240.png" />
-    <Content Include="Template\css\plugins\images\ui-icons_777777_256x240.png" />
-    <Content Include="Template\css\plugins\images\ui-icons_cc0000_256x240.png" />
-    <Content Include="Template\css\plugins\images\ui-icons_ffffff_256x240.png" />
-    <Content Include="Template\css\plugins\jquery-ui.min.css" />
-    <Content Include="Template\css\plugins\nice-select.css" />
-    <Content Include="Template\css\plugins\plugins.min.css" />
-    <Content Include="Template\css\plugins\swiper-bundle.min.css" />
-    <Content Include="Template\css\plugins\venobox.css" />
-    <Content Include="Template\css\style.css" />
-    <Content Include="Template\css\style.min.css" />
-    <Content Include="Template\css\vendor\bootstrap.bundle.min.css" />
-    <Content Include="Template\css\vendor\font.awesome.css" />
-    <Content Include="Template\css\vendor\pe-icon-7-stroke.css" />
-    <Content Include="Template\css\vendor\vendor.min.css" />
-    <Content Include="Template\fonts\FontAwesome\fontawesome-webfont.svg" />
-    <Content Include="Template\fonts\Pe-icon-7-stroke\Pe-icon-7-stroke.svg" />
-    <Content Include="Template\images\404\404.jpg" />
-    <Content Include="Template\images\about-image\intro-bg.jpg" />
-    <Content Include="Template\images\about-image\srevice-left-img.png" />
-    <Content Include="Template\images\about-image\srevice-left-shape.png" />
-    <Content Include="Template\images\banner\1.jpg" />
-    <Content Include="Template\images\banner\10.jpg" />
-    <Content Include="Template\images\banner\11.jpg" />
-    <Content Include="Template\images\banner\12.jpg" />
-    <Content Include="Template\images\banner\13.jpg" />
-    <Content Include="Template\images\banner\2.jpg" />
-    <Content Include="Template\images\banner\3.jpg" />
-    <Content Include="Template\images\banner\4.jpg" />
-    <Content Include="Template\images\banner\5.jpg" />
-    <Content Include="Template\images\banner\6.jpg" />
-    <Content Include="Template\images\banner\7.jpg" />
-    <Content Include="Template\images\banner\8.jpg" />
-    <Content Include="Template\images\banner\9.jpg" />
-    <Content Include="Template\images\banner\menu-banner-1.jpg" />
-    <Content Include="Template\images\banner\menu-banner-2.png" />
-    <Content Include="Template\images\banner\sticker-bg.png" />
-    <Content Include="Template\images\blog-image\1.jpg" />
-    <Content Include="Template\images\blog-image\2.jpg" />
-    <Content Include="Template\images\blog-image\3.jpg" />
-    <Content Include="Template\images\blog-image\quate-icon.png" />
-    <Content Include="Template\images\blog-image\single-blog.jpg" />
-    <Content Include="Template\images\blog-image\specker.jpg" />
-    <Content Include="Template\images\brand-logo\1.png" />
-    <Content Include="Template\images\brand-logo\2.png" />
-    <Content Include="Template\images\brand-logo\3.png" />
-    <Content Include="Template\images\brand-logo\4.png" />
-    <Content Include="Template\images\brand-logo\5.png" />
-    <Content Include="Template\images\coming-soon-bg\coming-soon.jpg" />
-    <Content Include="Template\images\comment-image\1.png" />
-    <Content Include="Template\images\comment-image\2.png" />
-    <Content Include="Template\images\comment-image\3.png" />
-    <Content Include="Template\images\deal-img\deal-bg-2.jpg" />
-    <Content Include="Template\images\deal-img\deal-bg.jpg" />
-    <Content Include="Template\images\deal-img\woman.png" />
-    <Content Include="Template\images\favicon\favicon.ico" />
-    <Content Include="Template\images\favicon\favicon.png" />
-    <Content Include="Template\images\icons\1.png" />
-    <Content Include="Template\images\icons\2.png" />
-    <Content Include="Template\images\icons\3.png" />
-    <Content Include="Template\images\icons\cmpted_logo.png" />
-    <Content Include="Template\images\icons\fabric-icon.png" />
-    <Content Include="Template\images\icons\icon-youtube-play.png" />
-    <Content Include="Template\images\icons\jewelry-icon.png" />
-    <Content Include="Template\images\icons\paintings-icon.png" />
-    <Content Include="Template\images\icons\payment.png" />
-    <Content Include="Template\images\icons\pottery-icon.png" />
-    <Content Include="Template\images\icons\sculptures-icon.png" />
-    <Content Include="Template\images\icons\tab-bg-2.png" />
-    <Content Include="Template\images\icons\tab-bg.png" />
-    <Content Include="Template\images\icons\wooden-icon.png" />
-    <Content Include="Template\images\logo\logo-white.png" />
-    <Content Include="Template\images\logo\logo.png" />
-    <Content Include="Template\images\product-image\1.jpg" />
-    <Content Include="Template\images\product-image\10.jpg" />
-    <Content Include="Template\images\product-image\11.jpg" />
-    <Content Include="Template\images\product-image\12.jpg" />
-    <Content Include="Template\images\product-image\14.jpg" />
-    <Content Include="Template\images\product-image\16.jpg" />
-    <Content Include="Template\images\product-image\2.jpg" />
-    <Content Include="Template\images\product-image\3.jpg" />
-    <Content Include="Template\images\product-image\4.jpg" />
-    <Content Include="Template\images\product-image\5.jpg" />
-    <Content Include="Template\images\product-image\6.jpg" />
-    <Content Include="Template\images\product-image\7.jpg" />
-    <Content Include="Template\images\product-image\8.jpg" />
-    <Content Include="Template\images\product-image\9.jpg" />
-    <Content Include="Template\images\product-image\small-image\1.jpg" />
-    <Content Include="Template\images\product-image\small-image\2.jpg" />
-    <Content Include="Template\images\product-image\small-image\3.jpg" />
-    <Content Include="Template\images\product-image\small-image\4.jpg" />
-    <Content Include="Template\images\product-image\small-image\5.jpg" />
-    <Content Include="Template\images\product-image\zoom-image\1.jpg" />
-    <Content Include="Template\images\product-image\zoom-image\2.jpg" />
-    <Content Include="Template\images\product-image\zoom-image\3.jpg" />
-    <Content Include="Template\images\product-image\zoom-image\4.jpg" />
-    <Content Include="Template\images\product-image\zoom-image\5.jpg" />
-    <Content Include="Template\images\review-image\1.png" />
-    <Content Include="Template\images\review-image\2.png" />
-    <Content Include="Template\images\slider-image\slider-1.png" />
-    <Content Include="Template\images\slider-image\slider-2.png" />
-    <Content Include="Template\images\slider-image\slider-bg-1.jpg" />
-    <Content Include="Template\images\slider-image\slider-bg-2-1.jpg" />
-    <Content Include="Template\images\slider-image\slider-bg-2-2.jpg" />
-    <Content Include="Template\images\team\1.jpg" />
-    <Content Include="Template\images\team\2.jpg" />
-    <Content Include="Template\images\team\3.jpg" />
-    <Content Include="Template\images\team\4.jpg" />
-    <Content Include="Template\images\testimonial-image\1.png" />
-    <Content Include="Template\images\testimonial-image\quate-1.png" />
-    <Content Include="Template\js\main.js" />
-    <Content Include="Template\js\plugins\ajax-mail.js" />
-    <Content Include="Template\js\plugins\countdown.js" />
-    <Content Include="Template\js\plugins\jquery-ui.min.js" />
-    <Content Include="Template\js\plugins\jquery.nice-select.min.js" />
-    <Content Include="Template\js\plugins\jquery.zoom.min.js" />
-    <Content Include="Template\js\plugins\plugins.min.js" />
-    <Content Include="Template\js\plugins\scrollup.js" />
-    <Content Include="Template\js\plugins\swiper-bundle.min.js" />
-    <Content Include="Template\js\plugins\venobox.min.js" />
-    <Content Include="Template\js\vendor\bootstrap.bundle.min.js" />
-    <Content Include="Template\js\vendor\jquery-3.5.1.min.js" />
-    <Content Include="Template\js\vendor\jquery-migrate-3.3.0.min.js" />
-    <Content Include="Template\js\vendor\modernizr-3.11.2.min.js" />
-    <Content Include="Template\js\vendor\vendor.min.js" />
-    <Content Include="Template\php\mail.php" />
     <Content Include="Content\fontawesome-free-6.3.0-web\css\all.css" />
     <Content Include="Content\fontawesome-free-6.3.0-web\css\all.min.css" />
     <Content Include="Content\fontawesome-free-6.3.0-web\css\brands.css" />
@@ -2364,62 +2296,157 @@
     <Content Include="Content\fontawesome-free-6.3.0-web\svgs\solid\yen-sign.svg" />
     <Content Include="Content\fontawesome-free-6.3.0-web\svgs\solid\yin-yang.svg" />
     <Content Include="Content\fontawesome-free-6.3.0-web\svgs\solid\z.svg" />
+    <Content Include="Images\bg.jpg" />
+    <Content Include="Images\default.jpg" />
+    <Content Include="Images\login-bg.jpg" />
+    <Content Include="Models\Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.esm.js" />
+    <Content Include="Scripts\bootstrap.esm.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Template\css\plugins\animate.css" />
+    <Content Include="Template\css\plugins\images\ui-icons_444444_256x240.png" />
+    <Content Include="Template\css\plugins\images\ui-icons_555555_256x240.png" />
+    <Content Include="Template\css\plugins\images\ui-icons_777620_256x240.png" />
+    <Content Include="Template\css\plugins\images\ui-icons_777777_256x240.png" />
+    <Content Include="Template\css\plugins\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Template\css\plugins\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Template\css\plugins\jquery-ui.min.css" />
+    <Content Include="Template\css\plugins\nice-select.css" />
+    <Content Include="Template\css\plugins\plugins.min.css" />
+    <Content Include="Template\css\plugins\swiper-bundle.min.css" />
+    <Content Include="Template\css\plugins\venobox.css" />
+    <Content Include="Template\css\style.css" />
+    <Content Include="Template\css\style.min.css" />
+    <Content Include="Template\css\vendor\bootstrap.bundle.min.css" />
+    <Content Include="Template\css\vendor\font.awesome.css" />
+    <Content Include="Template\css\vendor\pe-icon-7-stroke.css" />
+    <Content Include="Template\css\vendor\vendor.min.css" />
+    <Content Include="Template\fonts\FontAwesome\fontawesome-webfont.svg" />
+    <Content Include="Template\fonts\Pe-icon-7-stroke\Pe-icon-7-stroke.svg" />
+    <Content Include="Template\images\404\404.jpg" />
+    <Content Include="Template\images\about-image\intro-bg.jpg" />
+    <Content Include="Template\images\about-image\srevice-left-img.png" />
+    <Content Include="Template\images\about-image\srevice-left-shape.png" />
+    <Content Include="Template\images\banner\1.jpg" />
+    <Content Include="Template\images\banner\10.jpg" />
+    <Content Include="Template\images\banner\11.jpg" />
+    <Content Include="Template\images\banner\12.jpg" />
+    <Content Include="Template\images\banner\13.jpg" />
+    <Content Include="Template\images\banner\2.jpg" />
+    <Content Include="Template\images\banner\3.jpg" />
+    <Content Include="Template\images\banner\4.jpg" />
+    <Content Include="Template\images\banner\5.jpg" />
+    <Content Include="Template\images\banner\6.jpg" />
+    <Content Include="Template\images\banner\7.jpg" />
+    <Content Include="Template\images\banner\8.jpg" />
+    <Content Include="Template\images\banner\9.jpg" />
+    <Content Include="Template\images\banner\menu-banner-1.jpg" />
+    <Content Include="Template\images\banner\menu-banner-2.png" />
+    <Content Include="Template\images\banner\sticker-bg.png" />
+    <Content Include="Template\images\blog-image\1.jpg" />
+    <Content Include="Template\images\blog-image\2.jpg" />
+    <Content Include="Template\images\blog-image\3.jpg" />
+    <Content Include="Template\images\blog-image\quate-icon.png" />
+    <Content Include="Template\images\blog-image\single-blog.jpg" />
+    <Content Include="Template\images\blog-image\specker.jpg" />
+    <Content Include="Template\images\brand-logo\1.png" />
+    <Content Include="Template\images\brand-logo\2.png" />
+    <Content Include="Template\images\brand-logo\3.png" />
+    <Content Include="Template\images\brand-logo\4.png" />
+    <Content Include="Template\images\brand-logo\5.png" />
+    <Content Include="Template\images\coming-soon-bg\coming-soon.jpg" />
+    <Content Include="Template\images\comment-image\1.png" />
+    <Content Include="Template\images\comment-image\2.png" />
+    <Content Include="Template\images\comment-image\3.png" />
+    <Content Include="Template\images\deal-img\deal-bg-2.jpg" />
+    <Content Include="Template\images\deal-img\deal-bg.jpg" />
+    <Content Include="Template\images\deal-img\woman.png" />
+    <Content Include="Template\images\favicon\favicon.ico" />
+    <Content Include="Template\images\favicon\favicon.png" />
+    <Content Include="Template\images\icons\1.png" />
+    <Content Include="Template\images\icons\2.png" />
+    <Content Include="Template\images\icons\3.png" />
+    <Content Include="Template\images\icons\cmpted_logo.png" />
+    <Content Include="Template\images\icons\fabric-icon.png" />
+    <Content Include="Template\images\icons\icon-youtube-play.png" />
+    <Content Include="Template\images\icons\jewelry-icon.png" />
+    <Content Include="Template\images\icons\paintings-icon.png" />
+    <Content Include="Template\images\icons\payment.png" />
+    <Content Include="Template\images\icons\pottery-icon.png" />
+    <Content Include="Template\images\icons\sculptures-icon.png" />
+    <Content Include="Template\images\icons\tab-bg-2.png" />
+    <Content Include="Template\images\icons\tab-bg.png" />
+    <Content Include="Template\images\icons\wooden-icon.png" />
+    <Content Include="Template\images\logo\logo-white.png" />
+    <Content Include="Template\images\logo\logo.png" />
+    <Content Include="Template\images\product-image\1.jpg" />
+    <Content Include="Template\images\product-image\10.jpg" />
+    <Content Include="Template\images\product-image\11.jpg" />
+    <Content Include="Template\images\product-image\12.jpg" />
+    <Content Include="Template\images\product-image\14.jpg" />
+    <Content Include="Template\images\product-image\16.jpg" />
+    <Content Include="Template\images\product-image\2.jpg" />
+    <Content Include="Template\images\product-image\3.jpg" />
+    <Content Include="Template\images\product-image\4.jpg" />
+    <Content Include="Template\images\product-image\5.jpg" />
+    <Content Include="Template\images\product-image\6.jpg" />
+    <Content Include="Template\images\product-image\7.jpg" />
+    <Content Include="Template\images\product-image\8.jpg" />
+    <Content Include="Template\images\product-image\9.jpg" />
+    <Content Include="Template\images\product-image\small-image\1.jpg" />
+    <Content Include="Template\images\product-image\small-image\2.jpg" />
+    <Content Include="Template\images\product-image\small-image\3.jpg" />
+    <Content Include="Template\images\product-image\small-image\4.jpg" />
+    <Content Include="Template\images\product-image\small-image\5.jpg" />
+    <Content Include="Template\images\product-image\zoom-image\1.jpg" />
+    <Content Include="Template\images\product-image\zoom-image\2.jpg" />
+    <Content Include="Template\images\product-image\zoom-image\3.jpg" />
+    <Content Include="Template\images\product-image\zoom-image\4.jpg" />
+    <Content Include="Template\images\product-image\zoom-image\5.jpg" />
+    <Content Include="Template\images\review-image\1.png" />
+    <Content Include="Template\images\review-image\2.png" />
+    <Content Include="Template\images\slider-image\slider-1.png" />
+    <Content Include="Template\images\slider-image\slider-2.png" />
+    <Content Include="Template\images\slider-image\slider-bg-1.jpg" />
+    <Content Include="Template\images\slider-image\slider-bg-2-1.jpg" />
+    <Content Include="Template\images\slider-image\slider-bg-2-2.jpg" />
+    <Content Include="Template\images\team\1.jpg" />
+    <Content Include="Template\images\team\2.jpg" />
+    <Content Include="Template\images\team\3.jpg" />
+    <Content Include="Template\images\team\4.jpg" />
+    <Content Include="Template\images\testimonial-image\1.png" />
+    <Content Include="Template\images\testimonial-image\quate-1.png" />
+    <Content Include="Template\js\main.js" />
+    <Content Include="Template\js\plugins\ajax-mail.js" />
+    <Content Include="Template\js\plugins\countdown.js" />
+    <Content Include="Template\js\plugins\jquery-ui.min.js" />
+    <Content Include="Template\js\plugins\jquery.nice-select.min.js" />
+    <Content Include="Template\js\plugins\jquery.zoom.min.js" />
+    <Content Include="Template\js\plugins\plugins.min.js" />
+    <Content Include="Template\js\plugins\scrollup.js" />
+    <Content Include="Template\js\plugins\swiper-bundle.min.js" />
+    <Content Include="Template\js\plugins\venobox.min.js" />
+    <Content Include="Template\js\vendor\bootstrap.bundle.min.js" />
+    <Content Include="Template\js\vendor\jquery-3.5.1.min.js" />
+    <Content Include="Template\js\vendor\jquery-migrate-3.3.0.min.js" />
+    <Content Include="Template\js\vendor\modernizr-3.11.2.min.js" />
+    <Content Include="Template\js\vendor\vendor.min.js" />
+    <Content Include="Template\php\mail.php" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\less\brands.less" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\less\fontawesome.less" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\less\regular.less" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\less\solid.less" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\less\v4-shims.less" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\less\_animated.less" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\less\_bordered-pulled.less" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\less\_core.less" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\less\_fixed-width.less" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\less\_icons.less" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\less\_list.less" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\less\_mixins.less" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\less\_rotated-flipped.less" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\less\_screen-reader.less" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\less\_shims.less" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\less\_sizing.less" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\less\_stacked.less" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\less\_variables.less" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\metadata\categories.yml" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\metadata\icon-families.json" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\metadata\icon-families.yml" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\metadata\icons.json" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\metadata\icons.yml" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\metadata\shims.json" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\metadata\shims.yml" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\metadata\sponsors.yml" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\scss\brands.scss" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\scss\fontawesome.scss" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\scss\regular.scss" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\scss\solid.scss" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\scss\v4-shims.scss" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\scss\_animated.scss" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\scss\_bordered-pulled.scss" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\scss\_core.scss" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\scss\_fixed-width.scss" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\scss\_functions.scss" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\scss\_icons.scss" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\scss\_list.scss" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\scss\_mixins.scss" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\scss\_rotated-flipped.scss" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\scss\_screen-reader.scss" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\scss\_shims.scss" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\scss\_sizing.scss" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\scss\_stacked.scss" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\scss\_variables.scss" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\webfonts\fa-brands-400.ttf" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\webfonts\fa-brands-400.woff2" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\webfonts\fa-regular-400.ttf" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\webfonts\fa-regular-400.woff2" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\webfonts\fa-solid-900.ttf" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\webfonts\fa-solid-900.woff2" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\webfonts\fa-v4compatibility.ttf" />
-    <Content Include="Content\fontawesome-free-6.3.0-web\webfonts\fa-v4compatibility.woff2" />
     <Content Include="Template\fonts\FontAwesome\fontawesome-webfont.eot" />
     <Content Include="Template\fonts\FontAwesome\fontawesome-webfont.ttf" />
     <Content Include="Template\fonts\FontAwesome\fontawesome-webfont.woff" />
@@ -2496,6 +2523,66 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <EntityDeploy Include="Models\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
+    <Content Include="Content\fontawesome-free-6.3.0-web\less\brands.less" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\less\fontawesome.less" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\less\regular.less" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\less\solid.less" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\less\v4-shims.less" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\less\_animated.less" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\less\_bordered-pulled.less" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\less\_core.less" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\less\_fixed-width.less" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\less\_icons.less" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\less\_list.less" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\less\_mixins.less" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\less\_rotated-flipped.less" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\less\_screen-reader.less" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\less\_shims.less" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\less\_sizing.less" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\less\_stacked.less" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\less\_variables.less" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\metadata\categories.yml" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\metadata\icon-families.json" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\metadata\icon-families.yml" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\metadata\icons.json" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\metadata\icons.yml" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\metadata\shims.json" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\metadata\shims.yml" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\metadata\sponsors.yml" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\scss\brands.scss" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\scss\fontawesome.scss" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\scss\regular.scss" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\scss\solid.scss" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\scss\v4-shims.scss" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\scss\_animated.scss" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\scss\_bordered-pulled.scss" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\scss\_core.scss" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\scss\_fixed-width.scss" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\scss\_functions.scss" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\scss\_icons.scss" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\scss\_list.scss" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\scss\_mixins.scss" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\scss\_rotated-flipped.scss" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\scss\_screen-reader.scss" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\scss\_shims.scss" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\scss\_sizing.scss" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\scss\_stacked.scss" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\scss\_variables.scss" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\webfonts\fa-brands-400.ttf" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\webfonts\fa-brands-400.woff2" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\webfonts\fa-regular-400.ttf" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\webfonts\fa-regular-400.woff2" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\webfonts\fa-solid-900.ttf" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\webfonts\fa-solid-900.woff2" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\webfonts\fa-v4compatibility.ttf" />
+    <Content Include="Content\fontawesome-free-6.3.0-web\webfonts\fa-v4compatibility.woff2" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

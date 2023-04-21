@@ -1,19 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="mobiledbModelStoreContainer" CdmEntityContainer="mobiledbEntities1">
-    <EntitySetMapping Name="Banners">
-      <EntityTypeMapping TypeName="mobiledbModel.Banner">
-        <MappingFragment StoreEntitySet="Banner">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
-          <ScalarProperty Name="Ten" ColumnName="Ten" />
-          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
-          <ScalarProperty Name="Updated_at" ColumnName="Updated_at" />
-          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-          <ScalarProperty Name="Created_at" ColumnName="Created_at" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="BaoHanhs">
       <EntityTypeMapping TypeName="mobiledbModel.BaoHanh">
         <MappingFragment StoreEntitySet="BaoHanh">
@@ -34,19 +21,6 @@
           <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
           <ScalarProperty Name="Gia" ColumnName="Gia" />
           <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CTGioHangs">
-      <EntityTypeMapping TypeName="mobiledbModel.CTGioHang">
-        <MappingFragment StoreEntitySet="CTGioHang">
-          <ScalarProperty Name="MaSP" ColumnName="MaSP" />
-          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
-          <ScalarProperty Name="Gia" ColumnName="Gia" />
-          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-          <ScalarProperty Name="MaKH" ColumnName="MaKH" />
-          <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
-          <ScalarProperty Name="TenSP" ColumnName="TenSP" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -82,10 +56,8 @@
           <ScalarProperty Name="MaKH" ColumnName="MaKH" />
           <ScalarProperty Name="NgayLap" ColumnName="NgayLap" />
           <ScalarProperty Name="TongTien" ColumnName="TongTien" />
-          <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
           <ScalarProperty Name="GiamGia" ColumnName="GiamGia" />
           <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -114,6 +86,7 @@
         <MappingFragment StoreEntitySet="KhachHang">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+          <ScalarProperty Name="MaGH" ColumnName="MaGH" />
           <ScalarProperty Name="LoaiKH" ColumnName="LoaiKH" />
           <ScalarProperty Name="HoTen" ColumnName="HoTen" />
           <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
@@ -148,8 +121,6 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="TenLoai" ColumnName="TenLoai" />
           <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
-          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
-          <ScalarProperty Name="CapNhat" ColumnName="CapNhat" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -177,6 +148,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="mobiledbModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="mobiledbModel.User">
         <MappingFragment StoreEntitySet="User">
@@ -184,10 +166,19 @@
           <ScalarProperty Name="C_Password" ColumnName="_Password" />
           <ScalarProperty Name="C_Email" ColumnName="_Email" />
           <ScalarProperty Name="C_Phone" ColumnName="_Phone" />
-          <ScalarProperty Name="C_is_Admin" ColumnName="_is_Admin" />
-          <ScalarProperty Name="C_is_Active" ColumnName="_is_Active" />
           <ScalarProperty Name="C_Created_at" ColumnName="_Created_at" />
-          <ScalarProperty Name="C_Updated_at" ColumnName="_Updated_at" />
+          <ScalarProperty Name="C_is_Admin" ColumnName="_is_Admin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CTGioHangs">
+      <EntityTypeMapping TypeName="mobiledbModel.CTGioHang">
+        <MappingFragment StoreEntitySet="CTGioHang">
+          <ScalarProperty Name="MaGH" ColumnName="MaGH" />
+          <ScalarProperty Name="MaSP" ColumnName="MaSP" />
+          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+          <ScalarProperty Name="Gia" ColumnName="Gia" />
+          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -201,6 +192,5 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="sp_themDonHang" FunctionName="mobiledbModel.Store.sp_themDonHang" />
   </EntityContainerMapping>
 </Mapping>
