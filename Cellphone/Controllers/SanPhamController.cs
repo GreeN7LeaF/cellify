@@ -69,6 +69,7 @@ namespace Cellphone.Controllers
         }
 
         // GET: SanPham/Details/5
+        //thaomy đã tạo cái này
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -80,7 +81,17 @@ namespace Cellphone.Controllers
             {
                 return HttpNotFound();
             }
-            return View(sanPham);
+
+            //san pham lien quan
+            var relatedProduct = db.SanPhams.Where(s => s.LoaiSP == sanPham.LoaiSP && s.Hang == sanPham.Hang).Take(3).ToList();
+            var loaiSP = db.LoaiSPs.FirstOrDefault(s => s.ID == sanPham.LoaiSP);
+            var sanPhamDetailsModelView = new SanPhamDetailsModelView {
+                relatedProduct = relatedProduct,
+                product = sanPham,
+                productType = loaiSP
+            };
+
+            return View(sanPhamDetailsModelView);
         }
 
         public ActionResult ThongTinSanPham(int? id) {

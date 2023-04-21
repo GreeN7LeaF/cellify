@@ -17,6 +17,8 @@ namespace Cellphone.Controllers
             ViewBag.CTGioHang = db.CTGioHangs.ToList();
             ViewBag.HomeSlider = db.Banners.Where(s => s.Ten == "Home Slider").ToList();
             ViewBag.HomeSub = db.Banners.Where(s => s.Ten == "Home Sub").ToList();
+            ViewBag.BannerSub1 = db.Banners.Where(s => s.Ten == "Banner Sub").Take(2).ToList();
+            ViewBag.BannerSub2 = db.Banners.Where(s => s.Ten == "Banner Sub").OrderBy(s => s.ID).Skip(2).Take(3).ToList();
             return View(sanphams);
         }
 

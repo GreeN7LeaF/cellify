@@ -161,38 +161,27 @@
     <div class="banner-area-3 pt-100px pb-100px">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 mb-lm-30px mb-md-30px">
-                    <div class="single-banner">
-                        <img src="~/Template/images/banner/9.jpg" alt="">
-                        <div class="banner-content">
-                            <span class="category">-20%</span>
-                            <span class="title">
-                                Cactus Pot <br>
-                                & Holder
-                            </span>
-                            <a href="shop-left-sidebar.html" class="shop-link btn btn-primary text-uppercase">
-                                Shop
-                                Now
-                            </a>
+                @if (ViewBag.BannerSub1 != null)
+                {
+
+                    foreach (var item in ViewBag.BannerSub1)
+                    {
+                        <div class="col-lg-6 mb-lm-30px mb-md-30px">
+                            <div class="single-banner">
+                                <img src="@Url.Content("~/Images/Banner/" + @item.HinhAnh)" alt="">
+                                <div class="banner-content">
+                                    <span class="category">-20%</span>
+                                    <span class="title">
+                                        @item.NoiDung
+                                    </span>
+                                    <a href="shop-left-sidebar.html" class="shop-link btn btn-primary text-uppercase">
+                                        Mua ngay
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="single-banner">
-                        <img src="~/Template/images/banner/10.jpg" alt="">
-                        <div class="banner-content">
-                            <span class="category">-20%</span>
-                            <span class="title">
-                                Pottery Wheel<br>
-                                & Utensils
-                            </span>
-                            <a href="shop-left-sidebar.html" class="shop-link btn btn-primary text-uppercase">
-                                Shop
-                                Now
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                    }
+                }
             </div>
         </div>
     </div>
@@ -205,8 +194,7 @@
                 <!-- Section Title Start -->
                 <div class="col-12">
                     <div class="section-title text-center">
-                        <h2 class="title">Popular Categories</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod incididunt ut labore et dolore magna aliqua. </p>
+                        <h2 class="title">Danh mục</h2>
                     </div>
                     <!-- Tab Start -->
                     <div class="tab-slider swiper-container slider-nav-style-1 small-nav">
@@ -256,54 +244,48 @@
     <div class="banner-area">
         <div class="container">
             <div class="row">
-                <div class="single-col">
-                    <div class="single-banner">
-                        <img src="~/Template/images/banner/1.jpg" alt="">
-                        <div class="banner-content">
-                            <span class="category">Best Seller</span>
-                            <span class="title">
-                                Flower Vase <br>
-                                & Poot
-                            </span>
-                            <a href="shop-left-sidebar.html" class="shop-link btn btn-primary text-uppercase">
-                                Shop
-                                Now
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="single-col center-col">
-                    <div class="single-banner">
-                        <img src="~/Template/images/banner/2.jpg" alt="">
-                        <div class="banner-content">
-                            <span class="category">Best Seller</span>
-                            <span class="title">
-                                Wool Silk Dress <br>
-                                & Offer 2021
-                            </span>
-                            <a href="shop-left-sidebar.html" class="shop-link btn btn-primary text-uppercase">
-                                Shop
-                                Now
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="single-col">
-                    <div class="single-banner">
-                        <img src="~/Template/images/banner/3.jpg" alt="">
-                        <div class="banner-content">
-                            <span class="category">Best Seller</span>
-                            <span class="title">
-                                Pen Holder<br>
-                                & Poot
-                            </span>
-                            <a href="shop-left-sidebar.html" class="shop-link btn btn-primary text-uppercase">
-                                Shop
-                                Now
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                @if (ViewBag.BannerSub2 != null)
+                {
+                    var count = 1;
+                    foreach (var item in ViewBag.BannerSub2)
+                    {
+                        if (count == 2)
+                        {
+                            <div class="single-col center-col">
+                                <div class="single-banner">
+                                    <img src="@Url.Content("~/Images/Banner/" + @item.HinhAnh)" alt="">
+                                    <div class="banner-content">
+                                        <span class="category">Best Seller</span>
+                                        <span class="title">
+                                            @item.NoiDung
+                                        </span>
+                                        <a href="shop-left-sidebar.html" class="shop-link btn btn-primary text-uppercase">
+                                            Mua ngay
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="single-col">
+                                <div class="single-banner">
+                                    <img src="@Url.Content("~/Images/Banner/" + @item.HinhAnh)" alt="">
+                                    <div class="banner-content">
+                                        <span class="category">Best Seller</span>
+                                        <span class="title">
+                                            @item.NoiDung
+                                        </span>
+                                        <a href="shop-left-sidebar.html" class="shop-link btn btn-primary text-uppercase">
+                                            Mua ngay
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        count += 1;
+                    }
+                }
             </div>
         </div>
     </div>
