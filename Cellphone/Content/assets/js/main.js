@@ -113,8 +113,8 @@ function setHeader(route, route2) {
 
 function setPageList() {
     $(".pages .page-link").map((idx, val) => {
-        $(this).removeClass(".active");
-    };
+        return $(this).removeClass(".active");
+    });
     
     let param = (window.location.toString()).split("=")[1];
 
@@ -126,15 +126,16 @@ function setPageList() {
             return getValueFromString == param;
         });
         $pageLink.map((idx, val) => {
-            val.classList.toggle("active"));
-        };
+            return val.classList.toggle("active");
+        });
     } else {
-        $(".pages .page-link").eq(0).classList.toggle("active"));
+        $(".pages .page-link").first().addClass("active");
     }
 }
 
 function tabHandler() {
     $(".best-product-tab-nav li.nav-item").on("click", function () {
+        console.log("Click");
         //get product type id
         var typeid = $(".best-product-tab-nav li.nav-item .nav-link.active").parent().attr('id');
         var id = parseInt(typeid);
@@ -154,6 +155,7 @@ function tabHandler() {
     });
     /*$(".tab-slider.nav-center .navlink.active").parent().attr('id');*/
     $(".product-list li.nav-item").on("click", function () {
+        console.log("Click");
         //get product type id
         var typeid = $(".product-list li.nav-item .nav-link.active").parent().attr('id');
         var id = parseInt(typeid.split('-')[1]);
