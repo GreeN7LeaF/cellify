@@ -1,8 +1,10 @@
-﻿@model Cellphone.Models.DonHang
+﻿@model Cellphone.Models.DonHangModelView
 
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var ID = HttpContext.Current.Session["ID"];
 }
 @*Thanh toán *@
 
@@ -59,60 +61,7 @@
     </div>
 </div>
 <!-- OffCanvas Wishlist End -->
-<!-- OffCanvas Cart Start -->
-<div id="offcanvas-cart" class="offcanvas offcanvas-cart">
-    <div class="inner">
-        <div class="head">
-            <span class="title">Cart</span>
-            <button class="offcanvas-close">×</button>
-        </div>
-
-        <div class="body customScroll">
-            <ul class="minicart-product-list">
-                <li>
-                    <a href="single-product.html" class="image">
-                        <img src="assets/images/product-image/1.jpg"
-                             alt="Cart product Image">
-                    </a>
-                    <div class="content">
-                        <a href="single-product.html" class="title">Hand-Made Garlic Mortar</a>
-                        <span class="quantity-price">1 x <span class="amount">$18.86</span></span>
-                        <a href="#" class="remove">×</a>
-                    </div>
-                </li>
-                <li>
-                    <a href="single-product.html" class="image">
-                        <img src="assets/images/product-image/2.jpg"
-                             alt="Cart product Image">
-                    </a>
-                    <div class="content">
-                        <a href="single-product.html" class="title">Handmade Ceramic Pottery</a>
-                        <span class="quantity-price">1 x <span class="amount">$43.28</span></span>
-                        <a href="#" class="remove">×</a>
-                    </div>
-                </li>
-                <li>
-                    <a href="single-product.html" class="image">
-                        <img src="assets/images/product-image/3.jpg"
-                             alt="Cart product Image">
-                    </a>
-                    <div class="content">
-                        <a href="single-product.html" class="title">Hand Painted Bowls</a>
-                        <span class="quantity-price">1 x <span class="amount">$37.34</span></span>
-                        <a href="#" class="remove">×</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div class="foot">
-            <div class="buttons mt-30px">
-                <a href="cart.html" class="btn btn-dark btn-hover-primary mb-30px">view cart</a>
-                <a href="checkout.html" class="btn btn-outline-dark current-btn">checkout</a>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- OffCanvas Cart End -->
+@Html.Action("SideCart", "CTGioHangs")
 <!-- OffCanvas Menu Start -->
 <div id="offcanvas-mobile-menu" class="offcanvas offcanvas-mobile-menu">
     <button class="offcanvas-close"></button>
@@ -278,92 +227,136 @@
         <div class="row">
             <div class="col-lg-7">
                 <div class="billing-info-wrap">
-                    <h3>Billing Details</h3>
+                    <h3>Chi tiết hóa đơn</h3>
                     <div class="row">
-                        <div class="col-lg-6 col-md-6">
-                            <div class="billing-info mb-4">
-                                <label>First Name</label>
-                                <input type="text" />
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            <div class="billing-info mb-4">
-                                <label>Last Name</label>
-                                <input type="text" />
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="billing-info mb-4">
-                                <label>Company Name</label>
-                                <input type="text" />
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="billing-select mb-4">
-                                <label>Country</label>
-                                <select>
-                                    <option>Select a country</option>
-                                    <option>Azerbaijan</option>
-                                    <option>Bahamas</option>
-                                    <option>Bahrain</option>
-                                    <option>Bangladesh</option>
-                                    <option>Barbados</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="billing-info mb-4">
-                                <label>Street Address</label>
-                                <input class="billing-address" placeholder="House number and street name"
-                                       type="text" />
-                                <input placeholder="Apartment, suite, unit etc." type="text" />
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="billing-info mb-4">
-                                <label>Town / City</label>
-                                <input type="text" />
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            <div class="billing-info mb-4">
-                                <label>State / County</label>
-                                <input type="text" />
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            <div class="billing-info mb-4">
-                                <label>Postcode / ZIP</label>
-                                <input type="text" />
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            <div class="billing-info mb-4">
-                                <label>Phone</label>
-                                <input type="text" />
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            <div class="billing-info mb-4">
-                                <label>Email Address</label>
-                                <input type="text" />
-                            </div>
-                        </div>
+                        @if (ID == null)
+                        {
+                            using (Html.BeginForm("CreateFromDonHang", "KhachHang", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="HinhAnhSrc" value="@Model.KhachHang.HinhAnh" />
+                                <input type="hidden" name="MaKH" value="@Model.KhachHang.MaKH" />
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="billing-info mb-4">
+                                        <label>Họ tên</label>
+                                        <input type="text" name="HoTen" value="@Model.KhachHang.HoTen" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="billing-info mb-4">
+                                        <label>Điện thoại</label>
+                                        <input type="text" name="DienThoai" value="@Model.KhachHang.DienThoai" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="billing-select mb-4">
+                                        <label>Thành phố</label>
+                                        <select>
+                                            <option>Select a country</option>
+                                            <option>Azerbaijan</option>
+                                            <option>Bahamas</option>
+                                            <option>Bahrain</option>
+                                            <option>Bangladesh</option>
+                                            <option>Barbados</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="billing-info mb-4">
+                                        <label>Địa chỉ</label>
+                                        <input name="DiaChi" value="@Model.KhachHang.DiaChi" type="text" />
+                                    </div>
+                                </div>
+                                <div class=" hiding">
+                                    <!-- Password input -->
+                                    <div class="form-outline mb-2">
+                                        <input type="password"
+                                               id="password"
+                                               name="password"
+                                               class="form-control" />
+                                        <label class="form-label" for="form2Example2">Mật khẩu</label>
+                                    </div>
+                                    <!-- Password input -->
+                                    <div class="form-outline mb-2">
+                                        <div class="form-outline mb-2">
+                                            <input type="password"
+                                                   id="C_Password"
+                                                   name="C_Password"
+                                                   class="form-control" />
+                                            <label class="form-label" for="form2Example2">Nhập lại mật khẩu</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="checkout-account mb-30px">
+                                    <input class="checkout-toggle2 w-auto h-auto" type="checkbox" />
+                                    <label>Tạo tài khoản?</label>
+                                </div>
+                                <!-- Submit button -->
+                                <button type="submit" class="btn btn-clr-normal btn-block mb-4">
+                                    Tạo tài khoản
+                                </button>
+                            }
+                        }
+                        else
+                        {
+                            using (Html.BeginForm("EditFromDonHang", "KhachHang", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="HinhAnhSrc" value="@Model.KhachHang.HinhAnh" />
+                                <input type="hidden" name="MaKH" value="@Model.KhachHang.MaKH" />
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="billing-info mb-4">
+                                        <label>Họ tên</label>
+                                        <input type="text" name="HoTen" value="@Model.KhachHang.HoTen" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="billing-info mb-4">
+                                        <label>Điện thoại</label>
+                                        <input type="text" name="DienThoai" value="@Model.KhachHang.DienThoai" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="billing-select mb-4">
+                                        <label>Thành phố</label>
+                                        <select>
+                                            <option>Select a country</option>
+                                            <option>Azerbaijan</option>
+                                            <option>Bahamas</option>
+                                            <option>Bahrain</option>
+                                            <option>Bangladesh</option>
+                                            <option>Barbados</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="billing-info mb-4">
+                                        <label>Địa chỉ</label>
+                                        <input name="DiaChi" value="@Model.KhachHang.DiaChi" type="text" />
+                                    </div>
+                                </div>
+                                <div class="checkout-account mb-30px">
+                                    <input class="checkout-toggle2 w-auto h-auto" type="checkbox" />
+                                    <label>Tạo tài khoản?</label>
+                                </div>
+                                <!-- Submit button -->
+                                <button type="submit" class="btn btn-clr-normal btn-block mb-4">
+                                    Lưu thông tin
+                                </button>
+                            }
+                        }
                     </div>
-                    <div class="checkout-account mb-30px">
-                        <input class="checkout-toggle2 w-auto h-auto" type="checkbox" />
-                        <label>Create an account?</label>
-                    </div>
+
                     <div class="checkout-account-toggle open-toggle2 mb-30">
                         <input placeholder="Email address" type="email" />
                         <input placeholder="Password" type="password" />
                         <button class="btn-hover checkout-btn" type="submit">register</button>
                     </div>
                     <div class="additional-info-wrap">
-                        <h4>Additional information</h4>
+                        <h4 class="text-uppercase">Thông tin ghi chú</h4>
                         <div class="additional-info">
-                            <label>Order notes</label>
-                            <textarea placeholder="Notes about your order, e.g. special notes for delivery. "
+                            <label>Lưu ý bên vận chuyển</label>
+                            <textarea placeholder="Bạn có lời nhắc nào cho shop không? Đặc biệt là cho bạn shipper nè. "
                                       name="message"></textarea>
                         </div>
                     </div>
@@ -373,75 +366,46 @@
                     </div>
                     <div class="different-address open-toggle mt-30px">
                         <div class="row">
-                            <div class="col-lg-6 col-md-6">
-                                <div class="billing-info mb-4">
-                                    <label>First Name</label>
-                                    <input type="text" />
+                            @using (Html.BeginForm("EditFromDonHang", "KhachHang", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="HinhAnhSrc" value="@Model.KhachHang.HinhAnh" />
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="billing-info mb-4">
+                                        <label>Họ tên</label>
+                                        <input type="text" name="HoTen" value="@Model.KhachHang.HoTen" />
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                <div class="billing-info mb-4">
-                                    <label>Last Name</label>
-                                    <input type="text" />
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="billing-info mb-4">
+                                        <label>Điện thoại</label>
+                                        <input type="text" name="DienThoai" value="@Model.KhachHang.DienThoai" />
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="billing-info mb-4">
-                                    <label>Company Name</label>
-                                    <input type="text" />
+                                <div class="col-lg-12">
+                                    <div class="billing-select mb-4">
+                                        <label>Thành phố</label>
+                                        <select>
+                                            <option>Select a country</option>
+                                            <option>Azerbaijan</option>
+                                            <option>Bahamas</option>
+                                            <option>Bahrain</option>
+                                            <option>Bangladesh</option>
+                                            <option>Barbados</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="billing-select mb-4">
-                                    <label>Country</label>
-                                    <select>
-                                        <option>Select a country</option>
-                                        <option>Azerbaijan</option>
-                                        <option>Bahamas</option>
-                                        <option>Bahrain</option>
-                                        <option>Bangladesh</option>
-                                        <option>Barbados</option>
-                                    </select>
+                                <div class="col-lg-12">
+                                    <div class="billing-info mb-4">
+                                        <label>Địa chỉ</label>
+                                        <input name="DiaChi" value="@Model.KhachHang.DiaChi" type="text" />
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="billing-info mb-4">
-                                    <label>Street Address</label>
-                                    <input class="billing-address" placeholder="House number and street name"
-                                           type="text" />
-                                    <input placeholder="Apartment, suite, unit etc." type="text" />
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="billing-info mb-4">
-                                    <label>Town / City</label>
-                                    <input type="text" />
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                <div class="billing-info mb-4">
-                                    <label>State / County</label>
-                                    <input type="text" />
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                <div class="billing-info mb-4">
-                                    <label>Postcode / ZIP</label>
-                                    <input type="text" />
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                <div class="billing-info mb-4">
-                                    <label>Phone</label>
-                                    <input type="text" />
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                <div class="billing-info mb-4">
-                                    <label>Email Address</label>
-                                    <input type="text" />
-                                </div>
-                            </div>
+                                <!-- Submit button -->
+                                <button type="submit" class="btn btn-clr-normal btn-block mb-4">
+                                    Lưu thông tin
+                                </button>
+                            }
                         </div>
                     </div>
                 </div>
@@ -450,105 +414,113 @@
             @*Order list*@
             <div class="col-lg-5 mt-md-30px mt-lm-30px ">
                 <div class="your-order-area">
-                    <h3>Your order</h3>
-                    <div class="your-order-wrap gray-bg-4">
-                        <div class="your-order-product-info">
-                            <div class="your-order-top">
-                                <ul>
-                                    <li>Product</li>
-                                    <li>Total</li>
-                                </ul>
+                    @using (Html.BeginForm("Create", "DonHang", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <h3>Đơn hàng của tôi</h3>
+                        <div class="your-order-wrap gray-bg-4">
+                            <div class="your-order-product-info">
+                                <div class="your-order-top">
+                                    <ul>
+                                        <li>Sản phẩm</li>
+                                        <li>Tổng cộng</li>
+                                    </ul>
+                                </div>
+                                <div class="your-order-middle">
+                                    <ul>
+                                        @if (Model.CTGioHangs != null)
+                                        {
+                                            foreach (var item in Model.CTGioHangs)
+                                            {
+                                                <li>
+                                                    <span class="order-middle-left">@item.TenSP X @item.SoLuong</span>
+                                                    <span class="order-price">@item.ThanhTien</span>
+                                                </li>
+                                            }
+                                        }
+                                    </ul>
+                                </div>
+                                <div class="your-order-bottom">
+                                    <ul>
+                                        <li class="your-order-shipping">Vận chuyển</li>
+                                        <li>Vận chuyển miễn phí</li>
+                                    </ul>
+                                </div>
+                                <div class="your-order-total">
+                                    <ul>
+                                        <li class="order-total">Tổng cộng</li>
+                                        <li name="TongTien">@Model.DonHang.TongTien</li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="your-order-middle">
-                                <ul>
-                                    <li>
-                                        <span class="order-middle-left">Product Name X 1</span> <span class="order-price">$100 </span>
-                                    </li>
-                                    <li>
-                                        <span class="order-middle-left">Product Name X 1</span> <span class="order-price">$100 </span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="your-order-bottom">
-                                <ul>
-                                    <li class="your-order-shipping">Shipping</li>
-                                    <li>Free shipping</li>
-                                </ul>
-                            </div>
-                            <div class="your-order-total">
-                                <ul>
-                                    <li class="order-total">Total</li>
-                                    <li>$100</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="payment-method">
-                            <div class="payment-accordion element-mrg">
-                                <div id="faq" class="panel-group">
-                                    <div class="panel panel-default single-my-account m-0">
-                                        <div class="panel-heading my-account-title">
-                                            <h4 class="panel-title">
-                                                <a data-bs-toggle="collapse"
-                                                   href="#my-account-1" class="collapsed"
-                                                   aria-expanded="true">Direct bank transfer</a>
-                                            </h4>
-                                        </div>
-                                        <div id="my-account-1" class="panel-collapse collapse show"
-                                             data-bs-parent="#faq">
+                            <div class="payment-method">
+                                <div class="payment-accordion element-mrg">
+                                    <div id="faq" class="panel-group">
+                                        <div class="panel panel-default single-my-account m-0">
+                                            <div class="panel-heading my-account-title">
+                                                <h4 class="panel-title">
+                                                    <a data-bs-toggle="collapse"
+                                                       href="#my-account-1" class="collapsed"
+                                                       aria-expanded="true">Direct bank transfer</a>
+                                                </h4>
+                                            </div>
+                                            <div id="my-account-1" class="panel-collapse collapse show"
+                                                 data-bs-parent="#faq">
 
-                                            <div class="panel-body">
-                                                <p>
-                                                    Please send a check to Store Name, Store Street, Store Town,
-                                                    Store State / County, Store Postcode.
-                                                </p>
+                                                <div class="panel-body">
+                                                    <p>
+                                                        Please send a check to Store Name, Store Street, Store Town,
+                                                        Store State / County, Store Postcode.
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="panel panel-default single-my-account m-0">
-                                        <div class="panel-heading my-account-title">
-                                            <h4 class="panel-title">
-                                                <a data-bs-toggle="collapse"
-                                                   href="#my-account-2" aria-expanded="false"
-                                                   class="collapsed">Check payments</a>
-                                            </h4>
-                                        </div>
-                                        <div id="my-account-2" class="panel-collapse collapse"
-                                             data-bs-parent="#faq">
+                                        <div class="panel panel-default single-my-account m-0">
+                                            <div class="panel-heading my-account-title">
+                                                <h4 class="panel-title">
+                                                    <a data-bs-toggle="collapse"
+                                                       href="#my-account-2" aria-expanded="false"
+                                                       class="collapsed">Check payments</a>
+                                                </h4>
+                                            </div>
+                                            <div id="my-account-2" class="panel-collapse collapse"
+                                                 data-bs-parent="#faq">
 
-                                            <div class="panel-body">
-                                                <p>
-                                                    Please send a check to Store Name, Store Street, Store Town,
-                                                    Store State / County, Store Postcode.
-                                                </p>
+                                                <div class="panel-body">
+                                                    <p>
+                                                        Please send a check to Store Name, Store Street, Store Town,
+                                                        Store State / County, Store Postcode.
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="panel panel-default single-my-account m-0">
-                                        <div class="panel-heading my-account-title">
-                                            <h4 class="panel-title">
-                                                <a data-bs-toggle="collapse"
-                                                   href="#my-account-3">Cash on delivery</a>
-                                            </h4>
-                                        </div>
-                                        <div id="my-account-3" class="panel-collapse collapse"
-                                             data-bs-parent="#faq">
+                                        <div class="panel panel-default single-my-account m-0">
+                                            <div class="panel-heading my-account-title">
+                                                <h4 class="panel-title">
+                                                    <a data-bs-toggle="collapse"
+                                                       href="#my-account-3">Cash on delivery</a>
+                                                </h4>
+                                            </div>
+                                            <div id="my-account-3" class="panel-collapse collapse"
+                                                 data-bs-parent="#faq">
 
-                                            <div class="panel-body">
-                                                <p>
-                                                    Please send a check to Store Name, Store Street, Store Town,
-                                                    Store State / County, Store Postcode.
-                                                </p>
+                                                <div class="panel-body">
+                                                    <p>
+                                                        Please send a check to Store Name, Store Street, Store Town,
+                                                        Store State / County, Store Postcode.
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="Place-order mt-25">
+                            <button type="submit" class="btn-hover">Thanh toán</button>
+                        </div>
+                    }
                     </div>
-                    <div class="Place-order mt-25">
-                        <a class="btn-hover" href="#">Place Order</a>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -614,62 +586,4 @@
         </div>
     </div>
 </div>
-<!-- Search Modal End -->
-
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>DonHang</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.MaKH, "MaKH", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("MaKH", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.MaKH, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.NgayLap, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.NgayLap, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NgayLap, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.TongTien, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TongTien, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TongTien, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.GiamGia, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.GiamGia, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.GiamGia, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.TrangThai, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TrangThai, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TrangThai, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
 

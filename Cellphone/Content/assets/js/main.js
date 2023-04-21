@@ -30,9 +30,19 @@ $(document).ready(function () {
     let route = (window.location.pathname).split("/")[1];
     let route2 = (window.location.pathname).split("/")[2];
     if ($("#admin").length > 0) {
+        if (route == "Index" || route == "index") route = "noooo";
+        if (route2 == "Index" || route2 == "index" ) route2 = "noooo";
+        console.log(route, "   ", route2);
+
         renderSideNav(route, route2);
     }
     tabHandler();
+    setHeader(route, route2);
+
+    /*var input = document.getElementById("HinhAnh");
+    console.log(input);
+    input.value = input.getAttribute("data-default-value");
+    console.log(input.value);*/
 });
 
 function dropDownSideBar() {
@@ -82,16 +92,20 @@ function setSideNav(route, route2) {
         return $(this).prop('href').split('/').splice(-1)[0].indexOf(route) !== -1 || 
             $(this).prop('href').split('/').splice(-1)[0].indexOf(route2) !== -1;
     });
-
-    $authHeader = $("#auth-header .nav-link").filter(function () {
-        return $(this).prop("href").split('/').splice(-1)[0].indexOf(route) !== -1 ||
-            $(this).prop('href').split('/').splice(-1)[0].indexOf(route2) !== -1;
-    });
+    
 
     $item.map((idx, val) => val.classList.toggle('active'));
-    $authHeader.map((idx, val) => val.classList.toggle("active"));
+}
 
-   
+function setHeader(route, route2) {
+    $authHeader = $("#auth-header .nav-link").filter(function () {
+        return $(this).prop("href").split('/').splice(-1)[0]==(route) ||
+            $(this).prop('href').split('/').splice(-1)[0]==(route2) ||
+            $(this).prop("href").split('/').splice(-2)[0]==(route) ||
+            $(this).prop('href').split('/').splice(-2)[0]==(route2);
+    });
+
+    $authHeader.map((idx, val) => val.classList.toggle("active"));
 }
 
 function tabHandler() {

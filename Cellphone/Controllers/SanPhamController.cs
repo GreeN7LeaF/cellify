@@ -21,6 +21,11 @@ namespace Cellphone.Controllers
             else return "/Images/Product/default.png";
         }
 
+        public string getName(int ID) {
+            var sanPham = db.SanPhams.Find(ID);
+            return sanPham.TenSP;
+        }
+
         // GET: SanPham
         public ActionResult Index()
         {
@@ -28,6 +33,24 @@ namespace Cellphone.Controllers
             ViewBag.Hang = new SelectList(db.Hangs, "ID", "TenHang");
             ViewBag.LoaiSP = new SelectList(db.LoaiSPs, "ID", "TenLoai");
             return View(sanPhams.ToList());
+        }
+
+        public ActionResult ShoppingList(int ID)
+        {
+            var hang = db.Hangs.ToList();
+            var loaiSP = db.LoaiSPs.ToList();
+            var sanPhams = db.SanPhams.Where(s => s.LoaiSP == ID).ToList();
+
+            var tenLoaiSP = db.LoaiSPs.Find(ID).TenLoai;
+
+            var sanPhamListModelView = new SanPhamListModelView {
+                Hangs = hang,
+                LoaiSPs = loaiSP,
+                SanPhams = sanPhams,
+                tenLoaiSP = tenLoaiSP
+            };
+
+            return View(sanPhamListModelView);
         }
 
         // GET: SanPham/Details/5
@@ -104,7 +127,8 @@ namespace Cellphone.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,TenSP,GiaBan,GiaMua,SoLuong,LoaiSP,Hang,TrangThai")] SanPham sanPham)
+        public ActionResult Edit([Bind(Include = "ID,TenSP,GiaBan,GiaMua,SoLuong,LoaiSP,Hang,TrangThai")] SanPham sanPham,
+            FormCollection form)
         {
             if (ModelState.IsValid)
             {
@@ -112,12 +136,20 @@ namespace Cellphone.Controllers
                 if (file != null)
                 {
                     var fileName = Path.GetFileName(file.FileName);
-                    //Tạo đường dẫn tới file
-                    var path = Path.Combine(Server.MapPath("~/Images/Product/"), fileName);
-                    //Lưu tên
-                    sanPham.HinhAnh = fileName;
-                    //Save vào Images Folder
-                    file.SaveAs(path);
+                    if (fileName != "")
+                    {
+                        //Tạo đường dẫn tới file
+                        var path = Path.Combine(Server.MapPath("~/Images/Product/"), fileName);
+                        //Lưu tên
+                        sanPham.HinhAnh = fileName;
+                        //Save vào Images Folder
+                        file.SaveAs(path);
+                    }
+                    else
+                    {
+                        var hinhanhsrc = form["HinhAnhSrc"];
+                        sanPham.HinhAnh = hinhanhsrc;
+                    }
                 }
 
                 db.Entry(sanPham).State = EntityState.Modified;

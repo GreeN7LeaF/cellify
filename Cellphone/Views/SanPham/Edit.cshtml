@@ -16,6 +16,7 @@
                 @using (Html.BeginForm("Edit", "SanPham", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
                     @Html.AntiForgeryToken()
+                    <input type="hidden" name="HinhAnhSrc" value="@Model.HinhAnh" />
                     <!-- 2 column grid layout with text inputs for the first and last names -->
                     <div class="row mb-4">
                         <div class="col">
@@ -84,18 +85,18 @@
                             </select>
                         </div>
                         @*<script>
-                            var trangthai = @Html.Raw(Json.Encode(Model.TrangThai));
-                            if (trangthai != "") {
-                                var select = document.getElementById('TrangThai');
-                                for (var i = 0; i < select.options.length; i++) {
-                                    console.log(select.options[i].value.trim() == trangthai.trim());
-                                    if (select.options[i].value.trim() == trangthai.trim()) {
-                                        select.selectedIndex = i;
-                                        break;
-                                    }
-                                }
+                    var trangthai = @Html.Raw(Json.Encode(Model.TrangThai));
+                    if (trangthai != "") {
+                        var select = document.getElementById('TrangThai');
+                        for (var i = 0; i < select.options.length; i++) {
+                            console.log(select.options[i].value.trim() == trangthai.trim());
+                            if (select.options[i].value.trim() == trangthai.trim()) {
+                                select.selectedIndex = i;
+                                break;
                             }
-                        </script>*@
+                        }
+                    }
+                </script>*@
                     </div>
 
                     <div class="form-outline mb-4">

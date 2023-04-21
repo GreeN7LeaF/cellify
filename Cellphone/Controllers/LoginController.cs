@@ -37,6 +37,7 @@ namespace Cellphone.Controllers
                                 Session["ID"] = user.C_ID;
                                 Session["Email"] = user.C_Email;
                                 Session["MaKH"] = customer.MaKH;
+                                Session["LoaiKH"] = customer.LoaiKH;
                                 Session["HoTen"] = customer.HoTen;
                                 Session["IsLoggedIn"] = true;
 
@@ -61,7 +62,10 @@ namespace Cellphone.Controllers
                             var customer1 = db.KhachHangs.SingleOrDefault(x => x.ID.Equals(newCustomer.ID));
 
                             Session["ID"] = user.C_ID;
+                            Session["Email"] = user.C_Email;
                             Session["MaKH"] = customer1.MaKH;
+                            Session["LoaiKH"] = customer1.LoaiKH;
+                            Session["HoTen"] = customer1.HoTen;
                             return RedirectToAction("Index", "Home");
                         }
                     }

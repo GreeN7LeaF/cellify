@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -18,11 +19,34 @@ namespace Cellphone.Controllers
         public ActionResult Index()
         {
             if (Session["MaKH"] == null) return Redirect("/Login");
-
             var maKH = (int)Session["MaKH"];
             var cTGioHangs = db.CTGioHangs.Where(s => s.MaKH == maKH);
+            var donHang = db.DonHangs.Find();
+            var donHangView = new DonHangModelView {
+            };
+
             return View(cTGioHangs.ToList());
         }
+
+        public ActionResult SideCart()
+        {
+            if (Session["MaKH"] == null) return PartialView("PP_GioHangCart");
+            var maKH = (int)Session["MaKH"];
+            var cTGioHangs = db.CTGioHangs.Where(s => s.MaKH == maKH);
+            if (cTGioHangs == null) {
+                return PartialView("PP_GioHangCart", new List<CTGioHang>());
+            }
+            return PartialView("PP_GioHangCart", cTGioHangs.ToList());
+        }
+        public ActionResult Clear()
+        {
+            var maKH = (int)Session["MaKH"];
+            //xóa sản phẩm trong giỏ hàng 
+            string sql = "DELETE FROM CTGioHang WHERE MaKH = @maKH";
+            db.Database.ExecuteSqlCommand(sql, new SqlParameter("@maKH", maKH));
+            return RedirectToAction("Index");
+        }
+
 
         // GET: CTGioHangs/Details/5
         public ActionResult Details(int? id)
@@ -57,7 +81,9 @@ namespace Cellphone.Controllers
             {
                 var sanPham = db.SanPhams.Find(ID);
 
-                if (Session["MaKH"] == null) return Json(new { error = true });
+                if (Session["MaKH"] == null) {
+                    return Json(new { error = true });
+                }
 
                 var maKH = (int)Session["MaKH"];
 
@@ -87,8 +113,8 @@ namespace Cellphone.Controllers
                 }
 
                 db.SaveChanges();
-                /*return Json(new { success = true,  });*/
-                return Redirect("/home/index");
+                return Json(new { success = true, });
+                /*return Redirect("/home/index");*/
             }
             return Json(new { error = true });
         }

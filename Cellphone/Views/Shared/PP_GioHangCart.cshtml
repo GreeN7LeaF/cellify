@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Cellphone.Models.CTGioHang>
+@{ 
+    var ID = HttpContext.Current.Session["ID"];
+}
+
+<!-- OffCanvas Cart Start -->
+<div id="offcanvas-cart" class="offcanvas offcanvas-cart">
+    <div class="inner">
+        <div class="head">
+            <span class="title">Giỏ hàng</span>
+            <button class="offcanvas-close">×</button>
+        </div>
+
+        <div class="body customScroll">
+            <ul class="minicart-product-list">
+                @if (ID != null)
+                {
+                    foreach (var item in Model)
+                    {
+                    <li>
+                        <a href="single-product.html" class="image">
+                            <img src=@Html.Action("getImage", "SanPham", new { ID = @item.MaSP })
+                                    alt="Cart product Image">
+                        </a>
+                        <div class="content">
+                            <a href="single-product.html" class="title">@item.TenSP</a>
+                            <span class="quantity-price">@item.SoLuong x <span class="amount">@item.Gia</span></span>
+                            <button onclick="removeFromCart(@item.MaSP)" class="remove">×</button>
+                        </div>
+                    </li>
+                    }
+                } else
+                {
+                    <a href="@Url.Action("Login", "Login")" class="btn">Đăng nhập</a>
+                }
+            </ul>
+            <script>
+                function removeFromCart(productId) {
+                    $.ajax({
+                        url: '/CTGioHangs/Delete',
+                        type: 'POST',
+                        data: { ID: productId },
+                        success: function (result) {
+                            // Xử lý kết quả trả về ở đây
+                            alert('Sản phẩm đã được xóa');
+                        },
+                        error: function () {
+                            alert('Đã có lỗi xảy ra khi xóa sản phẩm khỏi giỏ hàng');
+                        }
+                    });
+                }
+            </script>
+        </div>
+        <div class="foot">
+            <div class="buttons mt-30px">
+                <a href=@Url.Action("Index", "CTGioHangs") class="btn btn-dark btn-hover-primary mb-30px">Xem Giỏ Hàng</a>
+                <a href=@Url.Action("Create", "DonHang") class="btn btn-outline-dark current-btn">Thanh Toán</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- OffCanvas Cart End -->

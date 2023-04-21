@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="de0607ac40cf4a4aa9458dfa473b1e42" Name="Diagram1">
+        <EntityTypeShape EntityType="mobiledbModel.Banner" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="mobiledbModel.BaoHanh" Width="1.5" PointX="5.25" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="mobiledbModel.CTDonHang" Width="1.5" PointX="8.25" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="mobiledbModel.CTGioHang" Width="1.5" PointX="8.25" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="mobiledbModel.CTKhuyenMai" Width="1.5" PointX="5.25" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="mobiledbModel.CTPhieuNhap" Width="1.5" PointX="5.25" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="mobiledbModel.DonHang" Width="1.5" PointX="6" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="mobiledbModel.GioHang" Width="1.5" PointX="10.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="mobiledbModel.Hang" Width="1.5" PointX="0.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="mobiledbModel.KhachHang" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="mobiledbModel.KhuyenMai" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="mobiledbModel.LoaiKH" Width="1.5" PointX="3.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="mobiledbModel.LoaiSP" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="mobiledbModel.PhieuNhap" Width="1.5" PointX="3" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="mobiledbModel.SanPham" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="mobiledbModel.User" Width="1.5" PointX="3.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="mobiledbModel.DanhGia" Width="1.5" PointX="8.25" PointY="6.625" IsExpanded="true" />
+        <AssociationConnector Association="mobiledbModel.FK_KhachHang_PhieuBaoHanh" ManuallyRouted="false" />
+        <AssociationConnector Association="mobiledbModel.FK_SanPham_PhieuBaoHanh" ManuallyRouted="false" />
+        <AssociationConnector Association="mobiledbModel.FK_DonHang_CTDonHang" ManuallyRouted="false" />
+        <AssociationConnector Association="mobiledbModel.FK_SanPham_CTDonHang" ManuallyRouted="false" />
+        <AssociationConnector Association="mobiledbModel.FK_KH_CTGioHang" ManuallyRouted="false" />
+        <AssociationConnector Association="mobiledbModel.FK_KhuyenMai_CTKhuyenMai" ManuallyRouted="false" />
+        <AssociationConnector Association="mobiledbModel.FK_SanPham_CTKhuyenMai" ManuallyRouted="false" />
+        <AssociationConnector Association="mobiledbModel.FK_PheuNhap_CTPhieuNhap" ManuallyRouted="false" />
+        <AssociationConnector Association="mobiledbModel.FK_SanPham_CTPhieuNhap" ManuallyRouted="false" />
+        <AssociationConnector Association="mobiledbModel.FK_KhachHang_DonHang" ManuallyRouted="false" />
+        <AssociationConnector Association="mobiledbModel.FK_Hang_SanPham" ManuallyRouted="false" />
+        <AssociationConnector Association="mobiledbModel.FK_KhachHang_DanhGia" ManuallyRouted="false" />
+        <AssociationConnector Association="mobiledbModel.FK_LoaiKh_KhachHang" ManuallyRouted="false" />
+        <AssociationConnector Association="mobiledbModel.FK_User_KhachHang" ManuallyRouted="false" />
+        <AssociationConnector Association="mobiledbModel.FK_LoaiSP_SanPham" ManuallyRouted="false" />
+        <AssociationConnector Association="mobiledbModel.FK_SanPham_DanhGia" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

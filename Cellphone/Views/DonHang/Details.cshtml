@@ -1,59 +1,111 @@
-﻿@model Cellphone.Models.DonHang
+﻿@model Cellphone.Models.DonHangModelView
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/Admin_Layout.cshtml";
+
+    double thanhtien = (double)Model.DonHang.ThanhTien;
+    string thanhtienValue = thanhtien.ToString("C", new System.Globalization.CultureInfo("vi-VN"));
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>DonHang</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.NgayLap)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NgayLap)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TongTien)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TongTien)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.GiamGia)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.GiamGia)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TrangThai)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TrangThai)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.KhachHang.HoTen)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.KhachHang.HoTen)
-        </dd>
-
-    </dl>
+<div class="breadcumb d-flex flex-row mb-3">
+    @Html.ActionLink("Đơn hàng", "Index", null, new { @class = "bc-prev nav-link" })
+    <a href="#" class="nav-link">Thông tin đơn hàng</a>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<h5 class="title">Thông tin đơn hàng</h5>
+<div class="my-3">
+    Trạng thái:
+    @if (Model.DonHang.TrangThai == "Chưa xác nhận")
+    {
+        <span>Nhấn để xác nhận</span>
+        <a href="@Html.Action("UpdateStatus", "DonHang", new { maDH= Model.DonHang.ID})" class="btn text-bg-danger py-2 px-3" style="width: 160px;">@Model.DonHang.TrangThai</a>
+    }
+    else if (Model.DonHang.TrangThai == "Đã xác nhận")
+    {
+        <span>Nhấn để hoàn thành</span>
+        <a href="@Html.Action("UpdateStatus", "DonHang", new { maDH = Model.DonHang.ID})" class="btn text-bg-warning py-2 px-3" style="width: 160px;">@Model.DonHang.TrangThai</a>
+    }
+    else
+    {
+        <span class="btn text-bg-success py-2 px-3" style="width: 160px;">@Model.DonHang.TrangThai</span>
+    }
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="main-content rounded-3 border border-2 py-4 px-3 mb-3">
+            <h6>
+                Khách hàng
+            </h6>
+                <input type="hidden" name="ID" value="@Model.KhachHang.ID" />
+                <!-- 2 column grid layout with text inputs for the first and last names -->
+                <div class="row mb-4">
+                    <div class="col-lg-4">
+                        <div class="form-outline">
+                            <div class="form-control">@Model.KhachHang.ID</div>
+                            <div>User ID</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-outline">
+                            <div class="form-control">@Model.KhachHang.MaKH</div>
+                            <div>Mã Khách Hàng</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="form-outline">
+                            <div class="form-control">@Model.KhachHang.HoTen</div>
+                            <div>Họ Tên Khách Hàng</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-outline">
+                            <div class="form-control">@Model.KhachHang.DienThoai</div>
+                            <div>Điện thoại</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-outline">
+                            <div class="form-control">@Model.KhachHang.DiaChi</div>
+                            <div>Địa chỉ</div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="form-outline mb-4">
+                    <textarea class="form-control"
+                              id="form6Example7"
+                              rows="4"></textarea>
+                    <label class="form-label" for="form6Example7">Note</label>
+                </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="create-form">
+            <div class="main-content rounded-3 border border-2 py-4 px-3 mb-3">
+                <h6>
+                    Chi tiết đơn hàng
+                </h6>
+                <ul class="minicart-product-list">
+                    @foreach (var item in Model.CTDonHang)
+                    {
+                        <li>
+                            <a href="single-product.html" class="image">
+                                <img src=@Html.Action("getImage", "SanPham", new { ID = @item.MaSP })
+                                        alt="Cart product Image">
+                            </a>
+                            <div class="content">
+                                <a href="single-product.html" class="title">@Html.Action("getName", "SanPham", new { ID = @item.MaSP })</a>
+                                <span class="quantity-price">@item.SoLuong x <span class="amount">@item.Gia.ToString("C", new System.Globalization.CultureInfo("vi-VN"))</span></span>
+                            </div>
+                        </li>
+                    }
+                </ul>
+                <div class="form-outline mt-2">
+                    <div class=" fw-bold">Thành tiền</div>
+                    <div class="form-control fs-5">@thanhtienValue</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

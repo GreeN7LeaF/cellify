@@ -15,6 +15,8 @@ namespace Cellphone.Controllers
             var sanphams = db.SanPhams.ToList();
             ViewBag.LoaiSP = db.LoaiSPs.ToList();
             ViewBag.CTGioHang = db.CTGioHangs.ToList();
+            ViewBag.HomeSlider = db.Banners.Where(s => s.Ten == "Home Slider").ToList();
+            ViewBag.HomeSub = db.Banners.Where(s => s.Ten == "Home Sub").ToList();
             return View(sanphams);
         }
 

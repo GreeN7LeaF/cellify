@@ -98,14 +98,28 @@ li {
   transform: translate(-50%, -50%);
 } */
 
+.image-index {
+    max-height: 130px;
+    overflow: hidden;
+    object-fit: cover;
+}
+
+.image-index img {
+    height: 100%;
+}
+
 .default-img-wrapper img {
-  width: 300px;
-  height: 300px;
-  object-fit: cover;
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
 }
 
 input:checked {
   background-color: var(--clr-btn) !important;
+}
+
+.form-outline {
+    margin: 7px 0px;
 }
 
 input:focus,

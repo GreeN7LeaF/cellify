@@ -51,6 +51,18 @@ namespace Cellphone.Controllers
         {
             if (ModelState.IsValid)
             {
+                var file = Request.Files["HinhAnh"];
+                if (file != null)
+                {
+                    var fileName = Path.GetFileName(file.FileName);
+                    //Tạo đường dẫn tới file
+                    var path = Path.Combine(Server.MapPath("~/Images/Banner/"), fileName);
+                    //Lưu tên
+                    banner.HinhAnh = fileName;
+                    //Save vào Images Folder
+                    file.SaveAs(path);
+                }
+                banner.Created_at = DateTime.Now;
                 db.Banners.Add(banner);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -79,7 +91,7 @@ namespace Cellphone.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Ten,NoiDung")] Banner banner)
+        public ActionResult Edit([Bind(Include = "ID,Ten,NoiDung")] Banner banner, FormCollection form)
         {
             if (ModelState.IsValid)
             {
@@ -87,12 +99,18 @@ namespace Cellphone.Controllers
                 if (file != null)
                 {
                     var fileName = Path.GetFileName(file.FileName);
-                    //Tạo đường dẫn tới file
-                    var path = Path.Combine(Server.MapPath("~/Images/Banner/"), fileName);
-                    //Lưu tên
-                    banner.HinhAnh = fileName;
-                    //Save vào Images Folder
-                    file.SaveAs(path);
+                    if (fileName != "") { 
+                        //Tạo đường dẫn tới file
+                        var path = Path.Combine(Server.MapPath("~/Images/Banner/"), fileName);
+                        //Lưu tên
+                        banner.HinhAnh = fileName;
+                        //Save vào Images Folder
+                        file.SaveAs(path);
+                    } else
+                    {
+                        var hinhanhsrc = form["HinhAnhSrc"];
+                        banner.HinhAnh = hinhanhsrc;
+                    } 
                 }
                 banner.Created_at = DateTime.Now;
                 db.Entry(banner).State = EntityState.Modified;

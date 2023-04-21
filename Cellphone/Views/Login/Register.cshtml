@@ -19,63 +19,63 @@
                 {
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <form>
-                        <!-- Email input -->
-                        <div class="form-outline mb-2">
-                            @Html.EditorFor(model => model.C_Email, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.C_Email, "", new { @class = "text-danger" })
-                            @Html.LabelFor(model => model.C_Email, "Email", htmlAttributes: new { @class = "form-label" })
-                        </div>
+                <form>
+                    <!-- Email input -->
+                    <div class="form-outline mb-2">
+                        @Html.EditorFor(model => model.C_Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.C_Email, "", new { @class = "text-danger" })
+                        @Html.LabelFor(model => model.C_Email, "Email", htmlAttributes: new { @class = "form-label" })
+                    </div>
 
-                        <!-- Phone number input -->
-                        <div class="form-outline mb-2">
-                            @Html.EditorFor(model => model.C_Phone, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.C_Phone, "", new { @class = "text-danger" })
-                            @Html.LabelFor(model => model.C_Phone, "Số điện thoại", htmlAttributes: new { @class = "form-label" })
-                        </div>
-
-                        <!-- Password input -->
-                        <div class="form-outline mb-2">
-                            <div class="form-outline mb-2">
-                                <input type="password"
-                                       id="C_Password"
-                                       name="C_Password"
-                                       class="form-control" />
-                                <label class="form-label" for="form2Example2">Nhập lại mật khẩu</label>
-                            </div>
-                        </div>
-
-                        <!-- Password input -->
+                    <!-- Phone number input -->
+                    <div class="form-outline mb-2">
+                        @Html.EditorFor(model => model.C_Phone, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.C_Phone, "", new { @class = "text-danger" })
+                        @Html.LabelFor(model => model.C_Phone, "Số điện thoại", htmlAttributes: new { @class = "form-label" })
+                    </div>
+                    <!-- Password input -->
+                    <div class="form-outline mb-2">
+                        <input type="password"
+                               id="password"
+                               name="password"
+                               class="form-control" />
+                        <label class="form-label" for="form2Example2">Mật khẩu</label>
+                    </div>
+                    <!-- Password input -->
+                    <div class="form-outline mb-2">
                         <div class="form-outline mb-2">
                             <input type="password"
-                                   id="password"
-                                   name="password"
+                                   id="C_Password"
+                                   name="C_Password"
                                    class="form-control" />
-                            <label class="form-label" for="form2Example2">Mật khẩu</label>
+                            <label class="form-label" for="form2Example2">Nhập lại mật khẩu</label>
                         </div>
+                    </div>
 
-                        <!-- 2 column grid layout for inline styling -->
-                        <div class="row mb-4">
-                            <div class="col d-flex justify-content-center">
-                                <!-- Checkbox -->
-                                <div class="form-check d-flex flex-row gap-2 align-items-center">
-                                    <input class="form-check-input"
-                                           type="checkbox"
-                                           value=""
-                                           id="form2Example31"
-                                           checked />
-                                    <label class="form-check-label" for="form2Example31">
-                                        Nhớ tài khoản
-                                    </label>
-                                </div>
+
+
+                    <!-- 2 column grid layout for inline styling -->
+                    <div class="row mb-4">
+                        <div class="col d-flex justify-content-center">
+                            <!-- Checkbox -->
+                            <div class="form-check d-flex flex-row gap-2 align-items-center">
+                                <input class="form-check-input"
+                                       type="checkbox"
+                                       value=""
+                                       id="form2Example31"
+                                       checked />
+                                <label class="form-check-label" for="form2Example31">
+                                    Nhớ tài khoản
+                                </label>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- Submit button -->
-                        <button type="submit" class="submit-btn btn btn-block mb-4">
-                            Đăng ký
-                        </button>
-                    </form>
+                    <!-- Submit button -->
+                    <button type="submit" class="submit-btn btn btn-block mb-4">
+                        Đăng ký
+                    </button>
+                </form>
                 }
             </div>
         </div>

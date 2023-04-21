@@ -43,7 +43,14 @@ namespace Cellphone.Controllers
             {
                 return HttpNotFound();
             }
-            return View(user);
+
+            var khachHang = db.KhachHangs.FirstOrDefault(s => s.ID == id);
+            var userModel = new UserModelView() {
+                KhachHang = khachHang,
+                User = user
+            };
+
+            return View(userModel);
         }
 
         // GET: User/Create
@@ -98,6 +105,21 @@ namespace Cellphone.Controllers
                 return RedirectToAction("Index");
             }
             return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditStatus(int ID, FormCollection form)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = db.Users.Find(ID);
+                db.Entry(user).State = EntityState.Modified;
+                user.C_is_Active = bool.Parse(form["C_is_Active"]);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View("Index");
         }
 
         // GET: User/Delete/5

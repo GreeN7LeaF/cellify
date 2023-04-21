@@ -17,6 +17,7 @@
             @using (Html.BeginForm("Edit", "Banner", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
                 @Html.AntiForgeryToken()
+                <input type="hidden" name="HinhAnhSrc" value="@Model.HinhAnh"/>
                 <!-- 2 column grid layout with text inputs for the first and last names -->
                 <div class="row mb-4">
                     <div class="col">
@@ -27,35 +28,6 @@
                         </div>
                     </div>
                     <div class="col">
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-outline">
-                                    @Html.DropDownList("NoiDung", null, htmlAttributes: new { @class = "select w-100" })
-                                    @Html.ValidationMessageFor(model => model.NoiDung, "", new { @class = "text-danger" })
-                                    @Html.LabelFor(model => model.NoiDung, "Nội dung", htmlAttributes: new { @class = "form-label " })
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Text input -->
-                <div class="row">
-                    @*<div class="col">
-                        <div class="form-outline mb-4">
-                            @Html.EditorFor(model => model.GiaMua, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.GiaMua, "", new { @class = "text-danger" })
-                            @Html.LabelFor(model => model.GiaMua, "Giá mua", htmlAttributes: new { @class = "fomr-label " })
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-outline mb-4">
-                            @Html.EditorFor(model => model.GiaBan, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.GiaBan, "", new { @class = "text-danger" })
-                            @Html.LabelFor(model => model.GiaBan, "Giá bán", htmlAttributes: new { @class = "form-label " })
-                        </div>
-                    </div>*@
-                    <div class="col">
                         <div class="file-upload">
                             <div class="file-select">
                                 <div class="file-select-button" id="fileName">
@@ -64,30 +36,25 @@
                                 <div class="file-select-name" id="noFile">
                                     No file chosen...
                                 </div>
-                                <input type="file" id="HinhAnh" name="HinhAnh" onchange="previewImage(event)" />
+                                <input type="file" id="HinhAnh" name="HinhAnh" data-default-value="@Model.HinhAnh" onchange="previewImage(event)" />
                             </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <select class="select w-100" id="TrangThai" name="TrangThai" value="@Model.TrangThai">
-                            <option value="Hết hàng">Hết hàng</option>
-                            <option value="Còn Hàng">Còn Hàng</option>
-                            <option value="Ẩn">Ẩn</option>
-                        </select>
-                    </div>
+                    
                 </div>
 
                 <div class="form-outline mb-4">
                     <textarea class="form-control"
-                              id="form6Example7"
-                              rows="4"></textarea>
-                    <label class="form-label" for="form6Example7">Note</label>
+                              id="NoiDung"
+                              name="NoiDung"
+                              rows="4">@Model.NoiDung</textarea>
+                    <label class="form-label" for="NoiDung">Nội Dung</label>
                 </div>
 
                 <!-- Submit button -->
                 <button type="submit"
                         class="btn btn-clr-normal btn-block mb-4">
-                    Create
+                    Save
                 </button>
             }
         </div>
@@ -97,33 +64,37 @@
             <div id="imagePreview" class="default-img-wrapper">
                 @if (Model.HinhAnh == null)
                 {
-                    <img src="../../../images/default.jpg" alt="" />
+                    <img src="../../../images/default.jpg" name="HinhAnh2" alt="" />
                 }
                 else
                 {
-                    <img src="@Url.Content("~/Images/Banner/" + @Model.HinhAnh)" alt="" />
+                    <img src="@Url.Content("~/Images/Banner/" + @Model.HinhAnh)" name="HinhAnh2" alt="" />
                 }
             </div>
             <label class="form-label" for="form6Example4">Image</label>
         </div>
     </div>
     <script>
-            function previewImage(event) {
-                var input = event.target;
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        var img = document.createElement("img");
-                        img.src = e.target.result;
-                        img.width = 200; // Thay đổi kích thước hình ảnh tại đây
-                        var container = document.getElementById("imagePreview");
-                        container.innerHTML = "";
-                        container.appendChild(img);
-                    }
-                    reader.readAsDataURL(input.files[0]);
+        function previewImage(event) {
+            var input = event.target;
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var img = document.createElement("img");
+                    img.src = e.target.result;
+                    img.width = 200; // Thay đổi kích thước hình ảnh tại đây
+                    var container = document.getElementById("imagePreview");
+                    container.innerHTML = "";
+                    container.appendChild(img);
                 }
+                reader.readAsDataURL(input.files[0]);
             }
-
+        }
+        @*window.addEventListener("load", function () {
+            console.log(document.getElementById("HinhAnh"));
+            var input = document.getElementById("HinhAnh");
+            input.value = input.getAttribute("data-default-value");
+        });*@
     </script>
 </div>
 

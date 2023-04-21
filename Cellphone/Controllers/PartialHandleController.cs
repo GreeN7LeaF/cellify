@@ -51,6 +51,10 @@ namespace Cellphone.Controllers
             }
         }
 
+        public ActionResult getGioHangCart() {
+            return PartialView("PP_GioHangCart");
+        }
+
         public ActionResult getBreadcumb()
         {
             return PartialView("_Breadcumb");

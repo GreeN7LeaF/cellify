@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Index";
+    var ID = HttpContext.Current.Session["ID"];
 }
 
 
@@ -15,16 +16,16 @@
         <div class="body customScroll">
             <ul class="minicart-product-list">
                 @*@if (ViewBag.CTGioHang != null) {
-                    foreach (var item in ViewBag.CTGioHang) { 
-                        <li>
-                            <div class="content">
-                                <a href="single-product.html" class="title">@item.TenSP</a>
-                                <span class="quantity-price">@item.SoLuong x <span class="amount">@item.Gia</span></span>
-                                <a href="#" class="remove">×</a>
-                            </div>
-                        </li>
-                    }
-                }*@
+                        foreach (var item in ViewBag.CTGioHang) {
+                            <li>
+                                <div class="content">
+                                    <a href="single-product.html" class="title">@item.TenSP</a>
+                                    <span class="quantity-price">@item.SoLuong x <span class="amount">@item.Gia</span></span>
+                                    <a href="#" class="remove">×</a>
+                                </div>
+                            </li>
+                        }
+                    }*@
             </ul>
         </div>
         <div class="foot">
@@ -35,60 +36,7 @@
     </div>
 </div>
 <!-- OffCanvas Wishlist End -->
-<!-- OffCanvas Cart Start -->
-<div id="offcanvas-cart" class="offcanvas offcanvas-cart">
-    <div class="inner">
-        <div class="head">
-            <span class="title">Cart</span>
-            <button class="offcanvas-close">×</button>
-        </div>
-
-        <div class="body customScroll">
-            <ul class="minicart-product-list">
-                @if (ViewBag.CTGioHang != null)
-                {
-                    foreach (var item in ViewBag.CTGioHang)
-                    {
-                        <li>
-                            <a href="single-product.html" class="image">
-                                <img src= @Html.Action("getImage","SanPham", new { ID= @item.MaSP})
-                                     alt="Cart product Image">
-                            </a>
-                            <div class="content">
-                                <a href="single-product.html" class="title">@item.TenSP</a>
-                                <span class="quantity-price">@item.SoLuong x <span class="amount">@item.Gia</span></span>
-                                <button onclick="removeFromCart(@item.MaSP)" class="remove">×</button>
-                            </div>
-                        </li>
-                    }
-                }
-            </ul>
-            <script>
-                function removeFromCart(productId) {
-                    $.ajax({
-                        url: '/CTGioHangs/Delete',
-                        type: 'POST',
-                        data: { ID: productId },
-                        success: function (result) {
-                            // Xử lý kết quả trả về ở đây
-                            alert('Sản phẩm đã được xóa');
-                        },
-                        error: function () {
-                            alert('Đã có lỗi xảy ra khi xóa sản phẩm khỏi giỏ hàng');
-                        }
-                    });
-                }
-            </script>
-        </div>
-        <div class="foot">
-            <div class="buttons mt-30px">
-                <a href=@Url.Action("Index", "CTGioHangs") class="btn btn-dark btn-hover-primary mb-30px">view cart</a>
-                @*<a href=@Url.Action("Details", "DonHang") class="btn btn-outline-dark current-btn">checkout</a>*@
-            </div>
-        </div>
-    </div>
-</div>
-<!-- OffCanvas Cart End -->
+@Html.Action("SideCart", "CTGioHangs")
 <!-- OffCanvas Menu Start -->
 <div id="offcanvas-mobile-menu" class="offcanvas offcanvas-mobile-menu">
     <button class="offcanvas-close"></button>
@@ -239,24 +187,21 @@
                 <div class="hero-slider swiper-container slider-nav-style-1 slider-dot-style-1">
                     <!-- Hero slider Active -->
                     <div class="swiper-wrapper">
-                        <!-- Single slider item -->
-                        <div class="hero-slide-item slider-height-2 swiper-slide d-flex"
-                             data-bg-image="/Template/images/slider-image/slider-bg-2-1.jpg">
-                            <div class="hero-slide-content hero-slide-content-2 slider-animated-1 slider-animated-2 text-start align-self-center pl-80px">
-                                <span class="category">-20% Off</span>
-                                <h2 class="title-1">Handmade <br> Shop Co.</h2>
-                                <a href="shop-left-sidebar.html" class="btn btn-primary text-uppercase">Shop Now</a>
-                            </div>
-                        </div>
-                        <!-- Single slider item -->
-                        <div class="hero-slide-item slider-height-2 swiper-slide d-flex"
-                             data-bg-image="/Template/images/slider-image/slider-bg-2-2.jpg">
-                            <div class="hero-slide-content hero-slide-content-2 slider-animated-1 slider-animated-2 text-start align-self-center pl-80px">
-                                <span class="category">-20% Off</span>
-                                <h2 class="title-1">Handmade <br> Shop Co.</h2>
-                                <a href="shop-left-sidebar.html" class="btn btn-primary text-uppercase">Shop Now</a>
-                            </div>
-                        </div>
+                        @if (ViewBag.HomeSlider != null)
+                        {
+                            foreach (var item in ViewBag.HomeSlider)
+                            {
+                                <!-- Single slider item -->
+                                <div class="hero-slide-item slider-height-2 swiper-slide d-flex"
+                                     data-bg-image="@Url.Content("~/Images/Banner/" + @item.HinhAnh)">
+                                    <div class="hero-slide-content hero-slide-content-2 slider-animated-1 slider-animated-2 text-start align-self-center pl-80px">
+                                        <span class="category">@item.NoiDung</span>
+                                        <h2 class="title-1">Handmade <br> Shop Co.</h2>
+                                        <a href="shop-left-sidebar.html" class="btn btn-primary text-uppercase">Shop Now</a>
+                                    </div>
+                                </div>
+                            }
+                        }
                     </div>
                     <!-- Add Pagination -->
                     <div class="swiper-pagination swiper-pagination-white"></div>
@@ -268,395 +213,383 @@
                 </div>
             </div>
             <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 responsive-flex">
-                <div class="single-banner">
-                    <img src="~/Template/images/banner/7.jpg" alt="">
-                    <div class="banner-content">
-                        <span class="category">Best Seller</span>
-                        <span class="title">
-                            Doily Dream
-                            <br> & Catcher
-                        </span>
-                        <a href="shop-left-sidebar.html" class="shop-link btn btn-primary text-uppercase">
-                            Shop
-                            Now
-                        </a>
-                    </div>
-                </div>
-                <div class="single-banner mt-25px">
-                    <img src="~/Template/images/banner/8.jpg" alt="">
-                    <div class="banner-content">
-                        <span class="category">Best Seller</span>
-                        <span class="title">
-                            Flower Vase
-                            <br> & Poot
-                        </span>
-                        <a href="shop-left-sidebar.html" class="shop-link btn btn-primary text-uppercase">
-                            Shop
-                            Now
-                        </a>
-                    </div>
-                </div>
+                @if (ViewBag.HomeSub != null)
+                {
+                    foreach (var item in ViewBag.HomeSub)
+                    {
+                        <div class="single-banner mt-25px">
+                            <img src="@Url.Content("~/Images/Banner/" + @item.HinhAnh)" alt="">
+                            <div class="banner-content">
+                                <span class="category">Best Seller</span>
+                                <span class="title">
+                                    @item.NoiDung
+                                    <br> & Catcher
+                                </span>
+                                <a href="shop-left-sidebar.html" class="shop-link btn btn-primary text-uppercase">
+                                    Shop
+                                    Now
+                                </a>
+                            </div>
+                        </div>
+                    }
+                }
             </div>
         </div>
     </div>
-</div>
 
-<!-- Hero/Intro Slider End -->
-<!-- Feature Area Srart -->
-<div class="feature-area pt-100px">
-    <div class="container">
-        <div class="feature-wrapper">
-            <div class="single-feture-col">
-                <!-- single item -->
-                <div class="single-feature">
-                    <div class="feature-icon">
-                        <img src="~/Template/images/icons/1.png" alt="">
-                    </div>
-                    <div class="feature-content">
-                        <h4 class="title">Free Shipping</h4>
-                        <span class="sub-title">Capped at $39 per order</span>
-                    </div>
-                </div>
-            </div>
-            <!-- single item -->
-            <div class="single-feture-col ">
-                <div class="single-feature">
-                    <div class="feature-icon">
-                        <img src="~/Template/images/icons/2.png" alt="">
-                    </div>
-                    <div class="feature-content">
-                        <h4 class="title">Card Payments</h4>
-                        <span class="sub-title">12 Months Installments</span>
-                    </div>
-                </div>
-            </div>
-            <!-- single item -->
-            <div class="single-feture-col">
-                <div class="single-feature">
-                    <div class="feature-icon">
-                        <img src="~/Template/images/icons/3.png" alt="">
-                    </div>
-                    <div class="feature-content">
-                        <h4 class="title">Easy Returns</h4>
-                        <span class="sub-title">Shop With Confidence</span>
+    <!-- Hero/Intro Slider End -->
+    <!-- Feature Area Srart -->
+    <div class="feature-area pt-100px">
+        <div class="container">
+            <div class="feature-wrapper">
+                <div class="single-feture-col">
+                    <!-- single item -->
+                    <div class="single-feature">
+                        <div class="feature-icon">
+                            <img src="~/Template/images/icons/1.png" alt="">
+                        </div>
+                        <div class="feature-content">
+                            <h4 class="title">Miễn phí vận chuyển</h4>
+                            <span class="sub-title">Với đơn hàng trên 5 triệu</span>
+                        </div>
                     </div>
                 </div>
                 <!-- single item -->
+                <div class="single-feture-col ">
+                    <div class="single-feature">
+                        <div class="feature-icon">
+                            <img src="~/Template/images/icons/2.png" alt="">
+                        </div>
+                        <div class="feature-content">
+                            <h4 class="title">Thanh toán Online</h4>
+                            <span class="sub-title">Tiết kiệm với những ưu đãi hấp dẫn</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- single item -->
+                <div class="single-feture-col">
+                    <div class="single-feature">
+                        <div class="feature-icon">
+                            <img src="~/Template/images/icons/3.png" alt="">
+                        </div>
+                        <div class="feature-content">
+                            <h4 class="title">Đổi trả hoàn toàn</h4>
+                            <span class="sub-title">Trong vòng 1 tuần, đổi trả hoàn toàn</span>
+                        </div>
+                    </div>
+                    <!-- single item -->
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Feature Area End -->
-<!-- Product Area Start -->
-<div class="product-area pt-100px">
-    <div class="container">
-        <!-- Section Title & Tab Start -->
-        <div class="row">
-            <!-- Section Title Start -->
-            <div class="col-12">
-                <div class="section-title text-center mb-60px">
-                    <h2 class="title">Best Products</h2>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod incididunt ut labore
-                        et dolore magna aliqua.
-                    </p>
-                </div>
-                <!-- Tab Start -->
-                <div class="tab-slider nav-center nav-center-2">
-                    <ul class="best-product-tab-nav product-tab-nav nav justify-content-center align-items-center">
-                        @if (ViewBag.LoaiSP != null) {
-                            foreach (var item in ViewBag.LoaiSP)
+    <!-- Feature Area End -->
+    <!-- Product Area Start -->
+    <div class="product-area pt-100px">
+        <div class="container">
+            <!-- Section Title & Tab Start -->
+            <div class="row">
+                <!-- Section Title Start -->
+                <div class="col-12">
+                    <div class="section-title text-center mb-60px">
+                        <h2 class="title">Sản phẩm bán chạy</h2>
+                    </div>
+                    <!-- Tab Start -->
+                    <div class="tab-slider nav-center nav-center-2">
+                        <ul class="best-product-tab-nav product-tab-nav nav justify-content-center align-items-center">
+                            @if (ViewBag.LoaiSP != null)
                             {
-                                <li id=@item.ID class="nav-item">
-                                    <a class="nav-link" data-bs-toggle="tab"
-                                       href="#tab-fabric-2"><span>@item.TenLoai</span></a>
-                                </li>
+                                foreach (var item in ViewBag.LoaiSP)
+                                {
+                                    <li id=@item.ID class="nav-item">
+                                        <a class="nav-link" data-bs-toggle="tab"
+                                           href="#tab-fabric-2"><span>@item.TenLoai</span></a>
+                                    </li>
+                                }
                             }
-                        }
-                    </ul>
+                        </ul>
+                    </div>
+                    <!-- Tab End -->
                 </div>
-                <!-- Tab End -->
-            </div>
-            <!-- Section Title End -->
+                <!-- Section Title End -->
 
-        </div>
-        <!-- Section Title & Tab End -->
+            </div>
+            <!-- Section Title & Tab End -->
 
-        <div class="row">
-            <div class="col">
-                <div class="tab-content mt-60px">
-                    <!-- 1st tab start -->
-                    <div class="tab-pane fade show active" id="tab-fabric-2">
-                        <div id="productTabContainer" class="row">
-                            @*chỗ này nó tự động render theo tabs, và lấy dữ liệu từ PP_SanPhamCart*@
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Product Area End -->
-<!-- Testimonial Area Start -->
-<div class="banner-area-3 pt-100px pb-100px">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 mb-lm-30px mb-md-30px">
-                <div class="single-banner">
-                    <img src="~/Template/images/banner/9.jpg" alt="">
-                    <div class="banner-content">
-                        <span class="category">-20%</span>
-                        <span class="title">
-                            Cactus Pot <br>
-                            & Holder
-                        </span>
-                        <a href="shop-left-sidebar.html" class="shop-link btn btn-primary text-uppercase">
-                            Shop
-                            Now
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="single-banner">
-                    <img src="~/Template/images/banner/10.jpg" alt="">
-                    <div class="banner-content">
-                        <span class="category">-20%</span>
-                        <span class="title">
-                            Pottery Wheel<br>
-                            & Utensils
-                        </span>
-                        <a href="shop-left-sidebar.html" class="shop-link btn btn-primary text-uppercase">
-                            Shop
-                            Now
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Testimonial Area End -->
-<!-- Product Area Start -->
-<div class="product-area">
-    <div class="container">
-        <!-- Section Title & Tab Start -->
-        <div class="row">
-            <!-- Section Title Start -->
-            <div class="col-12">
-                <div class="section-title text-center">
-                    <h2 class="title">Popular Categories</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod incididunt ut labore et dolore magna aliqua. </p>
-                </div>
-                <!-- Tab Start -->
-                <div class="tab-slider swiper-container slider-nav-style-1 small-nav">
-                    <ul class="product-list product-tab-nav nav swiper-wrapper ">
-                        @if (ViewBag.LoaiSP != null)
-                        {
-                            foreach (var item in ViewBag.LoaiSP)
-                            {
-                                <li id="tab-@item.ID" class="nav-item swiper-slide">
-                                    <a class="nav-link" data-bs-toggle="tab"
-                                       href="#tab-jewelry">
-                                        <img src="~/Template/images/icons/jewelry-icon.png"
-                                             alt=""><span>@item.TenLoai</span>
-                                    </a>
-                                </li>
-                            }
-                         }
-                    </ul>
-                    <!-- Add Arrows -->
-                    <div class="swiper-buttons">
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
-                    </div>
-                </div>
-                <!-- Tab End -->
-            </div>
-            <!-- Section Title End -->
-
-        </div>
-        <!-- Section Title & Tab End -->
-
-        <div class="row">
-            <div class="col">
-                <div class="tab-content mt-60px">
-                    <div class="tab-pane fade show active" id="tab-fabric-2">
-                        <div id="productListContainer" class="row">
-                            @*chỗ này nó tự động render theo tabs, và lấy dữ liệu từ PP_SanPhamCart*@
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Product Area End -->
-<!-- Banner Area Start -->
-<div class="banner-area">
-    <div class="container">
-        <div class="row">
-            <div class="single-col">
-                <div class="single-banner">
-                    <img src="~/Template/images/banner/1.jpg" alt="">
-                    <div class="banner-content">
-                        <span class="category">Best Seller</span>
-                        <span class="title">
-                            Flower Vase <br>
-                            & Poot
-                        </span>
-                        <a href="shop-left-sidebar.html" class="shop-link btn btn-primary text-uppercase">
-                            Shop
-                            Now
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="single-col center-col">
-                <div class="single-banner">
-                    <img src="~/Template/images/banner/2.jpg" alt="">
-                    <div class="banner-content">
-                        <span class="category">Best Seller</span>
-                        <span class="title">
-                            Wool Silk Dress <br>
-                            & Offer 2021
-                        </span>
-                        <a href="shop-left-sidebar.html" class="shop-link btn btn-primary text-uppercase">
-                            Shop
-                            Now
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="single-col">
-                <div class="single-banner">
-                    <img src="~/Template/images/banner/3.jpg" alt="">
-                    <div class="banner-content">
-                        <span class="category">Best Seller</span>
-                        <span class="title">
-                            Pen Holder<br>
-                            & Poot
-                        </span>
-                        <a href="shop-left-sidebar.html" class="shop-link btn btn-primary text-uppercase">
-                            Shop
-                            Now
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Banner Area End -->
-<!-- Testimonial Area Start -->
-<div class="testimonial-area pt-100px">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="section-title text-center">
-                    <h2 class="title line-height-1">What Client Says</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod incididunt ut labore et dolore magna aliqua. </p>
-                </div>
-            </div>
-        </div>
-        <!-- Slider Start -->
-        <div class="testimonial-wrapper swiper-container">
-            <div class="swiper-wrapper">
-                <!-- Slider Single Item -->
-                <div class="swiper-slide">
-                    <div class="testi-inner">
-                        <div class="author-img">
-                            <img src="~/Template/images/testimonial-image/1.png" alt="">
-                        </div>
-                        <div class="testi-content">
-                            <p>
-                                Lorem ipsum dolor sit ametju consectadipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                            </p>
-                        </div>
-                        <div class="testi-author text-center">
-                            <div class="author-name">
-                                <h4 class="name">Britney Cooper</h4>
-                                <span class="title">Client-HRO</span>
+            <div class="row">
+                <div class="col">
+                    <div class="tab-content mt-60px">
+                        <!-- 1st tab start -->
+                        <div class="tab-pane fade show active" id="tab-fabric-2">
+                            <div id="productTabContainer" class="row">
+                                @*chỗ này nó tự động render theo tabs, và lấy dữ liệu từ PP_SanPhamCart*@
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Slider Single Item -->
-            </div>
-            <!-- Add Arrows -->
-            <div class="swiper-buttons">
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-            </div>
-        </div>
-        <!-- Slider Start -->
-    </div>
-</div>
-<!-- Testimonial Area End -->
-<!-- Brand area start -->
-<div class="brand-area pt-100px">
-    <div class="container">
-        <div class="brand-slider swiper-container">
-            <div class="swiper-wrapper align-items-center">
-                <div class="swiper-slide brand-slider-item text-center">
-                    <a href="#"><img class=" img-fluid" src="~/Template/images/brand-logo/1.png" alt="" /></a>
-                </div>
-                <div class="swiper-slide brand-slider-item text-center">
-                    <a href="#"><img class=" img-fluid" src="~/Template/images/brand-logo/2.png" alt="" /></a>
-                </div>
-                <div class="swiper-slide brand-slider-item text-center">
-                    <a href="#"><img class=" img-fluid" src="~/Template/images/brand-logo/3.png" alt="" /></a>
-                </div>
-                <div class="swiper-slide brand-slider-item text-center">
-                    <a href="#"><img class=" img-fluid" src="~/Template/images/brand-logo/4.png" alt="" /></a>
-                </div>
-                <div class="swiper-slide brand-slider-item text-center">
-                    <a href="#"><img class=" img-fluid" src="~/Template/images/brand-logo/5.png" alt="" /></a>
-                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Brand area end -->
-
-<div class="newsletter-area ">
-    <div class="container line-shape-bottom">
-        <div class="row align-items-center">
-            <div class="col-lg-6">
-                <div class="newsletter-content mb-lm-30px">
-                    <i class="pe-7s-mail-open-file"></i>
-                    <div class="newsletter-text">
-                        <h3 class="title">Newsletter & Get Updates</h3>
-                        <p>Sign up for our newsletter to get update from us</p>
+    <!-- Product Area End -->
+    <!-- Testimonial Area Start -->
+    <div class="banner-area-3 pt-100px pb-100px">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-lm-30px mb-md-30px">
+                    <div class="single-banner">
+                        <img src="~/Template/images/banner/9.jpg" alt="">
+                        <div class="banner-content">
+                            <span class="category">-20%</span>
+                            <span class="title">
+                                Cactus Pot <br>
+                                & Holder
+                            </span>
+                            <a href="shop-left-sidebar.html" class="shop-link btn btn-primary text-uppercase">
+                                Shop
+                                Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="single-banner">
+                        <img src="~/Template/images/banner/10.jpg" alt="">
+                        <div class="banner-content">
+                            <span class="category">-20%</span>
+                            <span class="title">
+                                Pottery Wheel<br>
+                                & Utensils
+                            </span>
+                            <a href="shop-left-sidebar.html" class="shop-link btn btn-primary text-uppercase">
+                                Shop
+                                Now
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <div class="news-letter-form">
-                    <div id="mc_embed_signup" class="subscribe-form">
-                        <form id="mc-embedded-subscribe-form" class="validate" novalidate="" target="_blank"
-                              name="mc-embedded-subscribe-form" method="post"
-                              action="http://devitems.us11.list-manage.com/subscribe/post?u=6bbb9b6f5827bd842d9640c82&amp;id=05d85f18ef">
-                            <div id="mc_embed_signup_scroll" class="mc-form">
-                                <input class="email" type="email" required=""
-                                       placeholder="Enter Your Mail Here......." name="EMAIL" value="">
-                                <div class="mc-news d-none" aria-hidden="true">
-                                    <input type="text" value="" tabindex="-1"
-                                           name="b_6bbb9b6f5827bd842d9640c82_05d85f18ef">
-                                </div>
-                                <div class="clear">
-                                    <button id="mc-embedded-subscribe" class="button" type="submit" name="subscribe"
-                                            value="">
-                                        Submit
-                                    </button>
+        </div>
+    </div>
+    <!-- Testimonial Area End -->
+    <!-- Product Area Start -->
+    <div class="product-area">
+        <div class="container">
+            <!-- Section Title & Tab Start -->
+            <div class="row">
+                <!-- Section Title Start -->
+                <div class="col-12">
+                    <div class="section-title text-center">
+                        <h2 class="title">Popular Categories</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod incididunt ut labore et dolore magna aliqua. </p>
+                    </div>
+                    <!-- Tab Start -->
+                    <div class="tab-slider swiper-container slider-nav-style-1 small-nav">
+                        <ul class="product-list product-tab-nav nav swiper-wrapper ">
+                            @if (ViewBag.LoaiSP != null)
+                            {
+                                foreach (var item in ViewBag.LoaiSP)
+                                {
+                                    <li id="tab-@item.ID" class="nav-item swiper-slide">
+                                        <a class="nav-link" data-bs-toggle="tab"
+                                           href="#tab-jewelry">
+                                            <img src="~/Template/images/icons/jewelry-icon.png"
+                                                 alt=""><span>@item.TenLoai</span>
+                                            </a>
+                                        </li>
+                                    }
+                                }
+                        </ul>
+                        <!-- Add Arrows -->
+                        <div class="swiper-buttons">
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                        </div>
+                    </div>
+                    <!-- Tab End -->
+                </div>
+                <!-- Section Title End -->
+
+            </div>
+            <!-- Section Title & Tab End -->
+
+            <div class="row">
+                <div class="col">
+                    <div class="tab-content mt-60px">
+                        <div class="tab-pane fade show active" id="tab-fabric-2">
+                            <div id="productListContainer" class="row">
+                                @*chỗ này nó tự động render theo tabs, và lấy dữ liệu từ PP_SanPhamCart*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Product Area End -->
+    <!-- Banner Area Start -->
+    <div class="banner-area">
+        <div class="container">
+            <div class="row">
+                <div class="single-col">
+                    <div class="single-banner">
+                        <img src="~/Template/images/banner/1.jpg" alt="">
+                        <div class="banner-content">
+                            <span class="category">Best Seller</span>
+                            <span class="title">
+                                Flower Vase <br>
+                                & Poot
+                            </span>
+                            <a href="shop-left-sidebar.html" class="shop-link btn btn-primary text-uppercase">
+                                Shop
+                                Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="single-col center-col">
+                    <div class="single-banner">
+                        <img src="~/Template/images/banner/2.jpg" alt="">
+                        <div class="banner-content">
+                            <span class="category">Best Seller</span>
+                            <span class="title">
+                                Wool Silk Dress <br>
+                                & Offer 2021
+                            </span>
+                            <a href="shop-left-sidebar.html" class="shop-link btn btn-primary text-uppercase">
+                                Shop
+                                Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="single-col">
+                    <div class="single-banner">
+                        <img src="~/Template/images/banner/3.jpg" alt="">
+                        <div class="banner-content">
+                            <span class="category">Best Seller</span>
+                            <span class="title">
+                                Pen Holder<br>
+                                & Poot
+                            </span>
+                            <a href="shop-left-sidebar.html" class="shop-link btn btn-primary text-uppercase">
+                                Shop
+                                Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Banner Area End -->
+    <!-- Testimonial Area Start -->
+    <div class="testimonial-area pt-100px">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title text-center">
+                        <h2 class="title line-height-1">What Client Says</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod incididunt ut labore et dolore magna aliqua. </p>
+                    </div>
+                </div>
+            </div>
+            <!-- Slider Start -->
+            <div class="testimonial-wrapper swiper-container">
+                <div class="swiper-wrapper">
+                    <!-- Slider Single Item -->
+                    <div class="swiper-slide">
+                        <div class="testi-inner">
+                            <div class="author-img">
+                                <img src="~/Template/images/testimonial-image/1.png" alt="">
+                            </div>
+                            <div class="testi-content">
+                                <p>
+                                    Lorem ipsum dolor sit ametju consectadipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                                </p>
+                            </div>
+                            <div class="testi-author text-center">
+                                <div class="author-name">
+                                    <h4 class="name">Britney Cooper</h4>
+                                    <span class="title">Client-HRO</span>
                                 </div>
                             </div>
-                        </form>
+                        </div>
+                    </div>
+                    <!-- Slider Single Item -->
+                </div>
+                <!-- Add Arrows -->
+                <div class="swiper-buttons">
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+            </div>
+            <!-- Slider Start -->
+        </div>
+    </div>
+    <!-- Testimonial Area End -->
+    <!-- Brand area start -->
+    <div class="brand-area pt-100px">
+        <div class="container">
+            <div class="brand-slider swiper-container">
+                <div class="swiper-wrapper align-items-center">
+                    <div class="swiper-slide brand-slider-item text-center">
+                        <a href="#"><img class=" img-fluid" src="~/Template/images/brand-logo/1.png" alt="" /></a>
+                    </div>
+                    <div class="swiper-slide brand-slider-item text-center">
+                        <a href="#"><img class=" img-fluid" src="~/Template/images/brand-logo/2.png" alt="" /></a>
+                    </div>
+                    <div class="swiper-slide brand-slider-item text-center">
+                        <a href="#"><img class=" img-fluid" src="~/Template/images/brand-logo/3.png" alt="" /></a>
+                    </div>
+                    <div class="swiper-slide brand-slider-item text-center">
+                        <a href="#"><img class=" img-fluid" src="~/Template/images/brand-logo/4.png" alt="" /></a>
+                    </div>
+                    <div class="swiper-slide brand-slider-item text-center">
+                        <a href="#"><img class=" img-fluid" src="~/Template/images/brand-logo/5.png" alt="" /></a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+    <!-- Brand area end -->
+
+    <div class="newsletter-area ">
+        <div class="container line-shape-bottom">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="newsletter-content mb-lm-30px">
+                        <i class="pe-7s-mail-open-file"></i>
+                        <div class="newsletter-text">
+                            <h3 class="title">Newsletter & Get Updates</h3>
+                            <p>Sign up for our newsletter to get update from us</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="news-letter-form">
+                        <div id="mc_embed_signup" class="subscribe-form">
+                            <form id="mc-embedded-subscribe-form" class="validate" novalidate="" target="_blank"
+                                  name="mc-embedded-subscribe-form" method="post"
+                                  action="http://devitems.us11.list-manage.com/subscribe/post?u=6bbb9b6f5827bd842d9640c82&amp;id=05d85f18ef">
+                                <div id="mc_embed_signup_scroll" class="mc-form">
+                                    <input class="email" type="email" required=""
+                                           placeholder="Enter Your Mail Here......." name="EMAIL" value="">
+                                    <div class="mc-news d-none" aria-hidden="true">
+                                        <input type="text" value="" tabindex="-1"
+                                               name="b_6bbb9b6f5827bd842d9640c82_05d85f18ef">
+                                    </div>
+                                    <div class="clear">
+                                        <button id="mc-embedded-subscribe" class="button" type="submit" name="subscribe"
+                                                value="">
+                                            Submit
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 

@@ -1,75 +1,112 @@
-﻿@model Cellphone.Models.User
+﻿@model Cellphone.Models.UserModelView
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/Admin_Layout.cshtml";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>User</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.C_Password)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.C_Password)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.C_Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.C_Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.C_Phone)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.C_Phone)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.C_is_Admin)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.C_is_Admin)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.C_is_Active)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.C_is_Active)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.C_Created_at)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.C_Created_at)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.C_Updated_at)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.C_Updated_at)
-        </dd>
-
-    </dl>
+<div class="breadcumb d-flex flex-row mb-3">
+    @Html.ActionLink("Người dùng", "Index", null, new { @class = "bc-prev nav-link" })
+    <a href="#" class="nav-link">Thông tin người dùng</a>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.C_ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<h5 class="title">Thông tin người dùng</h5>
+<div class="row">
+    <div class="col-8">
+        <div class="create-form">
+            @using (Html.BeginForm("EditStatus", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="ID" value="@Model.KhachHang.ID" />
+                <!-- 2 column grid layout with text inputs for the first and last names -->
+                <div class="row mb-4">
+                    <div class="col-lg-4">
+                        <div class="form-outline">
+                            <div class="form-control">@Model.KhachHang.ID</div>
+                            <div>User ID</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-outline">
+                            <div class="form-control">@Model.KhachHang.MaKH</div>
+                            <div>Mã Khách Hàng</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-outline">
+                            <select name="C_is_Active" id="C_is_Active">
+                                <option value="true">Hoạt động</option>
+                                <option value="true">Khóa tài khoản</option>
+                            </select>
+                            <label class="form-label" for="C_is_Active">Trạng thái</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-outline">
+                            <div class="form-control">@Model.KhachHang.HoTen</div>
+                            <div>Họ Tên Khách Hàng</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-outline">
+                            <div class="form-control">@Model.KhachHang.DienThoai</div>
+                            <div>Điện thoại</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-outline">
+                            <div class="form-control">@Model.KhachHang.DiaChi</div>
+                            <div>Địa chỉ</div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="form-outline mb-4">
+                    <textarea class="form-control"
+                                id="form6Example7"
+                                rows="4"></textarea>
+                    <label class="form-label" for="form6Example7">Note</label>
+                </div>
+
+                <!-- Submit button -->
+                <button type="submit"
+                        class="btn btn-clr-normal btn-block mb-4">
+                    Lưu
+                </button>
+            }
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="form-outline mb-4">
+            <div id="imagePreview" class="default-img-wrapper">
+                @if (Model.KhachHang.HinhAnh == null)
+                {
+                    <img src="../../../images/default.jpg" alt="" />
+                }
+                else
+                {
+                    <img src="@Url.Content("~/Images/Product/" + @Model.KhachHang.HinhAnh)" alt="" />
+                }
+            </div>
+            <label class="form-label" for="form6Example4">Image</label>
+        </div>
+    </div>
+    <script>
+            function previewImage(event) {
+                var input = event.target;
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var img = document.createElement("img");
+                        img.src = e.target.result;
+                        img.width = 200; // Thay đổi kích thước hình ảnh tại đây
+                        var container = document.getElementById("imagePreview");
+                        container.innerHTML = "";
+                        container.appendChild(img);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+    </script>
+</div>

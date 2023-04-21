@@ -41,7 +41,7 @@
         </div>
     </form>
 </div>
-<!-- brand List -->
+<!-- user List -->
 <div class="main-content rounded-3 border border-2 py-4 px-3">
     <div class="table-header row">
         <div class="col-3">
@@ -62,9 +62,10 @@
                         <th>Loại</th>
                         <th>Họ và tên</th>
                         <th>Email</th>
-                        <th>Giới tính</th>
+                        <th>Điện thoại</th>
                         <th>Địa chỉ</th>
-
+                        <th>Trạng thái</th>
+                        <th>Khác</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -76,11 +77,21 @@
                                 <td>@user.customer.LoaiKH</td>
                                 <td>@user.customer.HoTen</td>
                                 <td>@user.user.C_Email</td>
-                                <td>@user.customer.GioiTinh</td>
+                                <td>@user.customer.DienThoai</td>
                                 <td>@user.customer.DiaChi</td>
                                 <td>
+                                    @if (@user.user.C_is_Active == true)
+                                    {
+                                        <span class="btn text-bg-success py-2 w-75">Hoạt động</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="btn text-bg-warning py-2 w-75">Đã bị khóa</span>
+                                    }
+                                </td>
+                                <td>
                                     <div class="d-flex flex-row gap-1">
-                                        <a href="@Url.Action("Edit", "KhachHang", new {id=@user.customer.ID})" class="nav-link">
+                                        <a href="@Url.Action("Details", "User", new {id=@user.customer.ID})" class="nav-link">
                                             <i class="fa-solid fa-pen"></i>
                                         </a>
 

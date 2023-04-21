@@ -34,8 +34,15 @@
                     {
                     <tr>
                         <td>
-                            <div class="d-flex align-items-center">
-                                @Html.DisplayFor(modelItem => item.HinhAnh)
+                            <div class="image-index default-img-wrapper">
+                                @if (item.HinhAnh == null)
+                                {
+                                    <img src="../../../images/default.jpg" alt="" />
+                                }
+                                else
+                                {
+                                    <img src="@Url.Content("~/Images/Banner/" + @item.HinhAnh)" alt="" />
+                                }
                             </div>
                         </td>
                         <td>
