@@ -129,7 +129,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\BannerController.cs" />
     <Compile Include="Controllers\CTGioHangsController.cs" />
     <Compile Include="Controllers\CTKhuyenMaiController.cs" />
     <Compile Include="Controllers\DonHangController.cs" />
@@ -2660,11 +2659,6 @@
     <Content Include="Views\CTGioHangs\Details.cshtml" />
     <Content Include="Views\CTGioHangs\Edit.cshtml" />
     <Content Include="Views\CTGioHangs\Index.cshtml" />
-    <Content Include="Views\Banner\Create.cshtml" />
-    <Content Include="Views\Banner\Delete.cshtml" />
-    <Content Include="Views\Banner\Details.cshtml" />
-    <Content Include="Views\Banner\Edit.cshtml" />
-    <Content Include="Views\Banner\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
