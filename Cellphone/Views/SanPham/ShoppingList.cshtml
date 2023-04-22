@@ -151,7 +151,7 @@
                                                 <!-- Single Prodect -->
                                                 <div class="product">
                                                     <div class="thumb">
-                                                        <a href="single-product.html" class="image">
+                                                        <a href="@Url.Action("Details", "SanPham", new { ID= @item.Id})" class="image">
                                                             <img src="@Url.Content("~/Images/Product/" + @item.HinhAnh)"
                                                                  alt="Product" />
                                                             <img class="hover-image"

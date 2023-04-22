@@ -344,6 +344,7 @@
     <Content Include="Template\images\icons\tab-bg-2.png" />
     <Content Include="Template\images\icons\tab-bg.png" />
     <Content Include="Template\images\icons\wooden-icon.png" />
+    <Content Include="Template\images\logo\logo-removebg.png" />
     <Content Include="Template\images\logo\logo-white.png" />
     <Content Include="Template\images\logo\logo.png" />
     <Content Include="Template\images\product-image\1.jpg" />

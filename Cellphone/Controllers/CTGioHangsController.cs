@@ -21,7 +21,6 @@ namespace Cellphone.Controllers
             if (Session["MaKH"] == null) return Redirect("/Login");
             var maKH = (int)Session["MaKH"];
             var cTGioHangs = db.CTGioHangs.Where(s => s.MaKH == maKH);
-            var donHang = db.DonHangs.Find();
             var donHangView = new DonHangModelView {
             };
 

@@ -14,6 +14,12 @@ namespace Cellphone
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Banner",
+                url: "CuaHang/Banner/{action}",
+                defaults: new { controller = "Banner", action = "Index" }
+            );
+
+            routes.MapRoute(
                 name: "KhachHang",
                 url: "KhachHang/{action}",
                 defaults: new { controller = "KhachHang", action = "Index" }

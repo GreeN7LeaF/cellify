@@ -41,7 +41,7 @@
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                             </div>
-                            <span class="read-review"><a class="reviews" href="#">( 2 Review )</a></span>
+                            <span class="read-review"><a class="reviews" href="#">( 2 Đánh giá )</a></span>
                         </div>
                         <div class="stock mt-30px">
 
@@ -59,7 +59,7 @@
                                 <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1" />
                             </div>
                             <div class="pro-details-cart">
-                                <button class="add-cart">
+                                <button class="add-cart" onclick="addToCart(@Model.product.ID)">
                                     Thêm giỏ hàng
                                 </button>
                             </div>
@@ -79,7 +79,6 @@
         </div>
     </div>
 
-    <!--thaomy đã sửa đống này-->
     <!-- product details description area start -->
     <div class="description-review-area pb-100px" data-aos="fade-up" data-aos-delay="200">
         <div class="container">
@@ -225,53 +224,55 @@
             </div>
             <div class="new-product-slider swiper-container slider-nav-style-1 pb-100px">
                 <div class="new-product-wrapper swiper-wrapper">
-                    @foreach (var item in Model.relatedProduct) {
-                        if (item.ID != Model.product.ID) { 
+                    @foreach (var item in Model.relatedProduct)
+                    {
+                        if (item.ID != Model.product.ID)
+                        {
                             <div class="new-product-item swiper-slide">
-                            <!-- Single Prodect -->
-                            <div class="product">
-                                <div class="thumb">
-                                    <a href="single-product.html" class="image">
-                                        <img src="@Url.Content("~/Images/Product/" + @item.HinhAnh)" alt="Product" />
-                                        <img class="hover-image" src="@Url.Content("~/Images/Product/" + @item.HinhAnh)"
-                                             alt="Product" />
-                                    </a>
-                                    <span class="badges">
-                                        <span class="new">Mới</span>
-                                    </span>
-                                    <div class="actions">
-                                        <a href="wishlist.html" class="action wishlist" title="Wishlist">
-                                            <i class="pe-7s-like"></i>
+                                <!-- Single Prodect -->
+                                <div class="product">
+                                    <div class="thumb">
+                                        <a href="single-product.html" class="image">
+                                            <img src="@Url.Content("~/Images/Product/" + @item.HinhAnh)" alt="Product" />
+                                            <img class="hover-image" src="@Url.Content("~/Images/Product/" + @item.HinhAnh)"
+                                                 alt="Product" />
                                         </a>
-                                        <a href="#" class="action quickview" data-link-action="quickview"
-                                           title="Quick view" data-bs-toggle="modal"
-                                           data-bs-target="#exampleModal"><i class="pe-7s-look"></i></a>
-                                        <a href="compare.html" class="action compare" title="Compare">
-                                            <i class="pe-7s-refresh-2"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="content">
-                                    <span class="ratings">
-                                        <span class="rating-wrap">
-                                            <span class="star" style="width: 100%"></span>
+                                        <span class="badges">
+                                            <span class="new">Mới</span>
                                         </span>
-                                        <span class="rating-num">( 5 Review )</span>
-                                    </span>
-                                    <h5 class="title">
-                                        <a href="single-product.html">
-                                            @item.TenSP
-                                        </a>
-                                    </h5>
-                                    <span class="price">
-                                        <span class="new">@item.GiaBan</span>
-                                    </span>
+                                        <div class="actions">
+                                            <a href="wishlist.html" class="action wishlist" title="Wishlist">
+                                                <i class="pe-7s-like"></i>
+                                            </a>
+                                            <a href="#" class="action quickview" data-link-action="quickview"
+                                               title="Quick view" data-bs-toggle="modal"
+                                               data-bs-target="#exampleModal"><i class="pe-7s-look"></i></a>
+                                            <a href="compare.html" class="action compare" title="Compare">
+                                                <i class="pe-7s-refresh-2"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="content">
+                                        <span class="ratings">
+                                            <span class="rating-wrap">
+                                                <span class="star" style="width: 100%"></span>
+                                            </span>
+                                            <span class="rating-num">( 5 Review )</span>
+                                        </span>
+                                        <h5 class="title">
+                                            <a href="single-product.html">
+                                                @item.TenSP
+                                            </a>
+                                        </h5>
+                                        <span class="price">
+                                            <span class="new">@item.GiaBan.ToString("C", new System.Globalization.CultureInfo("vi-VN"))</span>
+                                        </span>
+                                    </div>
+                                    <button title="Add To Cart" id="btnAddToCart" class="add-to-cart">
+                                        Thêm giỏ hàng
+                                    </button>
                                 </div>
-                                <button title="Add To Cart" id="btnAddToCart" class=" add-to-cart">
-                                   Thêm giỏ hàng
-                                </button>
                             </div>
-                        </div>
                         }
                     }
                 </div>
@@ -285,4 +286,20 @@
     </div>
     <!-- Related product Area End -->
     <!-- Modal end -->
+    <script>
+        function addToCart(productId) {
+            $.ajax({
+                url: '/CTGioHangs/Create',
+                type: 'POST',
+                data: { ID: productId },
+                success: function (result) {
+                    // Xử lý kết quả trả về ở đây
+                    alert('Sản phẩm đã được thêm vào giỏ hàng thành công');
+                },
+                error: function () {
+                    alert('Đã có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng');
+                }
+            });
+        }
+    </script>
 </div>

@@ -124,7 +124,7 @@ namespace Cellphone.Controllers
                 //xóa sản phẩm trong giỏ hàng 
                 string sql = "DELETE FROM CTGioHang WHERE MaKH = @maKH";
                 db.Database.ExecuteSqlCommand(sql, new SqlParameter("@maKH", maKH));
-                return RedirectToAction("Index");
+                return RedirectToAction("ThankYou");
             }
 
             ViewBag.MaKH = new SelectList(db.KhachHangs, "MaKH", "HoTen", donHang.MaKH);

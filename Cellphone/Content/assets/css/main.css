@@ -1,4 +1,5 @@
 @import "./root.css";
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap');
 
 #admin > * {
     box-sizing: border-box;
@@ -12,17 +13,26 @@
 }
 
 body {
-  /* background: rgb(210, 72, 80);
+    /* background: rgb(210, 72, 80);
   background: linear-gradient(
     90deg,
     rgba(210, 72, 80, 0.6369398101037289) 15%,
     rgba(223, 73, 73, 0.7377801462381828) 51%
   ); */
+    font-family: 'Nunito Sans', sans-serif !important;
 }
 
-.bg-gr-bg {
-  background-color: rgb(40, 19, 112);
+.header-logo {
+    width: 120px;
 }
+
+.header-logo img {
+    width: 100%;
+}
+
+    .bg-gr-bg {
+        background-color: rgb(40, 19, 112);
+    }
 
 .bg-gr-primary {
   background: linear-gradient(
@@ -196,10 +206,12 @@ select:focus,
     position: absolute;
     height: 85vh;
     width: 80vw;
-    margin: auto;
     border-radius: 20px;
     overflow: hidden;
     color: #ffe6fd;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #loginContent #loginForm .form-title {
@@ -214,7 +226,7 @@ select:focus,
 }
 
 #loginContent #loginForm a {
-    color: #66115f;
+    color: #fff;
 }
 
 #loginContent #loginForm .submit-btn {
@@ -222,7 +234,8 @@ select:focus,
     color: var(--clr-btn);
     /*width: 25%;*/
     font-weight: 600;
-    padding: 15px 25px;
+    padding: 15px 5px;
+    width: 130px;
 }
 
 #loginContent #loginForm .submit-btn:hover {
@@ -247,6 +260,7 @@ select:focus,
 
 #loginContent #loginForm .bg {
     height: 100%;
+    
 }
 
 #loginContent #loginForm .form-container {

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Cellphone.Models.DonHangModelView>
+﻿@model IEnumerable<Cellphone.Models.CTGioHang>
 
 @{
     ViewBag.Title = "Index";
@@ -43,7 +43,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var item in Model.CTGioHang)
+                                @foreach (var item in Model)
                                 {
                                     <tr>
                                         <td class="product-thumbnail">
@@ -53,13 +53,13 @@
                                             </a>
                                         </td>
                                         <td class="product-name"><a href="#">@item.TenSP</a></td>
-                                        <td class="product-price-cart"><span class="amount">@item.Gia</span></td>
+                                        <td class="product-price-cart"><span class="amount">@item.Gia.ToString("C", new System.Globalization.CultureInfo("vi-VN"))</span></td>
                                         <td class="product-quantity">
                                             <div class="cart-plus-minus">
                                                 @item.SoLuong
                                             </div>
                                         </td>
-                                        <td class="product-subtotal">@item.ThanhTien</td>
+                                        <td class="product-subtotal">@item.ThanhTien.ToString("C", new System.Globalization.CultureInfo("vi-VN"))</td>
                                         <td class="product-remove">
                                             <a href="#"><i class="fa fa-times"></i></a>
                                         </td>

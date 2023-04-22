@@ -238,7 +238,7 @@
                                             {
                                                 <li>
                                                     <span class="order-middle-left">@item.TenSP X @item.SoLuong</span>
-                                                    <span class="order-price">@item.ThanhTien</span>
+                                                    <span class="order-price">@item.ThanhTien.ToString("C", new System.Globalization.CultureInfo("vi-VN"))</span>
                                                 </li>
                                             }
                                         }
@@ -253,11 +253,11 @@
                                 <div class="your-order-total">
                                     <ul>
                                         <li class="order-total">Tổng cộng</li>
-                                        <li name="TongTien">@Model.DonHang.TongTien</li>
+                                        <li name="TongTien">@Model.DonHang.TongTien.ToString("C", new System.Globalization.CultureInfo("vi-VN"))</li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="payment-method">
+                            @*<div class="payment-method">
                                 <div class="payment-accordion element-mrg">
                                     <div id="faq" class="panel-group">
                                         <div class="panel panel-default single-my-account m-0">
@@ -318,7 +318,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>*@
                         </div>
                         <div class="Place-order mt-25">
                             <button type="submit" class="btn-hover">Thanh toán</button>
